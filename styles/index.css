@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Candal';
+    src: url('./fonts/candal.ttf');
+}
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('./fonts/nunito.ttf');
+}
+
+@font-face {
+    font-family: 'Nunito Bold';
+    src: url('./fonts/nunito-bold.ttf');
+}
+
+@font-face {
+    font-family: 'Paytone One';
+    src: url('./fonts/paytone-one.ttf');
+}
+
+.header-background {
+    background: linear-gradient(90deg, rgba(44,129,195,1) 0%, rgba(116,203,228,1) 100%);
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    z-index: 0;
+    font-family: "Nunito", sans-serif;
+    background-image: radial-gradient(at bottom left, #DAECD6, #73C4DA);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: "Nunito Bold", sans-serif;
+}
+
+.watermark-image {
+    height: 600px;
+    width: 600px;
+    margin-bottom: -100px;
+    margin-right: -100px;
+    background-image: url("/icons/bitmon-icon-black.svg");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.watermark {
+    z-index: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+    opacity: 0.05;
+}
