@@ -82,10 +82,10 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <div className="watermark">
-            <div className="watermark-image" />
-          </div>
         </body>
+        <div className="watermark">
+          <div className="watermark-image" />
+        </div>
       </Html>
     );
   }

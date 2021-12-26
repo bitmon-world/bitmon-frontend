@@ -26,19 +26,15 @@
     background: linear-gradient(90deg, rgba(44,129,195,1) 0%, rgba(116,203,228,1) 100%);
 }
 
-html, body {
-    margin: 0;
-    height: 100%;
+html,body {
+    min-height: 100vh;
 }
 
 body {
-    height: 100%;
     z-index: 0;
     font-family: "Nunito", sans-serif;
-    background-image: radial-gradient(at bottom left, #DAECD6, #73C4DA);
-    background-repeat: no-repeat;
+    background: radial-gradient(at bottom left, #DAECD6, #73C4DA), no-repeat;
     background-size: 100%;
-    background-position: center;
 }
 
 h1,h2,h3,h4,h5,h6 {

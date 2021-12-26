@@ -14,7 +14,7 @@ export default function Roadmap(): JSX.Element {
         </div>
         <div>
           <h1
-            className="text-7xl text-light-orange"
+            className="text-5xl text-light-orange"
             style={{ fontFamily: "Candal" }}
           >
             Roadmap
