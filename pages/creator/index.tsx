@@ -91,7 +91,7 @@ export default function Creator(): JSX.Element {
               </div>
             </div>
           ) : (
-              <div className="text-center">
+            <div className="text-center">
               <h1 className="text-xl">No Bitmon trainers found.</h1>
             </div>
           )
