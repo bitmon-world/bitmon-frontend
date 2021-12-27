@@ -1,8 +1,10 @@
 import Image from "next/image";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { ConnectWalletWarning } from "../../components/ConnectWalletWarning";
-
+import { useRouter } from "next/router";
 export default function CreatorBuilder(): JSX.Element {
+  const router = useRouter();
+
   const wallet = useWallet();
 
   return (

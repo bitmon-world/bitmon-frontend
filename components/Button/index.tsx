@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { FC } from "react";
+import { Loader } from "../Loader";
 
 export const ButtonBlue: FC<{
   text: string;
@@ -12,7 +13,9 @@ export const ButtonBlue: FC<{
       }
     >
       <button
-        className="py-1 px-6 text-white text-xl uppercase border-2 border-black rounded-full relative w-full"
+        className={
+          "py-1 px-6 text-white text-xl uppercase border-2 border-black rounded-full relative w-full"
+        }
         onClick={() => onClick()}
       >
         <div className="flex flex-row items-center justify-center">
