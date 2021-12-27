@@ -8,7 +8,7 @@ import { clusterApiUrl } from "@solana/web3.js";
 import { useCallback, useEffect, useState } from "react";
 import { Loader } from "../../components/Loader";
 import { ConnectWalletWarning } from "../../components/ConnectWalletWarning";
-import { TOKEN_CREATOR } from "../../constants";
+import { BITMON_DAO_ADDRESS } from "../../constants";
 import { TrainerImage } from "../../components/TrainerImage";
 
 export default function Creator(): JSX.Element {
@@ -32,7 +32,7 @@ export default function Creator(): JSX.Element {
       (t) =>
         t.data.creators
           .map((c) => c.address.toLowerCase())
-          .indexOf(TOKEN_CREATOR.toLowerCase()) !== -1
+          .indexOf(BITMON_DAO_ADDRESS.toLowerCase()) !== -1
     );
     setTokens(bitmon_tokens);
     setLoading(false);

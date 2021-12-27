@@ -1,7 +1,1 @@
-export const TOKENS_LIST = [
-  "Hm5Ub3htzdgMJvX2FwUsXSh8aHda3RZ1QjFfpWuCiNMQ",
-  "28VkDs1L4Gj2cKNa8tVBUwMNPr2Xja9dnc7EAva6XP2J",
-  "A6yGaDF8nM2FArQVX81NxYNtZsoedry832ohi4NNyTAt",
-];
-
-export const TOKEN_CREATOR = "Cw4wy1Yg1334gRQ5SxG43Qt5QbM1DM665ur8R6imWGkR";
+export const BITMON_DAO_ADDRESS = "61SCcKSsfWtCYb3khNpnZCq72Q1q1mzGsjKaBmVLvcQy";
