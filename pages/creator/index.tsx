@@ -79,7 +79,7 @@ export default function Creator(): JSX.Element {
         {wallet.connected ? (
           loading ? (
             <Loader />
-          ) : (
+          ) : tokens.length > 0 ? (
             <div className="text-center -mt-10">
               <h1 className="text-xl">Select a Bitmon Trainer to start</h1>
               <div className="z-10 mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-3/4 mx-auto">
@@ -89,6 +89,10 @@ export default function Creator(): JSX.Element {
                   );
                 })}
               </div>
+            </div>
+          ) : (
+              <div className="text-center">
+              <h1 className="text-xl">No Bitmon trainers found.</h1>
             </div>
           )
         ) : (
