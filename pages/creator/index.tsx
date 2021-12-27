@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   getParsedNftAccountsByOwner,
   createConnectionConfig,
@@ -85,7 +86,12 @@ export default function Creator(): JSX.Element {
               <div className="z-10 mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-3/4 mx-auto">
                 {tokens.map((t) => {
                   return (
-                    <TrainerImage key={t.mint} uri={t.data.uri} mint={t.mint} />
+                    <TrainerImage
+                      link
+                      key={t.mint}
+                      uri={t.data.uri}
+                      mint={t.mint}
+                    />
                   );
                 })}
               </div>

@@ -4,9 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 
-export const TrainerImage: FC<{ uri: string; mint: string }> = ({
+export const TrainerImage: FC<{ uri: string; mint: string; link: boolean }> = ({
   uri,
   mint,
+  link,
 }) => {
   const [loading, setLoading] = useState(true);
 
@@ -30,7 +31,7 @@ export const TrainerImage: FC<{ uri: string; mint: string }> = ({
         <div className="flex items-center justify-center w-[325px] h-[325px]">
           <LoaderGrey />
         </div>
-      ) : (
+      ) : link ? (
         <Link href={"/creator/" + mint} passHref>
           <div className="flex items-center justify-center border-4 border-white rounded-lg cursor-pointer hover:drop-shadow-lg hover:shadow-black">
             <Image
@@ -42,6 +43,16 @@ export const TrainerImage: FC<{ uri: string; mint: string }> = ({
             />
           </div>
         </Link>
+      ) : (
+        <div className="flex items-center justify-center border-4 border-white rounded-lg">
+          <Image
+            className={"rounded-lg"}
+            src={image}
+            width="325"
+            height="325"
+            alt={"Bitmon Trainer"}
+          />
+        </div>
       )}
     </div>
   );

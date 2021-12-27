@@ -15,7 +15,6 @@ import { Loader, LoaderSmall } from "../components/Loader";
 
 export default function Home(): JSX.Element {
   const wallet = useWallet();
-
   const connect = createConnectionConfig(clusterApiUrl("mainnet-beta"));
 
   const anchorWallet = useMemo(() => {
