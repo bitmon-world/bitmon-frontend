@@ -37,7 +37,7 @@ export default function CreatorSingle(): JSX.Element {
 
   return (
     <div className="relative z-10 mx-4 h-full pb-10">
-      <div className="pt-16 text-center flex flex-row justify-center items-center gap-x-10">
+      <div className="pt-14 text-center flex flex-row justify-center items-center gap-x-10">
         <div className="hidden md:inline-flex ml-10">
           <Image
             src="/img/separator-right.svg"
@@ -47,15 +47,12 @@ export default function CreatorSingle(): JSX.Element {
           />
         </div>
         <div>
-          <h1
-            className="text-5xl text-light-orange"
-            style={{ fontFamily: "Candal" }}
-          >
-            Creator
-          </h1>
-          <h1 className="text-2xl" style={{ fontFamily: "Candal" }}>
-            Customize your Bitmon trainer
-          </h1>
+          <Image
+            src="/img/trainer-creator.png"
+            width="200"
+            height="85"
+            alt="Bitmon Separator"
+          />
         </div>
         <div className="hidden md:inline-flex mr-10">
           <Image
@@ -70,8 +67,10 @@ export default function CreatorSingle(): JSX.Element {
         {wallet.connected ? (
           metadata ? (
             <div className="text-center">
-              <div>
-                <h1 className="text-xl">{metadata.data.data.name}</h1>
+              <div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[58px] mx-auto">
+                <p className="top-0 text-xl text-white">
+                  {metadata.data.data.name}
+                </p>
               </div>
               <div className="mx-auto w-[325px] h-[325px] mt-6">
                 <TrainerImage

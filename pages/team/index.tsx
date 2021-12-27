@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Team(): JSX.Element {
   return (
     <div className="relative z-10 mx-4 h-full pb-10">
-      <div className="pt-16 text-center flex flex-row justify-center items-center gap-x-10">
+      <div className="pt-14 text-center flex flex-row justify-center items-center gap-x-10">
         <div className="hidden md:inline-flex ml-10">
           <Image
             src="/img/separator-right.svg"

@@ -47,7 +47,7 @@ export default function Creator(): JSX.Element {
 
   return (
     <div className="relative z-10 mx-4 h-full pb-10">
-      <div className="pt-16 text-center flex flex-row justify-center items-center gap-x-10">
+      <div className="pt-14 text-center flex flex-row justify-center items-center gap-x-10">
         <div className="hidden md:inline-flex ml-10">
           <Image
             src="/img/separator-right.svg"
@@ -57,15 +57,12 @@ export default function Creator(): JSX.Element {
           />
         </div>
         <div>
-          <h1
-            className="text-5xl text-light-orange"
-            style={{ fontFamily: "Candal" }}
-          >
-            Creator
-          </h1>
-          <h1 className="text-2xl" style={{ fontFamily: "Candal" }}>
-            Customize your Bitmon trainer
-          </h1>
+          <Image
+            src="/img/trainer-creator.png"
+            width="200"
+            height="85"
+            alt="Bitmon Separator"
+          />
         </div>
         <div className="hidden md:inline-flex mr-10">
           <Image
@@ -76,13 +73,18 @@ export default function Creator(): JSX.Element {
           />
         </div>
       </div>
-      <div className="mt-20">
+      <div className="mt-6">
         {wallet.connected ? (
           loading ? (
             <Loader />
           ) : tokens.length > 0 ? (
-            <div className="text-center -mt-10">
-              <h1 className="text-xl">Select a Bitmon Trainer to start</h1>
+            <div className="text-center">
+              <div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[58px] mx-auto">
+                <p className="top-0 text-xl text-white">
+                  Select a Bitmon <span className="text-orange">trainer</span>{" "}
+                  to start
+                </p>
+              </div>
               <div className="z-10 mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-3/4 mx-auto">
                 {tokens.map((t) => {
                   return (
@@ -97,8 +99,10 @@ export default function Creator(): JSX.Element {
               </div>
             </div>
           ) : (
-            <div className="text-center">
-              <h1 className="text-xl">No Bitmon trainers found.</h1>
+            <div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[58px] mx-auto">
+              <p className="top-0 text-xl text-white">
+                No Bitmon trainers found.
+              </p>
             </div>
           )
         ) : (

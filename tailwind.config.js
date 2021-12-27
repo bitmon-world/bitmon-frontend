@@ -14,5 +14,8 @@ module.exports = {
         orange: "#E25C27",
       },
     },
+    backgroundImage: {
+      "title-background": "url('/img/section-background.png')",
+    },
   },
 };
