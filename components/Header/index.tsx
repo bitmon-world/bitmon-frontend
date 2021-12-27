@@ -81,7 +81,7 @@ export const Header = () => {
 
   function socials() {
     return (
-      <div className="flex flex-row justify-center mr-5 gap-x-4 mt-2">
+      <div className="flex flex-row justify-center md:mr-5 gap-x-4 mt-2">
         <a
           href="https://discord.gg/6PTUWzDZ8P"
           target="_blank"
@@ -204,6 +204,7 @@ export const Header = () => {
                 {faq()}
                 {/*{bitdex()}*/}
                 {creator()}
+                {socials()}
               </div>
             </Popover.Panel>
           </>
