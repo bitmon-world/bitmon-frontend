@@ -11,6 +11,7 @@ import { Loader } from "../../components/Loader";
 import { TrainerImage } from "../../components/TrainerImage";
 import { ButtonOrange, ButtonOrangeDisabled } from "../../components/Button";
 import { isMintOwner } from "../../functions/onwership";
+import { TrainerAttributes, TrainerBuilder } from "../../components/Builder";
 
 export default function CreatorSingle(): JSX.Element {
   const connect = createConnectionConfig(clusterApiUrl("mainnet-beta"));
@@ -34,6 +35,17 @@ export default function CreatorSingle(): JSX.Element {
     if (!router.query.id || !wallet || !wallet.publicKey) return;
     fetch_metadata(router.query.id);
   }, [router]);
+
+  const [builder, setBuilder] = useState(false);
+
+  const [attributes, setAttributes] = useState<TrainerAttributes>({
+    body_type: null,
+    body_color: null,
+  });
+
+  function attributesUpdate(data: TrainerAttributes) {
+    setAttributes(data);
+  }
 
   return (
     <div className="relative z-10 mx-4 h-full pb-10">
@@ -66,30 +78,37 @@ export default function CreatorSingle(): JSX.Element {
       <div className="mt-8">
         {wallet.connected ? (
           metadata ? (
-            <div className="text-center">
-              <div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[58px] mx-auto">
-                <p className="top-0 text-xl text-white">
-                  {metadata.data.data.name}
-                </p>
-              </div>
-              <div className="mx-auto w-[325px] h-[325px] mt-6">
-                <TrainerImage
-                  link={false}
-                  uri={metadata.data.data.uri}
-                  mint={metadata.data.mint}
-                />
-              </div>
-              <div className="w-56 mt-6 mx-auto">
-                {owner ? (
-                  <ButtonOrange
-                    text="Start Building"
-                    onClick={() => console.log("edit")}
+            builder ? (
+              <TrainerBuilder
+                attributes={attributes}
+                setAttributes={attributesUpdate}
+              />
+            ) : (
+              <div className="text-center">
+                <div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[58px] mx-auto">
+                  <p className="top-0 text-xl text-white">
+                    {metadata.data.data.name}
+                  </p>
+                </div>
+                <div className="mx-auto w-[325px] h-[325px] mt-6">
+                  <TrainerImage
+                    link={false}
+                    uri={metadata.data.data.uri}
+                    mint={metadata.data.mint}
                   />
-                ) : (
-                  <ButtonOrangeDisabled text="Start Building" />
-                )}
+                </div>
+                <div className="w-56 mt-6 mx-auto">
+                  {owner ? (
+                    <ButtonOrange
+                      text="Start Building"
+                      onClick={() => setBuilder(true)}
+                    />
+                  ) : (
+                    <ButtonOrangeDisabled text="Start Building" />
+                  )}
+                </div>
               </div>
-            </div>
+            )
           ) : (
             <Loader />
           )
