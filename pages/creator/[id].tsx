@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { ConnectWalletWarning } from "../../components/ConnectWalletWarning";
 import { useRouter } from "next/router";
@@ -10,7 +9,10 @@ import { clusterApiUrl } from "@solana/web3.js";
 import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 import { Loader } from "../../components/Loader";
 import { TrainerImage } from "../../components/TrainerImage";
-export default function CreatorBuilder(): JSX.Element {
+import { ButtonOrange, ButtonOrangeDisabled } from "../../components/Button";
+import { isMintOwner } from "../../functions/onwership";
+
+export default function CreatorSingle(): JSX.Element {
   const connect = createConnectionConfig(clusterApiUrl("mainnet-beta"));
 
   const router = useRouter();
@@ -19,14 +21,17 @@ export default function CreatorBuilder(): JSX.Element {
 
   const [metadata, setMetadata] = useState<Metadata | null>(null);
 
+  const [owner, setOwner] = useState(false);
+
   const fetch_metadata = useCallback(async (id: string | string[]) => {
     const data = await getMintMetadata(id, connect);
-    console.log(data);
+    const owner = await isMintOwner(id, wallet.publicKey, connect);
     setMetadata(data);
+    setOwner(owner);
   }, []);
 
   useEffect(() => {
-    if (!router.query.id) return;
+    if (!router.query.id || !wallet || !wallet.publicKey) return;
     fetch_metadata(router.query.id);
   }, [router]);
 
@@ -74,6 +79,16 @@ export default function CreatorBuilder(): JSX.Element {
                   uri={metadata.data.data.uri}
                   mint={metadata.data.mint}
                 />
+              </div>
+              <div className="w-56 mt-6 mx-auto">
+                {owner ? (
+                  <ButtonOrange
+                    text="Start Building"
+                    onClick={() => console.log("edit")}
+                  />
+                ) : (
+                  <ButtonOrangeDisabled text="Start Building" />
+                )}
               </div>
             </div>
           ) : (
