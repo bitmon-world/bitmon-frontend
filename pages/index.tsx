@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ButtonBlue } from "../components/Button";
+import { ButtonBlue, ButtonBlueDisabled } from "../components/Button";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   CANDY_MACHINE_ID,
@@ -103,21 +103,28 @@ export default function Home(): JSX.Element {
               Public Mint Price:{" "}
               {state.state.price.toNumber() / LAMPORTS_PER_SOL}
             </h1>
-            <h1 className="text-lg mt-4">
+            <h1 className="text-lg">
               Whitelist Mint Price:{" "}
               {state.state.whitelistMintSettings.discountPrice.toNumber() /
                 LAMPORTS_PER_SOL}
             </h1>
-            <h1 className="text-lg mt-4">
+            <h1 className="text-lg">
               {state.state.itemsRedeemed} / 10000 Trainers Minted
             </h1>
           </>
         ) : (
-          <Loader />
+          <div className="mt-4">
+            <Loader />
+          </div>
         )}
 
-        <div className="mt-5">
-          {minting ? (
+        <div className="mt-5 mx-auto">
+          {!wallet ||
+          !wallet.connected ||
+          !wallet.ready ||
+          !wallet.publicKey ? (
+            <ButtonBlueDisabled text={"Connect wallet"} />
+          ) : minting ? (
             <LoaderSmall />
           ) : (
             <ButtonBlue
