@@ -1,6 +1,8 @@
 import { FC, useState } from "react";
 import Image from "next/image";
 import { ButtonBlue, ButtonBlueDisabled } from "../Button";
+import { BODY_COLORS } from "../../constants";
+import { classNames } from "../../functions/classnames";
 
 export interface TrainerAttributes {
   body_type: "male" | "female" | null;
@@ -335,7 +337,20 @@ export const TrainerBuilder: FC<{
               </button>
             </div>
             <div className="bg-white/30 rounded-lg h-[400px] mt-5 overflow-y-scrollable">
-              <div></div>
+              <div className="grid grid-cols-2 md:grid-cols-3">
+                {Object.keys(BODY_COLORS).map((i) => {
+                  const color = "bg-[" + BODY_COLORS[i].color + "]";
+                  return (
+                    <div
+                      key={i}
+                      className={classNames(
+                        "p-5 h-20 w-20 rounded-full border-4 border-white",
+                        color
+                      )}
+                    />
+                  );
+                })}
+              </div>
             </div>
             <div className="flex flex-row justify-end gap-x-3 mt-5">
               <div>
