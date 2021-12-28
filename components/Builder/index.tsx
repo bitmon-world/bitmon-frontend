@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import Image from "next/image";
 import { ButtonBlue, ButtonBlueDisabled } from "../Button";
 
@@ -7,11 +7,28 @@ export interface TrainerAttributes {
   body_color: string | null;
 }
 
+enum AttributeSelection {
+  BodyColor,
+  Mouth,
+  Eyes,
+  Eyebrows,
+  Nose,
+  Hair,
+  BackHair,
+  Accessory,
+  Clothes,
+  Background,
+}
+
 export const TrainerBuilder: FC<{
   attributes: TrainerAttributes;
   setAttributes: (data: TrainerAttributes) => void;
   toggleTitle: (toggle: boolean) => void;
 }> = ({ attributes, setAttributes, toggleTitle }) => {
+  const [selected, setSelected] = useState<AttributeSelection>(
+    AttributeSelection.BodyColor
+  );
+
   return !attributes.body_type ? (
     <div>
       <div className="flex flex-row items-center justify-between bg-contain bg-no-repeat bg-center bg-title-background h-[54px] mx-auto">
@@ -69,22 +86,22 @@ export const TrainerBuilder: FC<{
   ) : (
     <div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-5 w-4/5 mx-auto mt-12">
-        <div className="flex flex-row justify-center md:mt-20">
+        <div className="flex flex-row justify-center md:mt-20 max-h-[338px] items-center">
           {!attributes.body_color ? (
             attributes.body_type === "male" ? (
               <Image
                 className={"rounded-lg mt-10"}
                 src="/img/male-body.png"
-                width="380"
-                height="428"
+                width="300"
+                height="338"
                 alt={"Bitmon Trainer Male Body"}
               />
             ) : (
               <Image
                 className={"rounded-lg mt-10"}
                 src="/img/female-body.png"
-                width="380"
-                height="428"
+                width="300"
+                height="338"
                 alt={"Bitmon Trainer Female Body"}
               />
             )
@@ -93,7 +110,6 @@ export const TrainerBuilder: FC<{
           )}
         </div>
         <div className="col-span-2">
-          <div></div>
           <div>
             <div className="flex flex-row items-center justify-between bg-contain bg-no-repeat bg-center bg-title-background h-[48px] mx-auto">
               <div className="flex flex-row items-center gap-x-10 items-center mx-auto">
@@ -112,7 +128,210 @@ export const TrainerBuilder: FC<{
                 </div>
               </div>
             </div>
-            <div className="bg-white rounded-lg">
+            <div className="flex flex-row gap-x-2 mt-7 items-center justify-center">
+              <div>
+                <Image
+                  src="/icons/builder/builder-left-arrow.svg"
+                  width="30px"
+                  height="30px"
+                />
+              </div>
+              <div>
+                <Image
+                  src="/icons/builder/body.svg"
+                  width="40px"
+                  height="40px"
+                />
+              </div>
+              <div>
+                <button
+                  onClick={() => setSelected(AttributeSelection.BodyColor)}
+                >
+                  {selected === AttributeSelection.BodyColor ? (
+                    <Image
+                      src="/icons/builder/skin-color-selected.svg"
+                      width="50px"
+                      height="50px"
+                    />
+                  ) : (
+                    <Image
+                      src="/icons/builder/skin-color.svg"
+                      width="40px"
+                      height="40px"
+                    />
+                  )}
+                </button>
+              </div>
+              <div>
+                <button onClick={() => setSelected(AttributeSelection.Mouth)}>
+                  {selected === AttributeSelection.Mouth ? (
+                    <Image
+                      src="/icons/builder/mouth-selected.svg"
+                      width="50px"
+                      height="50px"
+                    />
+                  ) : (
+                    <Image
+                      src="/icons/builder/mouth.svg"
+                      width="40px"
+                      height="40px"
+                    />
+                  )}
+                </button>
+              </div>
+              <div>
+                <button onClick={() => setSelected(AttributeSelection.Eyes)}>
+                  {selected === AttributeSelection.Eyes ? (
+                    <Image
+                      src="/icons/builder/eyes-selected.svg"
+                      width="50px"
+                      height="50px"
+                    />
+                  ) : (
+                    <Image
+                      src="/icons/builder/eyes.svg"
+                      width="40px"
+                      height="40px"
+                    />
+                  )}
+                </button>
+              </div>
+              <div>
+                <button
+                  onClick={() => setSelected(AttributeSelection.Eyebrows)}
+                >
+                  {selected === AttributeSelection.Eyebrows ? (
+                    <Image
+                      src="/icons/builder/eyebrows-selected.svg"
+                      width="50px"
+                      height="50px"
+                    />
+                  ) : (
+                    <Image
+                      src="/icons/builder/eyebrows.svg"
+                      width="40px"
+                      height="40px"
+                    />
+                  )}
+                </button>
+              </div>
+              <div>
+                <button onClick={() => setSelected(AttributeSelection.Nose)}>
+                  {selected === AttributeSelection.Nose ? (
+                    <Image
+                      src="/icons/builder/nose-selected.svg"
+                      width="50px"
+                      height="50px"
+                    />
+                  ) : (
+                    <Image
+                      src="/icons/builder/nose.svg"
+                      width="40px"
+                      height="40px"
+                    />
+                  )}
+                </button>
+              </div>
+              <div>
+                <button onClick={() => setSelected(AttributeSelection.Hair)}>
+                  {selected === AttributeSelection.Hair ? (
+                    <Image
+                      src="/icons/builder/hair-selected.svg"
+                      width="50px"
+                      height="50px"
+                    />
+                  ) : (
+                    <Image
+                      src="/icons/builder/hair.svg"
+                      width="40px"
+                      height="40px"
+                    />
+                  )}
+                </button>
+              </div>
+              <div>
+                <button
+                  onClick={() => setSelected(AttributeSelection.BackHair)}
+                >
+                  {selected === AttributeSelection.BackHair ? (
+                    <Image
+                      src="/icons/builder/back-hair-selected.svg"
+                      width="50px"
+                      height="50px"
+                    />
+                  ) : (
+                    <Image
+                      src="/icons/builder/back-hair.svg"
+                      width="40px"
+                      height="40px"
+                    />
+                  )}
+                </button>
+              </div>
+              <div>
+                <button
+                  onClick={() => setSelected(AttributeSelection.Accessory)}
+                >
+                  {selected === AttributeSelection.Accessory ? (
+                    <Image
+                      src="/icons/builder/accessories-selected.svg"
+                      width="50px"
+                      height="50px"
+                    />
+                  ) : (
+                    <Image
+                      src="/icons/builder/accessories.svg"
+                      width="40px"
+                      height="40px"
+                    />
+                  )}
+                </button>
+              </div>
+              <div>
+                <button onClick={() => setSelected(AttributeSelection.Clothes)}>
+                  {selected === AttributeSelection.Clothes ? (
+                    <Image
+                      src="/icons/builder/clothes-selected.svg"
+                      width="50px"
+                      height="50px"
+                    />
+                  ) : (
+                    <Image
+                      src="/icons/builder/clothes.svg"
+                      width="40px"
+                      height="40px"
+                    />
+                  )}
+                </button>
+              </div>
+              <div>
+                <button
+                  onClick={() => setSelected(AttributeSelection.Background)}
+                >
+                  {selected === AttributeSelection.Background ? (
+                    <Image
+                      src="/icons/builder/background-selected.svg"
+                      width="50px"
+                      height="50px"
+                    />
+                  ) : (
+                    <Image
+                      src="/icons/builder/background.svg"
+                      width="40px"
+                      height="40px"
+                    />
+                  )}
+                </button>
+              </div>
+              <div>
+                <Image
+                  src="/icons/builder/builder-right-arrow.svg"
+                  width="30px"
+                  height="30px"
+                />
+              </div>
+            </div>
+            <div className="bg-white/30 rounded-lg h-[400px] mt-5 overflow-y-scrollable">
               <div></div>
             </div>
             <div className="flex flex-row justify-end gap-x-3 mt-5">
