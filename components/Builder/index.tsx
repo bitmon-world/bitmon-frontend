@@ -339,13 +339,13 @@ export const TrainerBuilder: FC<{
             <div className="bg-white/30 rounded-lg h-[400px] mt-5 overflow-y-scroll">
               <div className="grid grid-cols-2 md:grid-cols-3">
                 {Object.keys(BODY_COLORS).map((i) => {
-                  const color = "bg-[" + BODY_COLORS[i].color + "]";
+                  const color = "bg-skins-" + i;
                   return (
                       <div  key={i} className="flex flex-row items-center justify-center h-32 w-32 mx-auto">
                         <button
                             className={classNames(
-                                "p-5 h-20 w-20 rounded-full border-4 border-white",
-                                color
+                                color,
+                              "p-5 h-20 w-20 rounded-full border-4 border-white"
                             )}
                         />
                       </div>

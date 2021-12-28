@@ -15,6 +15,7 @@ export const BODY_COLORS: {
     male_image: "/traits/body/male/2.png",
   },
   3: {
+
     color: "#EAB874",
     female_image: "/traits/body/female/3.png",
     male_image: "/traits/body/male/3.png",
