@@ -47,34 +47,44 @@ export default function CreatorSingle(): JSX.Element {
     setAttributes(data);
   }
 
+  const [showTitle, setShowTitle] = useState(true);
+
+  function toggleTitle(toggle: boolean) {
+    setShowTitle(toggle);
+  }
+
   return (
     <div className="relative z-10 mx-4 h-full pb-10">
-      <div className="pt-14 text-center flex flex-row justify-center items-center gap-x-10">
-        <div className="hidden md:inline-flex ml-10">
-          <Image
-            src="/img/separator-right.svg"
-            width="250"
-            height="17"
-            alt="Bitmon Separator"
-          />
+      {showTitle ? (
+        <div className="pt-14 text-center flex flex-row justify-center items-center gap-x-10">
+          <div className="hidden md:inline-flex ml-10">
+            <Image
+              src="/img/separator-right.svg"
+              width="250"
+              height="17"
+              alt="Bitmon Separator"
+            />
+          </div>
+          <div>
+            <Image
+              src="/img/trainer-creator.png"
+              width="200"
+              height="85"
+              alt="Bitmon Separator"
+            />
+          </div>
+          <div className="hidden md:inline-flex mr-10">
+            <Image
+              src="/img/separator-left.svg"
+              width="250"
+              height="17"
+              alt="Bitmon Separator"
+            />
+          </div>
         </div>
-        <div>
-          <Image
-            src="/img/trainer-creator.png"
-            width="200"
-            height="85"
-            alt="Bitmon Separator"
-          />
-        </div>
-        <div className="hidden md:inline-flex mr-10">
-          <Image
-            src="/img/separator-left.svg"
-            width="250"
-            height="17"
-            alt="Bitmon Separator"
-          />
-        </div>
-      </div>
+      ) : (
+        <div />
+      )}
       <div className="mt-8">
         {wallet.connected ? (
           metadata ? (
@@ -82,6 +92,7 @@ export default function CreatorSingle(): JSX.Element {
               <TrainerBuilder
                 attributes={attributes}
                 setAttributes={attributesUpdate}
+                toggleTitle={toggleTitle}
               />
             ) : (
               <div className="text-center">
