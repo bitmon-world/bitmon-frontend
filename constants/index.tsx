@@ -555,6 +555,18 @@ export const HAIR: { [k: number]: { image: string } } = {
   },
 };
 
+export const HAIR_COLORS: { [k: number]: { color: string } } = {
+  "1": { color: "#100F0F" },
+  "2": { color: "#F1C669" },
+  "3": { color: "#AA9F9A" },
+  "4": { color: "#457FA1" },
+  "5": { color: "#7D6B65" },
+  "6": { color: "#CB466E" },
+  "7": { color: "#486829" },
+  "8": { color: "#D16151" },
+  "9": { color: "#79358B" },
+};
+
 export const BACK_HAIR: { [k: number]: { image: string } } = {
   "1": {
     image: "/traits/back-hair/1.png",
