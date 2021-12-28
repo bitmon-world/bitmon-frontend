@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import Image from "next/image";
 import { ButtonBlue, ButtonBlueDisabled } from "../Button";
-import { BODY_COLORS } from "../../constants";
+import { BODY_COLORS, MOUTH } from "../../constants";
 import { classNames } from "../../functions/classnames";
 
 export interface TrainerAttributes {
@@ -338,20 +338,37 @@ export const TrainerBuilder: FC<{
             </div>
             <div className="bg-white/30 rounded-lg h-[400px] mt-5 overflow-y-scroll">
               <div className="grid grid-cols-2 md:grid-cols-3">
-                {Object.keys(BODY_COLORS).map((i) => {
-                  const color = "bg-skins-" + i;
-                  return (
-                      <div  key={i} className="flex flex-row items-center justify-center h-32 w-32 mx-auto">
+                {selected === AttributeSelection.BodyColor &&
+                  Object.keys(BODY_COLORS).map((i) => {
+                    const color = "bg-skins-" + i;
+                    return (
+                      <div
+                        key={i}
+                        className="flex flex-row items-center justify-center h-32 w-32 mx-auto"
+                      >
                         <button
-                            className={classNames(
-                                color,
-                              "p-5 h-20 w-20 rounded-full border-4 border-white"
-                            )}
+                          className={classNames(
+                            color,
+                            "p-5 h-20 w-20 rounded-full border-4 border-white"
+                          )}
                         />
                       </div>
-
-                  );
-                })}
+                    );
+                  })}
+                {selected === AttributeSelection.Mouth &&
+                  Object.keys(MOUTH).map((i) => {
+                    const image = MOUTH[i].image;
+                    return (
+                      <button>
+                        <div
+                          key={i}
+                          className="flex flex-row items-center justify-center h-[150px] w-[200px] mx-auto bg-attribute-background bg-no-repeat bg-center"
+                        >
+                          <Image src={image} width={192} height={192} />
+                        </div>
+                      </button>
+                    );
+                  })}
               </div>
             </div>
             <div className="flex flex-row justify-end gap-x-3 mt-5">

@@ -15,7 +15,6 @@ export const BODY_COLORS: {
     male_image: "/traits/body/male/2.png",
   },
   3: {
-
     color: "#EAB874",
     female_image: "/traits/body/female/3.png",
     male_image: "/traits/body/male/3.png",
@@ -47,7 +46,12 @@ export const BODY_COLORS: {
   },
 };
 
-export const MOUTH: { [k: number]: { image: string } } = {};
+export const MOUTH: { [k: number]: { image: string } } = {
+  1: { image: "/traits/mouth/1.png" },
+  2: { image: "/traits/mouth/2.png" },
+  3: { image: "/traits/mouth/3.png" },
+  4: { image: "/traits/mouth/4.png" },
+};
 
 export const EYES: { [k: number]: { image: string } } = {};
 

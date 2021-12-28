@@ -21,11 +21,12 @@ module.exports = {
           6: "#BBB7CD",
           7: "#CEC96B",
           8: "#CF7BB3",
-        }
+        },
       },
     },
     backgroundImage: {
       "title-background": "url('/img/section-background.png')",
+      "attribute-background": "url('/icons/builder/attribute-background.svg')",
     },
   },
 };
