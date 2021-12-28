@@ -92,466 +92,55 @@ export const NOSE: { [k: number]: { image: string } } = {
 
 export const HAIR: { [k: number]: { image: string } } = {
   "1": {
-    image: "/traits/hair/1.png",
+    image: "/traits/hair/1/1.png",
   },
   "2": {
-    image: "/traits/hair/2.png",
+    image: "/traits/hair/1/2.png",
   },
   "3": {
-    image: "/traits/hair/3.png",
+    image: "/traits/hair/1/3.png",
   },
   "4": {
-    image: "/traits/hair/4.png",
+    image: "/traits/hair/1/4.png",
   },
   "5": {
-    image: "/traits/hair/5.png",
+    image: "/traits/hair/1/5.png",
   },
   "6": {
-    image: "/traits/hair/6.png",
+    image: "/traits/hair/1/6.png",
   },
   "7": {
-    image: "/traits/hair/7.png",
+    image: "/traits/hair/1/7.png",
   },
   "8": {
-    image: "/traits/hair/8.png",
+    image: "/traits/hair/1/8.png",
   },
   "9": {
-    image: "/traits/hair/9.png",
+    image: "/traits/hair/1/9.png",
   },
   "10": {
-    image: "/traits/hair/10.png",
+    image: "/traits/hair/1/10.png",
   },
   "11": {
-    image: "/traits/hair/11.png",
+    image: "/traits/hair/1/11.png",
   },
   "12": {
-    image: "/traits/hair/12.png",
+    image: "/traits/hair/1/12.png",
   },
   "13": {
-    image: "/traits/hair/13.png",
+    image: "/traits/hair/1/13.png",
   },
   "14": {
-    image: "/traits/hair/14.png",
+    image: "/traits/hair/1/14.png",
   },
   "15": {
-    image: "/traits/hair/15.png",
+    image: "/traits/hair/1/15.png",
   },
   "16": {
-    image: "/traits/hair/16.png",
+    image: "/traits/hair/1/16.png",
   },
   "17": {
-    image: "/traits/hair/17.png",
-  },
-  "18": {
-    image: "/traits/hair/18.png",
-  },
-  "19": {
-    image: "/traits/hair/19.png",
-  },
-  "20": {
-    image: "/traits/hair/20.png",
-  },
-  "21": {
-    image: "/traits/hair/21.png",
-  },
-  "22": {
-    image: "/traits/hair/22.png",
-  },
-  "23": {
-    image: "/traits/hair/23.png",
-  },
-  "24": {
-    image: "/traits/hair/24.png",
-  },
-  "25": {
-    image: "/traits/hair/25.png",
-  },
-  "26": {
-    image: "/traits/hair/26.png",
-  },
-  "27": {
-    image: "/traits/hair/27.png",
-  },
-  "28": {
-    image: "/traits/hair/28.png",
-  },
-  "29": {
-    image: "/traits/hair/29.png",
-  },
-  "30": {
-    image: "/traits/hair/30.png",
-  },
-  "31": {
-    image: "/traits/hair/31.png",
-  },
-  "32": {
-    image: "/traits/hair/32.png",
-  },
-  "33": {
-    image: "/traits/hair/33.png",
-  },
-  "34": {
-    image: "/traits/hair/34.png",
-  },
-  "35": {
-    image: "/traits/hair/35.png",
-  },
-  "36": {
-    image: "/traits/hair/36.png",
-  },
-  "37": {
-    image: "/traits/hair/37.png",
-  },
-  "38": {
-    image: "/traits/hair/38.png",
-  },
-  "39": {
-    image: "/traits/hair/39.png",
-  },
-  "40": {
-    image: "/traits/hair/40.png",
-  },
-  "41": {
-    image: "/traits/hair/41.png",
-  },
-  "42": {
-    image: "/traits/hair/42.png",
-  },
-  "43": {
-    image: "/traits/hair/43.png",
-  },
-  "44": {
-    image: "/traits/hair/44.png",
-  },
-  "45": {
-    image: "/traits/hair/45.png",
-  },
-  "46": {
-    image: "/traits/hair/46.png",
-  },
-  "47": {
-    image: "/traits/hair/47.png",
-  },
-  "48": {
-    image: "/traits/hair/48.png",
-  },
-  "49": {
-    image: "/traits/hair/49.png",
-  },
-  "50": {
-    image: "/traits/hair/50.png",
-  },
-  "51": {
-    image: "/traits/hair/51.png",
-  },
-  "52": {
-    image: "/traits/hair/52.png",
-  },
-  "53": {
-    image: "/traits/hair/53.png",
-  },
-  "54": {
-    image: "/traits/hair/54.png",
-  },
-  "55": {
-    image: "/traits/hair/55.png",
-  },
-  "56": {
-    image: "/traits/hair/56.png",
-  },
-  "57": {
-    image: "/traits/hair/57.png",
-  },
-  "58": {
-    image: "/traits/hair/58.png",
-  },
-  "59": {
-    image: "/traits/hair/59.png",
-  },
-  "60": {
-    image: "/traits/hair/60.png",
-  },
-  "61": {
-    image: "/traits/hair/61.png",
-  },
-  "62": {
-    image: "/traits/hair/62.png",
-  },
-  "63": {
-    image: "/traits/hair/63.png",
-  },
-  "64": {
-    image: "/traits/hair/64.png",
-  },
-  "65": {
-    image: "/traits/hair/65.png",
-  },
-  "66": {
-    image: "/traits/hair/66.png",
-  },
-  "67": {
-    image: "/traits/hair/67.png",
-  },
-  "68": {
-    image: "/traits/hair/68.png",
-  },
-  "69": {
-    image: "/traits/hair/69.png",
-  },
-  "70": {
-    image: "/traits/hair/70.png",
-  },
-  "71": {
-    image: "/traits/hair/71.png",
-  },
-  "72": {
-    image: "/traits/hair/72.png",
-  },
-  "73": {
-    image: "/traits/hair/73.png",
-  },
-  "74": {
-    image: "/traits/hair/74.png",
-  },
-  "75": {
-    image: "/traits/hair/75.png",
-  },
-  "76": {
-    image: "/traits/hair/76.png",
-  },
-  "77": {
-    image: "/traits/hair/77.png",
-  },
-  "78": {
-    image: "/traits/hair/78.png",
-  },
-  "79": {
-    image: "/traits/hair/79.png",
-  },
-  "80": {
-    image: "/traits/hair/80.png",
-  },
-  "81": {
-    image: "/traits/hair/81.png",
-  },
-  "82": {
-    image: "/traits/hair/82.png",
-  },
-  "83": {
-    image: "/traits/hair/83.png",
-  },
-  "84": {
-    image: "/traits/hair/84.png",
-  },
-  "85": {
-    image: "/traits/hair/85.png",
-  },
-  "86": {
-    image: "/traits/hair/86.png",
-  },
-  "87": {
-    image: "/traits/hair/87.png",
-  },
-  "88": {
-    image: "/traits/hair/88.png",
-  },
-  "89": {
-    image: "/traits/hair/89.png",
-  },
-  "90": {
-    image: "/traits/hair/90.png",
-  },
-  "91": {
-    image: "/traits/hair/91.png",
-  },
-  "92": {
-    image: "/traits/hair/92.png",
-  },
-  "93": {
-    image: "/traits/hair/93.png",
-  },
-  "94": {
-    image: "/traits/hair/94.png",
-  },
-  "95": {
-    image: "/traits/hair/95.png",
-  },
-  "96": {
-    image: "/traits/hair/96.png",
-  },
-  "97": {
-    image: "/traits/hair/97.png",
-  },
-  "98": {
-    image: "/traits/hair/98.png",
-  },
-  "99": {
-    image: "/traits/hair/99.png",
-  },
-  "100": {
-    image: "/traits/hair/100.png",
-  },
-  "101": {
-    image: "/traits/hair/101.png",
-  },
-  "102": {
-    image: "/traits/hair/102.png",
-  },
-  "103": {
-    image: "/traits/hair/103.png",
-  },
-  "104": {
-    image: "/traits/hair/104.png",
-  },
-  "105": {
-    image: "/traits/hair/105.png",
-  },
-  "106": {
-    image: "/traits/hair/106.png",
-  },
-  "107": {
-    image: "/traits/hair/107.png",
-  },
-  "108": {
-    image: "/traits/hair/108.png",
-  },
-  "109": {
-    image: "/traits/hair/109.png",
-  },
-  "110": {
-    image: "/traits/hair/110.png",
-  },
-  "111": {
-    image: "/traits/hair/111.png",
-  },
-  "112": {
-    image: "/traits/hair/112.png",
-  },
-  "113": {
-    image: "/traits/hair/113.png",
-  },
-  "114": {
-    image: "/traits/hair/114.png",
-  },
-  "115": {
-    image: "/traits/hair/115.png",
-  },
-  "116": {
-    image: "/traits/hair/116.png",
-  },
-  "117": {
-    image: "/traits/hair/117.png",
-  },
-  "118": {
-    image: "/traits/hair/118.png",
-  },
-  "119": {
-    image: "/traits/hair/119.png",
-  },
-  "120": {
-    image: "/traits/hair/120.png",
-  },
-  "121": {
-    image: "/traits/hair/121.png",
-  },
-  "122": {
-    image: "/traits/hair/122.png",
-  },
-  "123": {
-    image: "/traits/hair/123.png",
-  },
-  "124": {
-    image: "/traits/hair/124.png",
-  },
-  "125": {
-    image: "/traits/hair/125.png",
-  },
-  "126": {
-    image: "/traits/hair/126.png",
-  },
-  "127": {
-    image: "/traits/hair/127.png",
-  },
-  "128": {
-    image: "/traits/hair/128.png",
-  },
-  "129": {
-    image: "/traits/hair/129.png",
-  },
-  "130": {
-    image: "/traits/hair/130.png",
-  },
-  "131": {
-    image: "/traits/hair/131.png",
-  },
-  "132": {
-    image: "/traits/hair/132.png",
-  },
-  "133": {
-    image: "/traits/hair/133.png",
-  },
-  "134": {
-    image: "/traits/hair/134.png",
-  },
-  "135": {
-    image: "/traits/hair/135.png",
-  },
-  "136": {
-    image: "/traits/hair/136.png",
-  },
-  "137": {
-    image: "/traits/hair/137.png",
-  },
-  "138": {
-    image: "/traits/hair/138.png",
-  },
-  "139": {
-    image: "/traits/hair/139.png",
-  },
-  "140": {
-    image: "/traits/hair/140.png",
-  },
-  "141": {
-    image: "/traits/hair/141.png",
-  },
-  "142": {
-    image: "/traits/hair/142.png",
-  },
-  "143": {
-    image: "/traits/hair/143.png",
-  },
-  "144": {
-    image: "/traits/hair/144.png",
-  },
-  "145": {
-    image: "/traits/hair/145.png",
-  },
-  "146": {
-    image: "/traits/hair/146.png",
-  },
-  "147": {
-    image: "/traits/hair/147.png",
-  },
-  "148": {
-    image: "/traits/hair/148.png",
-  },
-  "149": {
-    image: "/traits/hair/149.png",
-  },
-  "150": {
-    image: "/traits/hair/150.png",
-  },
-  "151": {
-    image: "/traits/hair/151.png",
-  },
-  "152": {
-    image: "/traits/hair/152.png",
-  },
-  "153": {
-    image: "/traits/hair/153.png",
-  },
-  "154": {
-    image: "/traits/hair/154.png",
+    image: "/traits/hair/1/17.png",
   },
 };
 
@@ -569,139 +158,19 @@ export const HAIR_COLORS: { [k: number]: { color: string } } = {
 
 export const BACK_HAIR: { [k: number]: { image: string } } = {
   "1": {
-    image: "/traits/back-hair/1.png",
+    image: "/traits/back-hair/1/1.png",
   },
   "2": {
-    image: "/traits/back-hair/2.png",
+    image: "/traits/back-hair/1/2.png",
   },
   "3": {
-    image: "/traits/back-hair/3.png",
+    image: "/traits/back-hair/1/3.png",
   },
   "4": {
-    image: "/traits/back-hair/4.png",
+    image: "/traits/back-hair/1/4.png",
   },
   "5": {
-    image: "/traits/back-hair/5.png",
-  },
-  "6": {
-    image: "/traits/back-hair/6.png",
-  },
-  "7": {
-    image: "/traits/back-hair/7.png",
-  },
-  "8": {
-    image: "/traits/back-hair/8.png",
-  },
-  "9": {
-    image: "/traits/back-hair/9.png",
-  },
-  "10": {
-    image: "/traits/back-hair/10.png",
-  },
-  "11": {
-    image: "/traits/back-hair/11.png",
-  },
-  "12": {
-    image: "/traits/back-hair/12.png",
-  },
-  "13": {
-    image: "/traits/back-hair/13.png",
-  },
-  "14": {
-    image: "/traits/back-hair/14.png",
-  },
-  "15": {
-    image: "/traits/back-hair/15.png",
-  },
-  "16": {
-    image: "/traits/back-hair/16.png",
-  },
-  "17": {
-    image: "/traits/back-hair/17.png",
-  },
-  "18": {
-    image: "/traits/back-hair/18.png",
-  },
-  "19": {
-    image: "/traits/back-hair/19.png",
-  },
-  "20": {
-    image: "/traits/back-hair/20.png",
-  },
-  "21": {
-    image: "/traits/back-hair/21.png",
-  },
-  "22": {
-    image: "/traits/back-hair/22.png",
-  },
-  "23": {
-    image: "/traits/back-hair/23.png",
-  },
-  "24": {
-    image: "/traits/back-hair/24.png",
-  },
-  "25": {
-    image: "/traits/back-hair/25.png",
-  },
-  "26": {
-    image: "/traits/back-hair/26.png",
-  },
-  "27": {
-    image: "/traits/back-hair/27.png",
-  },
-  "28": {
-    image: "/traits/back-hair/28.png",
-  },
-  "29": {
-    image: "/traits/back-hair/29.png",
-  },
-  "30": {
-    image: "/traits/back-hair/30.png",
-  },
-  "31": {
-    image: "/traits/back-hair/31.png",
-  },
-  "32": {
-    image: "/traits/back-hair/32.png",
-  },
-  "33": {
-    image: "/traits/back-hair/33.png",
-  },
-  "34": {
-    image: "/traits/back-hair/34.png",
-  },
-  "35": {
-    image: "/traits/back-hair/35.png",
-  },
-  "36": {
-    image: "/traits/back-hair/36.png",
-  },
-  "37": {
-    image: "/traits/back-hair/37.png",
-  },
-  "38": {
-    image: "/traits/back-hair/38.png",
-  },
-  "39": {
-    image: "/traits/back-hair/39.png",
-  },
-  "40": {
-    image: "/traits/back-hair/40.png",
-  },
-  "41": {
-    image: "/traits/back-hair/41.png",
-  },
-  "42": {
-    image: "/traits/back-hair/42.png",
-  },
-  "43": {
-    image: "/traits/back-hair/43.png",
-  },
-  "44": {
-    image: "/traits/back-hair/44.png",
-  },
-  "45": {
-    image: "/traits/back-hair/45.png",
+    image: "/traits/back-hair/1/5.png",
   },
 };
 

@@ -10,6 +10,7 @@ import {
   EYEBROWS,
   EYES,
   HAIR,
+  HAIR_COLORS,
   MOUTH,
   NOSE,
 } from "../../constants";
@@ -594,7 +595,6 @@ export const TrainerBuilder: FC<{
               <div className="grid grid-cols-1 md:grid-cols-3">
                 {selected === AttributeSelection.BodyColor &&
                   Object.keys(BODY_COLORS).map((i) => {
-                    const color = "bg-skins-" + i;
                     return (
                       <div
                         key={i}
@@ -931,6 +931,46 @@ export const TrainerBuilder: FC<{
                     })}
                   </>
                 )}
+                {selected === AttributeSelection.HairColor &&
+                  Object.keys(HAIR_COLORS).map((i) => {
+                    return (
+                      <div
+                        key={i}
+                        className="flex flex-row items-center justify-center h-32 w-32 mx-auto"
+                      >
+                        <button
+                          onClick={() =>
+                            setAttributes({
+                              accessory: attributes.accessory,
+                              back_hair: attributes.back_hair,
+                              background: attributes.background,
+                              clothes: attributes.clothes,
+                              eyebrows: attributes.eyebrows,
+                              eyes: attributes.eyes,
+                              eyes_color: attributes.eyes_color,
+                              hair_color: i,
+                              hair: attributes.hair,
+                              mouth: attributes.mouth,
+                              nose: attributes.nose,
+                              body_type: attributes.body_type,
+                              body_color: attributes.body_color,
+                            })
+                          }
+                        >
+                          <svg width="100" height="100">
+                            <circle
+                              cx="50"
+                              cy="50"
+                              r="40"
+                              stroke="white"
+                              strokeWidth="4"
+                              fill={HAIR_COLORS[i].color}
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    );
+                  })}
                 {selected === AttributeSelection.Accessory && (
                   <>
                     <button
