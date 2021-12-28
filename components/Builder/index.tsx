@@ -9,6 +9,7 @@ import {
   CLOTHES,
   EYEBROWS,
   EYES,
+  EYES_COLORS,
   HAIR,
   HAIR_COLORS,
   MOUTH,
@@ -64,7 +65,10 @@ export const TrainerBuilder: FC<{
       ).toString(),
       mouth: randomIntFromInterval(1, Object.keys(MOUTH).length).toString(),
       eyes: randomIntFromInterval(1, Object.keys(EYES).length).toString(),
-      eyes_color: null,
+      eyes_color: randomIntFromInterval(
+        1,
+        Object.keys(EYES_COLORS).length
+      ).toString(),
       eyebrows: randomIntFromInterval(
         1,
         Object.keys(EYEBROWS).length
@@ -75,7 +79,10 @@ export const TrainerBuilder: FC<{
         1,
         Object.keys(BACK_HAIR).length
       ).toString(),
-      hair_color: null,
+      hair_color: randomIntFromInterval(
+        1,
+        Object.keys(HAIR_COLORS).length
+      ).toString(),
       accessory: randomIntFromInterval(
         1,
         Object.keys(ACCESSORIES).length
@@ -242,14 +249,31 @@ export const TrainerBuilder: FC<{
                 <div />
               )}
               {attributes.eyes ? (
-                <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
-                  <Image
-                    className="rounded-lg"
-                    src={EYES[attributes.eyes].image}
-                    width={300}
-                    height={300}
-                  />
-                </div>
+                attributes.eyes_color ? (
+                  <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
+                    <Image
+                      className="rounded-lg"
+                      src={
+                        "/traits/eyes/" +
+                        attributes.eyes_color +
+                        "/" +
+                        attributes.eyes +
+                        ".png"
+                      }
+                      width={300}
+                      height={300}
+                    />
+                  </div>
+                ) : (
+                  <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
+                    <Image
+                      className="rounded-lg"
+                      src={EYES[attributes.eyes].image}
+                      width={300}
+                      height={300}
+                    />
+                  </div>
+                )
               ) : (
                 <div />
               )}
@@ -739,6 +763,46 @@ export const TrainerBuilder: FC<{
                           />
                         </div>
                       </button>
+                    );
+                  })}
+                {selected === AttributeSelection.EyesColor &&
+                  Object.keys(EYES_COLORS).map((i) => {
+                    return (
+                      <div
+                        key={i}
+                        className="flex flex-row items-center justify-center h-32 w-32 mx-auto"
+                      >
+                        <button
+                          onClick={() =>
+                            setAttributes({
+                              accessory: attributes.accessory,
+                              back_hair: attributes.back_hair,
+                              background: attributes.background,
+                              clothes: attributes.clothes,
+                              eyebrows: attributes.eyebrows,
+                              eyes: attributes.eyes,
+                              eyes_color: i,
+                              hair_color: attributes.hair_color,
+                              hair: attributes.hair,
+                              mouth: attributes.mouth,
+                              nose: attributes.nose,
+                              body_type: attributes.body_type,
+                              body_color: attributes.body_color,
+                            })
+                          }
+                        >
+                          <svg width="100" height="100">
+                            <circle
+                              cx="50"
+                              cy="50"
+                              r="40"
+                              stroke="white"
+                              strokeWidth="4"
+                              fill={EYES_COLORS[i].color}
+                            />
+                          </svg>
+                        </button>
+                      </div>
                     );
                   })}
                 {selected === AttributeSelection.Eyebrows &&

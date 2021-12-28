@@ -54,27 +54,20 @@ export const MOUTH: { [k: number]: { image: string } } = {
 };
 
 export const EYES: { [k: number]: { image: string } } = {
-  "1": { image: "/traits/eyes/1.png" },
-  "2": { image: "/traits/eyes/2.png" },
-  "3": { image: "/traits/eyes/3.png" },
-  "4": { image: "/traits/eyes/4.png" },
-  "5": { image: "/traits/eyes/5.png" },
-  "6": { image: "/traits/eyes/6.png" },
-  "7": { image: "/traits/eyes/7.png" },
-  "8": { image: "/traits/eyes/8.png" },
-  "9": { image: "/traits/eyes/9.png" },
-  "10": { image: "/traits/eyes/10.png" },
-  "11": { image: "/traits/eyes/11.png" },
-  "12": { image: "/traits/eyes/12.png" },
-  "13": { image: "/traits/eyes/13.png" },
-  "14": { image: "/traits/eyes/14.png" },
-  "15": { image: "/traits/eyes/15.png" },
-  "16": { image: "/traits/eyes/16.png" },
-  "17": { image: "/traits/eyes/17.png" },
-  "18": { image: "/traits/eyes/18.png" },
-  "19": { image: "/traits/eyes/19.png" },
-  "20": { image: "/traits/eyes/20.png" },
-  "21": { image: "/traits/eyes/21.png" },
+  "1": { image: "/traits/eyes/1/1.png" },
+  "2": { image: "/traits/eyes/1/2.png" },
+  "3": { image: "/traits/eyes/1/3.png" },
+};
+
+export const EYES_COLORS: { [k: number]: { color: string } } = {
+  "1": { color: "#483823" },
+  "2": { color: "#AFAAAF" },
+  "3": { color: "#799B2D" },
+  "4": { color: "#5A3F5E" },
+  "5": { color: "#4F92BD" },
+  "6": { color: "#B53839" },
+  "7": { color: "#AF4369" },
+  "8": { color: "#B58850" },
 };
 
 export const EYEBROWS: { [k: number]: { image: string } } = {
