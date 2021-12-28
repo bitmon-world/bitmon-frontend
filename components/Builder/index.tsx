@@ -13,17 +13,18 @@ import {
   MOUTH,
   NOSE,
 } from "../../constants";
-import { classNames } from "../../functions/classnames";
 
 export interface TrainerAttributes {
   body_type: "male" | "female" | null;
   body_color: string | null;
   mouth: string | null;
   eyes: string | null;
+  eyes_color: string | null;
   eyebrows: string | null;
   nose: string | null;
   hair: string | null;
   back_hair: string | null;
+  hair_color: string | null;
   accessory: string | null;
   clothes: string | null;
   background: string | null;
@@ -33,10 +34,12 @@ enum AttributeSelection {
   BodyColor,
   Mouth,
   Eyes,
+  EyesColor,
   Eyebrows,
   Nose,
   Hair,
   BackHair,
+  HairColor,
   Accessory,
   Clothes,
   Background,
@@ -60,6 +63,7 @@ export const TrainerBuilder: FC<{
       ).toString(),
       mouth: randomIntFromInterval(1, Object.keys(MOUTH).length).toString(),
       eyes: randomIntFromInterval(1, Object.keys(EYES).length).toString(),
+      eyes_color: null,
       eyebrows: randomIntFromInterval(
         1,
         Object.keys(EYEBROWS).length
@@ -70,6 +74,7 @@ export const TrainerBuilder: FC<{
         1,
         Object.keys(BACK_HAIR).length
       ).toString(),
+      hair_color: null,
       accessory: randomIntFromInterval(
         1,
         Object.keys(ACCESSORIES).length
@@ -115,7 +120,9 @@ export const TrainerBuilder: FC<{
               clothes: null,
               eyebrows: null,
               eyes: null,
+              eyes_color: null,
               hair: null,
+              hair_color: null,
               mouth: null,
               nose: null,
               body_type: "female",
@@ -143,7 +150,9 @@ export const TrainerBuilder: FC<{
               clothes: null,
               eyebrows: null,
               eyes: null,
+              eyes_color: null,
               hair: null,
+              hair_color: null,
               mouth: null,
               nose: null,
               body_type: "male",
@@ -405,6 +414,25 @@ export const TrainerBuilder: FC<{
               </div>
               <div>
                 <button
+                  onClick={() => setSelected(AttributeSelection.EyesColor)}
+                >
+                  {selected === AttributeSelection.EyesColor ? (
+                    <Image
+                      src="/icons/builder/eyes-color-selected.svg"
+                      width="50px"
+                      height="50px"
+                    />
+                  ) : (
+                    <Image
+                      src="/icons/builder/eyes-color.svg"
+                      width="40px"
+                      height="40px"
+                    />
+                  )}
+                </button>
+              </div>
+              <div>
+                <button
                   onClick={() => setSelected(AttributeSelection.Eyebrows)}
                 >
                   {selected === AttributeSelection.Eyebrows ? (
@@ -469,6 +497,25 @@ export const TrainerBuilder: FC<{
                   ) : (
                     <Image
                       src="/icons/builder/back-hair.svg"
+                      width="40px"
+                      height="40px"
+                    />
+                  )}
+                </button>
+              </div>
+              <div>
+                <button
+                  onClick={() => setSelected(AttributeSelection.HairColor)}
+                >
+                  {selected === AttributeSelection.HairColor ? (
+                    <Image
+                      src="/icons/builder/hair-color-selected.svg"
+                      width="50px"
+                      height="50px"
+                    />
+                  ) : (
+                    <Image
+                      src="/icons/builder/hair-color.svg"
                       width="40px"
                       height="40px"
                     />
@@ -562,6 +609,8 @@ export const TrainerBuilder: FC<{
                               clothes: attributes.clothes,
                               eyebrows: attributes.eyebrows,
                               eyes: attributes.eyes,
+                              eyes_color: attributes.eyes_color,
+                              hair_color: attributes.hair_color,
                               hair: attributes.hair,
                               mouth: attributes.mouth,
                               nose: attributes.nose,
@@ -597,6 +646,8 @@ export const TrainerBuilder: FC<{
                             clothes: attributes.clothes,
                             eyebrows: attributes.eyebrows,
                             eyes: attributes.eyes,
+                            eyes_color: attributes.eyes_color,
+                            hair_color: attributes.hair_color,
                             hair: attributes.hair,
                             mouth: i,
                             nose: attributes.nose,
@@ -632,6 +683,8 @@ export const TrainerBuilder: FC<{
                             clothes: attributes.clothes,
                             eyebrows: attributes.eyebrows,
                             eyes: i,
+                            eyes_color: attributes.eyes_color,
+                            hair_color: attributes.hair_color,
                             hair: attributes.hair,
                             mouth: attributes.mouth,
                             nose: attributes.nose,
@@ -667,6 +720,8 @@ export const TrainerBuilder: FC<{
                             clothes: attributes.clothes,
                             eyebrows: i,
                             eyes: attributes.eyes,
+                            eyes_color: attributes.eyes_color,
+                            hair_color: attributes.hair_color,
                             hair: attributes.hair,
                             mouth: attributes.mouth,
                             nose: attributes.nose,
@@ -702,6 +757,8 @@ export const TrainerBuilder: FC<{
                             clothes: attributes.clothes,
                             eyebrows: attributes.eyebrows,
                             eyes: attributes.eyes,
+                            eyes_color: attributes.eyes_color,
+                            hair_color: attributes.hair_color,
                             hair: attributes.hair,
                             mouth: attributes.mouth,
                             nose: i,
@@ -734,6 +791,8 @@ export const TrainerBuilder: FC<{
                           background: attributes.background,
                           clothes: attributes.clothes,
                           eyebrows: attributes.eyebrows,
+                          eyes_color: attributes.eyes_color,
+                          hair_color: attributes.hair_color,
                           eyes: attributes.eyes,
                           hair: null,
                           mouth: attributes.mouth,
@@ -768,6 +827,8 @@ export const TrainerBuilder: FC<{
                               background: attributes.background,
                               clothes: attributes.clothes,
                               eyebrows: attributes.eyebrows,
+                              eyes_color: attributes.eyes_color,
+                              hair_color: attributes.hair_color,
                               eyes: attributes.eyes,
                               hair: i,
                               mouth: attributes.mouth,
@@ -806,6 +867,8 @@ export const TrainerBuilder: FC<{
                           clothes: attributes.clothes,
                           eyebrows: attributes.eyebrows,
                           eyes: attributes.eyes,
+                          eyes_color: attributes.eyes_color,
+                          hair_color: attributes.hair_color,
                           hair: attributes.hair,
                           mouth: attributes.mouth,
                           nose: attributes.nose,
@@ -840,6 +903,8 @@ export const TrainerBuilder: FC<{
                               clothes: attributes.clothes,
                               eyebrows: attributes.eyebrows,
                               eyes: attributes.eyes,
+                              eyes_color: attributes.eyes_color,
+                              hair_color: attributes.hair_color,
                               hair: attributes.hair,
                               mouth: attributes.mouth,
                               nose: attributes.nose,
@@ -877,6 +942,8 @@ export const TrainerBuilder: FC<{
                           clothes: attributes.clothes,
                           eyebrows: attributes.eyebrows,
                           eyes: attributes.eyes,
+                          eyes_color: attributes.eyes_color,
+                          hair_color: attributes.hair_color,
                           hair: attributes.hair,
                           mouth: attributes.mouth,
                           nose: attributes.nose,
@@ -911,6 +978,8 @@ export const TrainerBuilder: FC<{
                               clothes: attributes.clothes,
                               eyebrows: attributes.eyebrows,
                               eyes: attributes.eyes,
+                              eyes_color: attributes.eyes_color,
+                              hair_color: attributes.hair_color,
                               hair: attributes.hair,
                               mouth: attributes.mouth,
                               nose: attributes.nose,
@@ -956,6 +1025,8 @@ export const TrainerBuilder: FC<{
                                 clothes: i,
                                 eyebrows: attributes.eyebrows,
                                 eyes: attributes.eyes,
+                                eyes_color: attributes.eyes_color,
+                                hair_color: attributes.hair_color,
                                 hair: attributes.hair,
                                 mouth: attributes.mouth,
                                 nose: attributes.nose,
@@ -993,6 +1064,8 @@ export const TrainerBuilder: FC<{
                             clothes: attributes.clothes,
                             eyebrows: attributes.eyebrows,
                             eyes: attributes.eyes,
+                            eyes_color: attributes.eyes_color,
+                            hair_color: attributes.hair_color,
                             hair: attributes.hair,
                             mouth: attributes.mouth,
                             nose: attributes.nose,
@@ -1061,6 +1134,8 @@ export const TrainerBuilder: FC<{
                         clothes: null,
                         eyebrows: null,
                         eyes: null,
+                        eyes_color: null,
+                        hair_color: null,
                         hair: null,
                         mouth: null,
                         nose: null,

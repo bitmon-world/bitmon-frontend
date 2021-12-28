@@ -28,13 +28,17 @@ export default function Creator(): JSX.Element {
       connection: connect,
     });
 
-    // Parse tokens based on the token creator
-    const bitmon_tokens = tokensList.filter(
-      (t) =>
-        t.data.creators
-          .map((c) => c.address.toLowerCase())
-          .indexOf(BITMON_DAO_ADDRESS.toLowerCase()) !== -1
-    );
+    console.log(tokensList);
+
+    const bitmon_tokens = tokensList.filter((t) => {
+      if (t.data.creators) {
+        return (
+          t.data.creators
+            .map((c) => c.address.toLowerCase())
+            .indexOf(BITMON_DAO_ADDRESS.toLowerCase()) !== -1
+        );
+      }
+    });
     setTokens(bitmon_tokens);
     setLoading(false);
   }, [wallet, connect, getParsedNftAccountsByOwner]);
