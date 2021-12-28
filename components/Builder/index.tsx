@@ -3,8 +3,10 @@ import Image from "next/image";
 import { ButtonBlue, ButtonBlueDisabled } from "../Button";
 import {
   ACCESSORIES,
-  BACK_HAIR, BACKGROUND,
-  BODY_COLORS, CLOTHES,
+  BACK_HAIR,
+  BACKGROUND,
+  BODY_COLORS,
+  CLOTHES,
   EYEBROWS,
   EYES,
   HAIR,
@@ -16,6 +18,15 @@ import { classNames } from "../../functions/classnames";
 export interface TrainerAttributes {
   body_type: "male" | "female" | null;
   body_color: string | null;
+  mouth: string | null;
+  eyes: string | null;
+  eyebrows: string | null;
+  nose: string | null;
+  hair: string | null;
+  back_hair: string | null;
+  accessory: string | null;
+  clothes: string | null;
+  background: string | null;
 }
 
 enum AttributeSelection {
@@ -40,9 +51,44 @@ export const TrainerBuilder: FC<{
     AttributeSelection.BodyColor
   );
 
+  function random() {
+    setAttributes({
+      body_type: attributes.body_type,
+      body_color: randomIntFromInterval(
+        1,
+        Object.keys(BODY_COLORS).length
+      ).toString(),
+      mouth: randomIntFromInterval(1, Object.keys(MOUTH).length).toString(),
+      eyes: randomIntFromInterval(1, Object.keys(EYES).length).toString(),
+      eyebrows: randomIntFromInterval(
+        1,
+        Object.keys(EYEBROWS).length
+      ).toString(),
+      nose: randomIntFromInterval(1, Object.keys(NOSE).length).toString(),
+      hair: randomIntFromInterval(1, Object.keys(HAIR).length).toString(),
+      back_hair: randomIntFromInterval(
+        1,
+        Object.keys(BACK_HAIR).length
+      ).toString(),
+      accessory: randomIntFromInterval(
+        1,
+        Object.keys(ACCESSORIES).length
+      ).toString(),
+      clothes: randomIntFromInterval(1, Object.keys(CLOTHES).length).toString(),
+      background: randomIntFromInterval(
+        1,
+        Object.keys(BACKGROUND).length
+      ).toString(),
+    });
+  }
+
+  function randomIntFromInterval(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
   return !attributes.body_type ? (
     <div>
-      <div className="flex flex-row items-center justify-between bg-contain bg-no-repeat bg-center bg-title-background h-[54px] mx-auto">
+      <div className="relative z-20 flex flex-row items-center justify-between bg-contain bg-no-repeat bg-center bg-title-background h-[54px] mx-auto">
         <div className="flex flex-row items-center gap-x-10 items-center mx-auto">
           <div>
             <span
@@ -62,7 +108,19 @@ export const TrainerBuilder: FC<{
       <div className="grid grid-cols-1 md:grid-cols-2 w-2/4 mx-auto mt-8">
         <button
           onClick={() => {
-            setAttributes({ body_type: "female", body_color: null });
+            setAttributes({
+              accessory: null,
+              back_hair: null,
+              background: null,
+              clothes: null,
+              eyebrows: null,
+              eyes: null,
+              hair: null,
+              mouth: null,
+              nose: null,
+              body_type: "female",
+              body_color: null,
+            });
             toggleTitle(false);
           }}
         >
@@ -78,7 +136,19 @@ export const TrainerBuilder: FC<{
         </button>
         <button
           onClick={() => {
-            setAttributes({ body_type: "male", body_color: null });
+            setAttributes({
+              accessory: null,
+              back_hair: null,
+              background: null,
+              clothes: null,
+              eyebrows: null,
+              eyes: null,
+              hair: null,
+              mouth: null,
+              nose: null,
+              body_type: "male",
+              body_color: null,
+            });
             toggleTitle(false);
           }}
         >
@@ -97,7 +167,7 @@ export const TrainerBuilder: FC<{
   ) : (
     <div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-5 w-4/5 mx-auto mt-12">
-        <div className="flex flex-row justify-center md:mt-20 max-h-[338px] items-center">
+        <div className="relative flex flex-row justify-center md:mt-20 max-h-[338px] items-center">
           {!attributes.body_color ? (
             attributes.body_type === "male" ? (
               <Image
@@ -117,7 +187,128 @@ export const TrainerBuilder: FC<{
               />
             )
           ) : (
-            <div />
+            <div>
+              {attributes.background ? (
+                <div className="rounded-lg h-[338px] w-[338px] z-0 static">
+                  <Image
+                    className="rounded-lg"
+                    src={BACKGROUND[attributes.background].image}
+                    width={300}
+                    height={300}
+                  />
+                </div>
+              ) : (
+                <div className="bg-white rounded-lg h-[300px] w-[300px]" />
+              )}
+              <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
+                <Image
+                  className="rounded-lg"
+                  src={
+                    attributes.body_type === "male"
+                      ? BODY_COLORS[attributes.body_color].male_image
+                      : BODY_COLORS[attributes.body_color].female_image
+                  }
+                  width={300}
+                  height={300}
+                />
+              </div>
+              {attributes.mouth ? (
+                <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
+                  <Image
+                    className="rounded-lg"
+                    src={MOUTH[attributes.mouth].image}
+                    width={300}
+                    height={300}
+                  />
+                </div>
+              ) : (
+                <div />
+              )}
+              {attributes.eyes ? (
+                <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
+                  <Image
+                    className="rounded-lg"
+                    src={EYES[attributes.eyes].image}
+                    width={300}
+                    height={300}
+                  />
+                </div>
+              ) : (
+                <div />
+              )}
+              {attributes.eyebrows ? (
+                <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
+                  <Image
+                    className="rounded-lg"
+                    src={EYEBROWS[attributes.eyebrows].image}
+                    width={300}
+                    height={300}
+                  />
+                </div>
+              ) : (
+                <div />
+              )}
+              {attributes.nose ? (
+                <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
+                  <Image
+                    className="rounded-lg"
+                    src={NOSE[attributes.nose].image}
+                    width={300}
+                    height={300}
+                  />
+                </div>
+              ) : (
+                <div />
+              )}
+              {attributes.hair ? (
+                <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
+                  <Image
+                    className="rounded-lg"
+                    src={HAIR[attributes.hair].image}
+                    width={300}
+                    height={300}
+                  />
+                </div>
+              ) : (
+                <div />
+              )}
+              {attributes.back_hair ? (
+                <div className="rounded-lg h-[300px] w-[300px] z-0 absolute top-0">
+                  <Image
+                    className="rounded-lg"
+                    src={BACK_HAIR[attributes.back_hair].image}
+                    width={300}
+                    height={300}
+                  />
+                </div>
+              ) : (
+                <div />
+              )}
+              {attributes.accessory ? (
+                <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
+                  <Image
+                    className="rounded-lg"
+                    src={ACCESSORIES[attributes.accessory].image}
+                    width={300}
+                    height={300}
+                  />
+                </div>
+              ) : (
+                <div />
+              )}
+              {attributes.clothes ? (
+                <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
+                  <Image
+                    className="rounded-lg"
+                    src={CLOTHES[attributes.clothes].image}
+                    width={300}
+                    height={300}
+                  />
+                </div>
+              ) : (
+                <div />
+              )}
+            </div>
           )}
         </div>
         <div className="col-span-2">
@@ -345,7 +536,7 @@ export const TrainerBuilder: FC<{
                 />
               </button>
             </div>
-            <div className="bg-white/30 rounded-lg h-[400px] mt-5 overflow-y-scroll">
+            <div className="relative bg-white/30 rounded-lg h-[400px] mt-5 overflow-y-scroll z-20">
               <div className="grid grid-cols-1 md:grid-cols-3">
                 {selected === AttributeSelection.BodyColor &&
                   Object.keys(BODY_COLORS).map((i) => {
@@ -356,11 +547,33 @@ export const TrainerBuilder: FC<{
                         className="flex flex-row items-center justify-center h-32 w-32 mx-auto"
                       >
                         <button
-                          className={classNames(
-                            color,
-                            "p-5 h-20 w-20 rounded-full border-4 border-white"
-                          )}
-                        />
+                          onClick={() =>
+                            setAttributes({
+                              accessory: attributes.accessory,
+                              back_hair: attributes.back_hair,
+                              background: attributes.background,
+                              clothes: attributes.clothes,
+                              eyebrows: attributes.eyebrows,
+                              eyes: attributes.eyes,
+                              hair: attributes.hair,
+                              mouth: attributes.mouth,
+                              nose: attributes.nose,
+                              body_type: attributes.body_type,
+                              body_color: i,
+                            })
+                          }
+                        >
+                          <svg width="100" height="100">
+                            <circle
+                              cx="50"
+                              cy="50"
+                              r="40"
+                              stroke="white"
+                              strokeWidth="4"
+                              fill={BODY_COLORS[i].color}
+                            />
+                          </svg>
+                        </button>
                       </div>
                     );
                   })}
@@ -368,7 +581,23 @@ export const TrainerBuilder: FC<{
                   Object.keys(MOUTH).map((i) => {
                     const image = MOUTH[i].image;
                     return (
-                      <button>
+                      <button
+                        onClick={() =>
+                          setAttributes({
+                            accessory: attributes.accessory,
+                            back_hair: attributes.back_hair,
+                            background: attributes.background,
+                            clothes: attributes.clothes,
+                            eyebrows: attributes.eyebrows,
+                            eyes: attributes.eyes,
+                            hair: attributes.hair,
+                            mouth: i,
+                            nose: attributes.nose,
+                            body_type: attributes.body_type,
+                            body_color: attributes.body_color,
+                          })
+                        }
+                      >
                         <div
                           key={i}
                           className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
@@ -387,7 +616,23 @@ export const TrainerBuilder: FC<{
                   Object.keys(EYES).map((i) => {
                     const image = EYES[i].image;
                     return (
-                      <button>
+                      <button
+                        onClick={() =>
+                          setAttributes({
+                            accessory: attributes.accessory,
+                            back_hair: attributes.back_hair,
+                            background: attributes.background,
+                            clothes: attributes.clothes,
+                            eyebrows: attributes.eyebrows,
+                            eyes: i,
+                            hair: attributes.hair,
+                            mouth: attributes.mouth,
+                            nose: attributes.nose,
+                            body_type: attributes.body_type,
+                            body_color: attributes.body_color,
+                          })
+                        }
+                      >
                         <div
                           key={i}
                           className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
@@ -406,7 +651,23 @@ export const TrainerBuilder: FC<{
                   Object.keys(EYEBROWS).map((i) => {
                     const image = EYEBROWS[i].image;
                     return (
-                      <button>
+                      <button
+                        onClick={() =>
+                          setAttributes({
+                            accessory: attributes.accessory,
+                            back_hair: attributes.back_hair,
+                            background: attributes.background,
+                            clothes: attributes.clothes,
+                            eyebrows: i,
+                            eyes: attributes.eyes,
+                            hair: attributes.hair,
+                            mouth: attributes.mouth,
+                            nose: attributes.nose,
+                            body_type: attributes.body_type,
+                            body_color: attributes.body_color,
+                          })
+                        }
+                      >
                         <div
                           key={i}
                           className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
@@ -425,7 +686,23 @@ export const TrainerBuilder: FC<{
                   Object.keys(NOSE).map((i) => {
                     const image = NOSE[i].image;
                     return (
-                      <button>
+                      <button
+                        onClick={() =>
+                          setAttributes({
+                            accessory: attributes.accessory,
+                            back_hair: attributes.back_hair,
+                            background: attributes.background,
+                            clothes: attributes.clothes,
+                            eyebrows: attributes.eyebrows,
+                            eyes: attributes.eyes,
+                            hair: attributes.hair,
+                            mouth: attributes.mouth,
+                            nose: i,
+                            body_type: attributes.body_type,
+                            body_color: attributes.body_color,
+                          })
+                        }
+                      >
                         <div
                           key={i}
                           className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
@@ -444,7 +721,23 @@ export const TrainerBuilder: FC<{
                   Object.keys(HAIR).map((i) => {
                     const image = HAIR[i].image;
                     return (
-                      <button>
+                      <button
+                        onClick={() =>
+                          setAttributes({
+                            accessory: attributes.accessory,
+                            back_hair: attributes.back_hair,
+                            background: attributes.background,
+                            clothes: attributes.clothes,
+                            eyebrows: attributes.eyebrows,
+                            eyes: attributes.eyes,
+                            hair: i,
+                            mouth: attributes.mouth,
+                            nose: attributes.nose,
+                            body_type: attributes.body_type,
+                            body_color: attributes.body_color,
+                          })
+                        }
+                      >
                         <div
                           key={i}
                           className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
@@ -465,7 +758,23 @@ export const TrainerBuilder: FC<{
                   Object.keys(BACK_HAIR).map((i) => {
                     const image = BACK_HAIR[i].image;
                     return (
-                      <button>
+                      <button
+                        onClick={() =>
+                          setAttributes({
+                            accessory: attributes.accessory,
+                            back_hair: i,
+                            background: attributes.background,
+                            clothes: attributes.clothes,
+                            eyebrows: attributes.eyebrows,
+                            eyes: attributes.eyes,
+                            hair: attributes.hair,
+                            mouth: attributes.mouth,
+                            nose: attributes.nose,
+                            body_type: attributes.body_type,
+                            body_color: attributes.body_color,
+                          })
+                        }
+                      >
                         <div
                           key={i}
                           className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
@@ -483,68 +792,116 @@ export const TrainerBuilder: FC<{
                     );
                   })}
                 {selected === AttributeSelection.Accessory &&
-                Object.keys(ACCESSORIES).map((i) => {
-                  const image = ACCESSORIES[i].image;
-                  return (
-                      <button>
+                  Object.keys(ACCESSORIES).map((i) => {
+                    const image = ACCESSORIES[i].image;
+                    return (
+                      <button
+                        onClick={() =>
+                          setAttributes({
+                            accessory: i,
+                            back_hair: attributes.back_hair,
+                            background: attributes.background,
+                            clothes: attributes.clothes,
+                            eyebrows: attributes.eyebrows,
+                            eyes: attributes.eyes,
+                            hair: attributes.hair,
+                            mouth: attributes.mouth,
+                            nose: attributes.nose,
+                            body_type: attributes.body_type,
+                            body_color: attributes.body_color,
+                          })
+                        }
+                      >
                         <div
-                            key={i}
-                            className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+                          key={i}
+                          className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
                         >
                           <div className="mt-14">
                             <Image
-                                className="object-cover"
-                                src={image}
-                                width={200}
-                                height={200}
+                              className="object-cover"
+                              src={image}
+                              width={200}
+                              height={200}
                             />
                           </div>
                         </div>
                       </button>
-                  );
-                })}
+                    );
+                  })}
                 {selected === AttributeSelection.Clothes &&
-                Object.keys(CLOTHES).map((i) => {
-                  const image = CLOTHES[i].image;
-                  return (
-                      <button>
+                  Object.keys(CLOTHES).map((i) => {
+                    const image = CLOTHES[i].image;
+                    return (
+                      <button
+                        onClick={() =>
+                          setAttributes({
+                            accessory: attributes.accessory,
+                            back_hair: attributes.back_hair,
+                            background: attributes.background,
+                            clothes: i,
+                            eyebrows: attributes.eyebrows,
+                            eyes: attributes.eyes,
+                            hair: attributes.hair,
+                            mouth: attributes.mouth,
+                            nose: attributes.nose,
+                            body_type: attributes.body_type,
+                            body_color: attributes.body_color,
+                          })
+                        }
+                      >
                         <div
-                            key={i}
-                            className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+                          key={i}
+                          className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
                         >
                           <div className="-mt-36">
                             <Image
-                                className="object-cover"
-                                src={image}
-                                width={200}
-                                height={200}
+                              className="object-cover"
+                              src={image}
+                              width={200}
+                              height={200}
                             />
                           </div>
                         </div>
                       </button>
-                  );
-                })}
+                    );
+                  })}
                 {selected === AttributeSelection.Background &&
-                Object.keys(BACKGROUND).map((i) => {
-                  const image = BACKGROUND[i].image;
-                  return (
-                      <button>
+                  Object.keys(BACKGROUND).map((i) => {
+                    const image = BACKGROUND[i].image;
+                    return (
+                      <button
+                        onClick={() =>
+                          setAttributes({
+                            accessory: attributes.accessory,
+                            back_hair: attributes.back_hair,
+                            background: i,
+                            clothes: attributes.clothes,
+                            eyebrows: attributes.eyebrows,
+                            eyes: attributes.eyes,
+                            hair: attributes.hair,
+                            mouth: attributes.mouth,
+                            nose: attributes.nose,
+                            body_type: attributes.body_type,
+                            body_color: attributes.body_color,
+                          })
+                        }
+                      >
                         <div
-                            key={i}
-                            className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+                          key={i}
+                          className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
                         >
                           <div className="">
                             <Image
-                                className="object-cover"
-                                src={image}
-                                width={100}
-                                height={100}
+                              className="object-cover"
+                              src={image}
+                              width={100}
+                              height={100}
                             />
                           </div>
                         </div>
                       </button>
-                  );
-                })}
+                    );
+                  })}
               </div>
             </div>
             <div className="flex flex-row justify-end gap-x-3 mt-5">
@@ -558,6 +915,7 @@ export const TrainerBuilder: FC<{
                     className={
                       "px-1 py-1 text-white text-xl uppercase border-2 border-black rounded-full relative w-full"
                     }
+                    onClick={() => random()}
                   >
                     <div className="flex flex-row items-center justify-center">
                       <Image
@@ -582,6 +940,15 @@ export const TrainerBuilder: FC<{
                     onClick={() =>
                       setAttributes({
                         body_type: attributes.body_type,
+                        accessory: null,
+                        back_hair: null,
+                        background: null,
+                        clothes: null,
+                        eyebrows: null,
+                        eyes: null,
+                        hair: null,
+                        mouth: null,
+                        nose: null,
                         body_color: null,
                       })
                     }

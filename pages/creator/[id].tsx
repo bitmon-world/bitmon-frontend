@@ -39,6 +39,15 @@ export default function CreatorSingle(): JSX.Element {
   const [builder, setBuilder] = useState(false);
 
   const [attributes, setAttributes] = useState<TrainerAttributes>({
+    accessory: null,
+    back_hair: null,
+    background: null,
+    clothes: null,
+    eyebrows: null,
+    eyes: null,
+    hair: null,
+    mouth: null,
+    nose: null,
     body_type: null,
     body_color: null,
   });

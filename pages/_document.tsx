@@ -83,7 +83,7 @@ class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-        <div className="watermark">
+        <div className="z-0 watermark">
           <div className="watermark-image" />
         </div>
       </Html>

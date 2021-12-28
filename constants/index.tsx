@@ -724,9 +724,6 @@ export const ACCESSORIES: { [k: number]: { image: string } } = {
   "10": {
     image: "/traits/accessories/10.png",
   },
-  "11": {
-    image: "/traits/accessories/11.png",
-  },
 };
 
 export const CLOTHES: { [k: number]: { image: string } } = {
