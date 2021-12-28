@@ -278,26 +278,60 @@ export const TrainerBuilder: FC<{
                 <div />
               )}
               {attributes.hair ? (
-                <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
-                  <Image
-                    className="rounded-lg"
-                    src={HAIR[attributes.hair].image}
-                    width={300}
-                    height={300}
-                  />
-                </div>
+                attributes.hair_color ? (
+                  <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
+                    <Image
+                      className="rounded-lg"
+                      src={
+                        "/traits/hair/" +
+                        attributes.hair_color +
+                        "/" +
+                        attributes.hair +
+                        ".png"
+                      }
+                      width={300}
+                      height={300}
+                    />
+                  </div>
+                ) : (
+                  <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
+                    <Image
+                      className="rounded-lg"
+                      src={HAIR[attributes.hair].image}
+                      width={300}
+                      height={300}
+                    />
+                  </div>
+                )
               ) : (
                 <div />
               )}
               {attributes.back_hair ? (
-                <div className="rounded-lg h-[300px] w-[300px] z-0 absolute top-0">
-                  <Image
-                    className="rounded-lg"
-                    src={BACK_HAIR[attributes.back_hair].image}
-                    width={300}
-                    height={300}
-                  />
-                </div>
+                attributes.hair_color ? (
+                  <div className="rounded-lg h-[300px] w-[300px] z-0 absolute top-0">
+                    <Image
+                      className="rounded-lg"
+                      src={
+                        "/traits/back-hair/" +
+                        attributes.hair_color +
+                        "/" +
+                        attributes.back_hair +
+                        ".png"
+                      }
+                      width={300}
+                      height={300}
+                    />
+                  </div>
+                ) : (
+                  <div className="rounded-lg h-[300px] w-[300px] z-0 absolute top-0">
+                    <Image
+                      className="rounded-lg"
+                      src={BACK_HAIR[attributes.back_hair].image}
+                      width={300}
+                      height={300}
+                    />
+                  </div>
+                )
               ) : (
                 <div />
               )}
