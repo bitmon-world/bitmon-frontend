@@ -129,20 +129,18 @@ export const TrainerBuilder: FC<{
               </div>
             </div>
             <div className="flex flex-row gap-x-2 mt-7 items-center justify-center">
-              <div>
+              <button
+                onClick={() => {
+                  if (selected === AttributeSelection.BodyColor) return;
+                  setSelected(selected - 1);
+                }}
+              >
                 <Image
                   src="/icons/builder/builder-left-arrow.svg"
                   width="30px"
                   height="30px"
                 />
-              </div>
-              <div>
-                <Image
-                  src="/icons/builder/body.svg"
-                  width="40px"
-                  height="40px"
-                />
-              </div>
+              </button>
               <div>
                 <button
                   onClick={() => setSelected(AttributeSelection.BodyColor)}
@@ -323,13 +321,18 @@ export const TrainerBuilder: FC<{
                   )}
                 </button>
               </div>
-              <div>
+              <button
+                onClick={() => {
+                  if (selected === AttributeSelection.Background) return;
+                  setSelected(selected + 1);
+                }}
+              >
                 <Image
                   src="/icons/builder/builder-right-arrow.svg"
                   width="30px"
                   height="30px"
                 />
-              </div>
+              </button>
             </div>
             <div className="bg-white/30 rounded-lg h-[400px] mt-5 overflow-y-scrollable">
               <div></div>
