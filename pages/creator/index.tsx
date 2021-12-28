@@ -28,8 +28,6 @@ export default function Creator(): JSX.Element {
       connection: connect,
     });
 
-    console.log(tokensList);
-
     const bitmon_tokens = tokensList.filter((t) => {
       if (t.data.creators) {
         return (

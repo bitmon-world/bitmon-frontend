@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { ButtonBlue, ButtonBlueDisabled } from "../Button";
 import {
@@ -15,6 +15,8 @@ import {
   MOUTH,
   NOSE,
 } from "../../constants";
+import { Loader } from "../Loader";
+import { mergeTraits } from "../../functions/merge-images";
 
 export interface TrainerAttributes {
   body_type: "male" | "female" | null;
@@ -99,6 +101,22 @@ export const TrainerBuilder: FC<{
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
+  const [finish, setFinish] = useState<boolean>(false);
+  const [building, setBuilding] = useState<boolean>(false);
+  const [builtImg, setBuiltImg] = useState<string>("");
+
+  const merge_images = useCallback(async () => {
+    setBuilding(true);
+    const image = await mergeTraits(attributes);
+    setBuiltImg(image);
+    setBuilding(false);
+  }, []);
+
+  useEffect(() => {
+    if (!finish) return;
+    merge_images();
+  }, [finish]);
+
   return !attributes.body_type ? (
     <div>
       <div className="relative z-20 flex flex-row items-center justify-between bg-contain bg-no-repeat bg-center bg-title-background h-[54px] mx-auto">
@@ -181,6 +199,50 @@ export const TrainerBuilder: FC<{
         </button>
       </div>
     </div>
+  ) : finish ? (
+    building ? (
+      <div>
+        <div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[48px] mx-auto">
+          <div className="flex flex-row items-center items-center mx-auto">
+            <div></div>
+            <div className="text-xl">
+              <span className="text-white">
+                Building your trainer{" "}
+                <span className="text-orange">attributes</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-row items-center justify-center mx-auto mt-10">
+          <Loader />
+        </div>
+      </div>
+    ) : (
+      <div>
+        <div className="flex flex-row items-center justify-between bg-contain bg-no-repeat bg-center bg-title-background h-[48px] mx-auto">
+          <div className="flex flex-row items-center gap-x-10 items-center mx-auto">
+            <div>
+              <span
+                className="bg-orange text-white text-4xl md:text-6xl"
+                style={{ fontFamily: "Candal" }}
+              >
+                03
+              </span>{" "}
+            </div>
+            <div className="text-xl">
+              <span className="text-white">
+                Update your <span className="text-orange">attributes</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        {builtImg !== "" && (
+          <div className="mt-10 flex flex-row items-center justify-center">
+            <Image src={builtImg} width={500} height={500} />
+          </div>
+        )}
+      </div>
+    )
   ) : (
     <div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-5 w-4/5 mx-auto mt-12">
@@ -1292,11 +1354,15 @@ export const TrainerBuilder: FC<{
                 </div>
               </div>
               <div>
-                {attributes.body_type && attributes.body_color ? (
-                  <ButtonBlue
-                    text="Finish"
-                    onClick={() => console.log("finish")}
-                  />
+                {attributes.body_type &&
+                attributes.body_color &&
+                attributes.mouth &&
+                attributes.eyes &&
+                attributes.eyebrows &&
+                attributes.nose &&
+                attributes.clothes &&
+                attributes.background ? (
+                  <ButtonBlue text="Finish" onClick={() => setFinish(true)} />
                 ) : (
                   <ButtonBlueDisabled text={"Finish"} />
                 )}
