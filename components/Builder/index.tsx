@@ -1,7 +1,16 @@
 import { FC, useState } from "react";
 import Image from "next/image";
 import { ButtonBlue, ButtonBlueDisabled } from "../Button";
-import { BODY_COLORS, MOUTH } from "../../constants";
+import {
+  ACCESSORIES,
+  BACK_HAIR, BACKGROUND,
+  BODY_COLORS, CLOTHES,
+  EYEBROWS,
+  EYES,
+  HAIR,
+  MOUTH,
+  NOSE,
+} from "../../constants";
 import { classNames } from "../../functions/classnames";
 
 export interface TrainerAttributes {
@@ -337,7 +346,7 @@ export const TrainerBuilder: FC<{
               </button>
             </div>
             <div className="bg-white/30 rounded-lg h-[400px] mt-5 overflow-y-scroll">
-              <div className="grid grid-cols-2 md:grid-cols-3">
+              <div className="grid grid-cols-1 md:grid-cols-3">
                 {selected === AttributeSelection.BodyColor &&
                   Object.keys(BODY_COLORS).map((i) => {
                     const color = "bg-skins-" + i;
@@ -362,13 +371,180 @@ export const TrainerBuilder: FC<{
                       <button>
                         <div
                           key={i}
-                          className="flex flex-row items-center justify-center h-[150px] w-[200px] mx-auto bg-attribute-background bg-no-repeat bg-center"
+                          className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
                         >
-                          <Image src={image} width={192} height={192} />
+                          <Image
+                            className="object-cover"
+                            src={image}
+                            width={400}
+                            height={500}
+                          />
                         </div>
                       </button>
                     );
                   })}
+                {selected === AttributeSelection.Eyes &&
+                  Object.keys(EYES).map((i) => {
+                    const image = EYES[i].image;
+                    return (
+                      <button>
+                        <div
+                          key={i}
+                          className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+                        >
+                          <Image
+                            className="object-cover"
+                            src={image}
+                            width={400}
+                            height={500}
+                          />
+                        </div>
+                      </button>
+                    );
+                  })}
+                {selected === AttributeSelection.Eyebrows &&
+                  Object.keys(EYEBROWS).map((i) => {
+                    const image = EYEBROWS[i].image;
+                    return (
+                      <button>
+                        <div
+                          key={i}
+                          className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+                        >
+                          <Image
+                            className="object-cover"
+                            src={image}
+                            width={400}
+                            height={500}
+                          />
+                        </div>
+                      </button>
+                    );
+                  })}
+                {selected === AttributeSelection.Nose &&
+                  Object.keys(NOSE).map((i) => {
+                    const image = NOSE[i].image;
+                    return (
+                      <button>
+                        <div
+                          key={i}
+                          className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+                        >
+                          <Image
+                            className="object-cover"
+                            src={image}
+                            width={400}
+                            height={500}
+                          />
+                        </div>
+                      </button>
+                    );
+                  })}
+                {selected === AttributeSelection.Hair &&
+                  Object.keys(HAIR).map((i) => {
+                    const image = HAIR[i].image;
+                    return (
+                      <button>
+                        <div
+                          key={i}
+                          className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+                        >
+                          <div className="mt-14">
+                            <Image
+                              className="object-cover"
+                              src={image}
+                              width={200}
+                              height={200}
+                            />
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })}
+                {selected === AttributeSelection.BackHair &&
+                  Object.keys(BACK_HAIR).map((i) => {
+                    const image = BACK_HAIR[i].image;
+                    return (
+                      <button>
+                        <div
+                          key={i}
+                          className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+                        >
+                          <div className="mt-14">
+                            <Image
+                              className="object-cover"
+                              src={image}
+                              width={200}
+                              height={200}
+                            />
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })}
+                {selected === AttributeSelection.Accessory &&
+                Object.keys(ACCESSORIES).map((i) => {
+                  const image = ACCESSORIES[i].image;
+                  return (
+                      <button>
+                        <div
+                            key={i}
+                            className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+                        >
+                          <div className="mt-14">
+                            <Image
+                                className="object-cover"
+                                src={image}
+                                width={200}
+                                height={200}
+                            />
+                          </div>
+                        </div>
+                      </button>
+                  );
+                })}
+                {selected === AttributeSelection.Clothes &&
+                Object.keys(CLOTHES).map((i) => {
+                  const image = CLOTHES[i].image;
+                  return (
+                      <button>
+                        <div
+                            key={i}
+                            className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+                        >
+                          <div className="-mt-36">
+                            <Image
+                                className="object-cover"
+                                src={image}
+                                width={200}
+                                height={200}
+                            />
+                          </div>
+                        </div>
+                      </button>
+                  );
+                })}
+                {selected === AttributeSelection.Background &&
+                Object.keys(BACKGROUND).map((i) => {
+                  const image = BACKGROUND[i].image;
+                  return (
+                      <button>
+                        <div
+                            key={i}
+                            className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+                        >
+                          <div className="">
+                            <Image
+                                className="object-cover"
+                                src={image}
+                                width={100}
+                                height={100}
+                            />
+                          </div>
+                        </div>
+                      </button>
+                  );
+                })}
               </div>
             </div>
             <div className="flex flex-row justify-end gap-x-3 mt-5">
