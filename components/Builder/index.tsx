@@ -125,7 +125,7 @@ export const TrainerBuilder: FC<{
 
   const wallet = useWallet();
 
-  const [uploading, setUploading] = useState(false)
+  const [uploading, setUploading] = useState(false);
 
   return !attributes.body_type ? (
     <div>
@@ -256,24 +256,26 @@ export const TrainerBuilder: FC<{
               />
             </div>
             <div className="text-center mt-5">
-              { uploading ? (<Loader />) : (
-                  <ButtonBlue
-                      text={"Upload"}
-                      onClick={async () => {
-                        setUploading(true)
-                        const address = wallet.publicKey.toBase58();
-                        const sig = await wallet.signMessage(Buffer.from(address));
-                        await upload(
-                            attributes,
-                            wallet.publicKey.toString(),
-                            wallet.publicKey.toBuffer().toString("hex"),
-                            Buffer.from(sig).toString("hex"),
-                            mint
-                        );
-                        setUploading(false)
-                      }}
-                  />
-              ) }
+              {uploading ? (
+                <Loader />
+              ) : (
+                <ButtonBlue
+                  text={"Upload"}
+                  onClick={async () => {
+                    setUploading(true);
+                    const address = wallet.publicKey.toBase58();
+                    const sig = await wallet.signMessage(Buffer.from(address));
+                    await upload(
+                      attributes,
+                      wallet.publicKey.toString(),
+                      wallet.publicKey.toBuffer().toString("hex"),
+                      Buffer.from(sig).toString("hex"),
+                      mint
+                    );
+                    setUploading(false);
+                  }}
+                />
+              )}
             </div>
           </>
         )}

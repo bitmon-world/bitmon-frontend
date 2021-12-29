@@ -13,6 +13,13 @@ import {
 export async function mergeTraits(traits: TrainerAttributes): Promise<string> {
   const images = [];
   if (traits.background) images.push(BACKGROUND[traits.background].image);
+  if (traits.back_hair && traits.hair_color)
+    images.push(
+      "/traits/back-hair/" + traits.hair_color + "/" + traits.back_hair + ".png"
+    );
+  if (traits.back_hair && !traits.hair_color)
+    images.push("/traits/back-hair/1/" + traits.back_hair + ".png");
+
   if (traits.body_type && traits.body_color) {
     const body =
       traits.body_type === "female"
@@ -30,12 +37,6 @@ export async function mergeTraits(traits: TrainerAttributes): Promise<string> {
     );
   if (traits.eyes && !traits.eyes_color)
     images.push("/traits/eyes/1/" + traits.eyes + ".png");
-  if (traits.back_hair && traits.hair_color)
-    images.push(
-      "/traits/back-hair/" + traits.hair_color + "/" + traits.back_hair + ".png"
-    );
-  if (traits.back_hair && !traits.hair_color)
-    images.push("/traits/back-hair/1/" + traits.back_hair + ".png");
   if (traits.hair && traits.hair_color)
     images.push(
       "/traits/hair/" + traits.hair_color + "/" + traits.hair + ".png"
