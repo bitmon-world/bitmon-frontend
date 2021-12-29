@@ -105,17 +105,20 @@ export const TrainerBuilder: FC<{
   const [building, setBuilding] = useState<boolean>(false);
   const [builtImg, setBuiltImg] = useState<string>("");
 
-  const merge_images = useCallback(async () => {
-    setBuilding(true);
-    const image = await mergeTraits(attributes);
-    setBuiltImg(image);
-    setBuilding(false);
-  }, []);
+  const merge_images = useCallback(
+    async (attr) => {
+      setBuilding(true);
+      const image = await mergeTraits(attr);
+      setBuiltImg(image);
+      setBuilding(false);
+    },
+    [attributes]
+  );
 
   useEffect(() => {
     if (!finish) return;
-    merge_images();
-  }, [finish]);
+    merge_images(attributes);
+  }, [finish, attributes]);
 
   return !attributes.body_type ? (
     <div>
@@ -204,7 +207,6 @@ export const TrainerBuilder: FC<{
       <div>
         <div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[48px] mx-auto">
           <div className="flex flex-row items-center items-center mx-auto">
-            <div></div>
             <div className="text-xl">
               <span className="text-white">
                 Building your trainer{" "}
@@ -231,15 +233,22 @@ export const TrainerBuilder: FC<{
             </div>
             <div className="text-xl">
               <span className="text-white">
-                Update your <span className="text-orange">attributes</span>
+                Upload your <span className="text-orange">attributes</span>
               </span>
             </div>
           </div>
         </div>
         {builtImg !== "" && (
-          <div className="mt-10 flex flex-row items-center justify-center">
-            <Image src={builtImg} width={500} height={500} />
-          </div>
+            <>
+              <div className="mt-10 flex flex-row items-center justify-center w-[300px] h-[300px] mx-auto">
+                <Image
+                    className="rounded-lg"
+                    src={builtImg}
+                    width={500}
+                    height={500}
+                />
+              </div>
+            </>
         )}
       </div>
     )

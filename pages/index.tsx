@@ -17,37 +17,27 @@ export default function Home(): JSX.Element {
   const wallet = useWallet();
   const connect = createConnectionConfig(clusterApiUrl("mainnet-beta"));
 
-  const anchorWallet = useMemo(() => {
-    if (
-      !wallet ||
-      !wallet.publicKey ||
-      !wallet.signAllTransactions ||
-      !wallet.signTransaction
-    ) {
-      return;
-    }
-
-    return {
-      publicKey: wallet.publicKey,
-      signAllTransactions: wallet.signAllTransactions,
-      signTransaction: wallet.signTransaction,
-    } as Wallet;
-  }, [wallet]);
-
   const [state, setState] = useState<CandyMachineAccount | null>(null);
 
-  const fetch_state = useCallback(async () => {
-    const data = await getCandyMachineState(
-      anchorWallet,
-      CANDY_MACHINE_ID,
-      connect
-    );
-    setState(data);
-  }, []);
+  const fetch_state = useCallback(
+    async (wallet) => {
+      const data = await getCandyMachineState(
+        {
+          publicKey: wallet.publicKey,
+          signAllTransactions: wallet.signAllTransactions,
+          signTransaction: wallet.signTransaction,
+        } as Wallet,
+        CANDY_MACHINE_ID,
+        connect
+      );
+      setState(data);
+    },
+    [wallet]
+  );
 
   useEffect(() => {
-    fetch_state();
-  }, []);
+    fetch_state(wallet);
+  }, [wallet]);
 
   const [minting, setMinting] = useState(false);
 
@@ -122,7 +112,9 @@ export default function Home(): JSX.Element {
           {!wallet ||
           !wallet.connected ||
           !wallet.ready ||
-          !wallet.publicKey ? (
+          !wallet.publicKey ||
+          !state ||
+          !state.program.provider.wallet ? (
             <ButtonBlueDisabled text={"Connect wallet"} />
           ) : minting ? (
             <LoaderSmall />
