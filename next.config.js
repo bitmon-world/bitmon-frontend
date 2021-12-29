@@ -34,7 +34,7 @@ const nextConfig = {
     runtimeCaching,
   },
   images: {
-    domains: ["arweave.net"],
+    domains: ["arweave.net", "ipfs.io"],
   },
 };
 

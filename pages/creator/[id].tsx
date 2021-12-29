@@ -104,6 +104,7 @@ export default function CreatorSingle(): JSX.Element {
                 attributes={attributes}
                 setAttributes={attributesUpdate}
                 toggleTitle={toggleTitle}
+                mint={router.query.id}
               />
             ) : (
               <div className="text-center">

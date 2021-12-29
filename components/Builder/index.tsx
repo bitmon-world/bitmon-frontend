@@ -55,7 +55,8 @@ export const TrainerBuilder: FC<{
   attributes: TrainerAttributes;
   setAttributes: (data: TrainerAttributes) => void;
   toggleTitle: (toggle: boolean) => void;
-}> = ({ attributes, setAttributes, toggleTitle }) => {
+  mint: string | string[];
+}> = ({ attributes, setAttributes, toggleTitle, mint }) => {
   const [selected, setSelected] = useState<AttributeSelection>(
     AttributeSelection.BodyColor
   );
@@ -123,6 +124,8 @@ export const TrainerBuilder: FC<{
   }, [finish, attributes]);
 
   const wallet = useWallet();
+
+  const [uploading, setUploading] = useState(false)
 
   return !attributes.body_type ? (
     <div>
@@ -253,31 +256,24 @@ export const TrainerBuilder: FC<{
               />
             </div>
             <div className="text-center mt-5">
-              <h1>
-                To prevent spamming and paying a lot of fees you need to send
-                some SOLANA to upload your image
-              </h1>
-              <h1>
-                Once you pay the fees you will receive a token string. It can be
-                used once in case of a failure during the upload.
-              </h1>
-            </div>
-            <div className="text-center mt-5">
-              <ButtonBlue
-                text={"Upload"}
-                onClick={async () => {
-                  const address = wallet.publicKey.toBase58();
-                  const sig = await wallet.signMessage(Buffer.from(address));
-                  const res = await upload(
-                    attributes,
-                    wallet.publicKey.toString(),
-                    address,
-                    "BoNbGwxtSlpKceNI6rQ69Cf8IJnWSx8mOAmY4hd5SMPihaYD71L3OOdvkNls6zV8",
-                    Buffer.from(sig).toString("hex")
-                  );
-                  console.log(res);
-                }}
-              />
+              { uploading ? (<Loader />) : (
+                  <ButtonBlue
+                      text={"Upload"}
+                      onClick={async () => {
+                        setUploading(true)
+                        const address = wallet.publicKey.toBase58();
+                        const sig = await wallet.signMessage(Buffer.from(address));
+                        await upload(
+                            attributes,
+                            wallet.publicKey.toString(),
+                            wallet.publicKey.toBuffer().toString("hex"),
+                            Buffer.from(sig).toString("hex"),
+                            mint
+                        );
+                        setUploading(false)
+                      }}
+                  />
+              ) }
             </div>
           </>
         )}

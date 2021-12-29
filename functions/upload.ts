@@ -1,20 +1,20 @@
 import { TrainerAttributes } from "../components/Builder";
 import axios from "axios";
 
-const API_URL = "http://localhost:8080";
+const API_URL = "https://api.bitmon.io";
 
 export async function upload(
   attributes: TrainerAttributes,
-  public_key: string,
   address: string,
-  token: string,
-  signature: string
+  public_key: string,
+  signature: string,
+  mint: string | string[]
 ) {
-  return axios.post(API_URL, {
+  await axios.post(API_URL, {
     attributes,
-    public_key,
     address,
-    token,
+    public_key,
     signature,
+    mint,
   });
 }
