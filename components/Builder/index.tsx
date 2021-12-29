@@ -239,16 +239,26 @@ export const TrainerBuilder: FC<{
           </div>
         </div>
         {builtImg !== "" && (
-            <>
-              <div className="mt-10 flex flex-row items-center justify-center w-[300px] h-[300px] mx-auto">
-                <Image
-                    className="rounded-lg"
-                    src={builtImg}
-                    width={500}
-                    height={500}
-                />
-              </div>
-            </>
+          <>
+            <div className="mt-10 flex flex-row items-center justify-center w-[300px] h-[300px] mx-auto">
+              <Image
+                className="rounded-lg"
+                src={builtImg}
+                width={500}
+                height={500}
+              />
+            </div>
+            <div className="text-center mt-5">
+              <h1>
+                To prevent spamming and paying a lot of fees you need to send
+                some SOLANA to upload your image
+              </h1>
+              <h1>
+                Once you pay the fees you will receive a token string. It can be
+                used once in case of a failure during the upload.
+              </h1>
+            </div>
+          </>
         )}
       </div>
     )

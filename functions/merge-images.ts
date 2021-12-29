@@ -32,24 +32,21 @@ export async function mergeTraits(traits: TrainerAttributes): Promise<string> {
     images.push(
       "/traits/eyes/" + traits.eyes_color + "/" + traits.eyes + ".png"
     );
-  if (traits.eyes && !traits.eyes_color) images.push(
-      "/traits/eyes/1/" + traits.eyes + ".png"
-  );
-  if (traits.back_hair && traits.hair_color) images.push(
+  if (traits.eyes && !traits.eyes_color)
+    images.push("/traits/eyes/1/" + traits.eyes + ".png");
+  if (traits.back_hair && traits.hair_color)
+    images.push(
       "/traits/back-hair/" + traits.hair_color + "/" + traits.back_hair + ".png"
-  );
-  if (traits.back_hair && !traits.hair_color) images.push(
-      "/traits/back-hair/1/" + traits.back_hair + ".png"
-  );
-  if (traits.hair && traits.hair_color) images.push(
+    );
+  if (traits.back_hair && !traits.hair_color)
+    images.push("/traits/back-hair/1/" + traits.back_hair + ".png");
+  if (traits.hair && traits.hair_color)
+    images.push(
       "/traits/hair/" + traits.hair_color + "/" + traits.hair + ".png"
-  );
-  if (traits.hair && !traits.hair_color) images.push(
-      "/traits/hair/1/" + traits.hair + ".png"
-  );
-  if (traits.accessory) images.push(
-      ACCESSORIES[traits.accessory].image
-  );
+    );
+  if (traits.hair && !traits.hair_color)
+    images.push("/traits/hair/1/" + traits.hair + ".png");
+  if (traits.accessory) images.push(ACCESSORIES[traits.accessory].image);
 
   return await mergeImages(images);
 }
