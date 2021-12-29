@@ -127,6 +127,10 @@ export const TrainerBuilder: FC<{
 
   const [uploading, setUploading] = useState(false);
 
+  const [uploaded, setUploaded] = useState(false);
+
+  const [success, setSuccess] = useState(false);
+
   return !attributes.body_type ? (
     <div>
       <div className="relative z-20 flex flex-row items-center justify-between bg-contain bg-no-repeat bg-center bg-title-background h-[54px] mx-auto">
@@ -265,13 +269,15 @@ export const TrainerBuilder: FC<{
                     setUploading(true);
                     const address = wallet.publicKey.toBase58();
                     const sig = await wallet.signMessage(Buffer.from(address));
-                    await upload(
+                    const success = await upload(
                       attributes,
                       wallet.publicKey.toString(),
                       wallet.publicKey.toBuffer().toString("hex"),
                       Buffer.from(sig).toString("hex"),
                       mint
                     );
+                    console.log(success);
+                    setSuccess(success);
                     setUploading(false);
                   }}
                 />

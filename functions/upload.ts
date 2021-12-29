@@ -9,12 +9,17 @@ export async function upload(
   public_key: string,
   signature: string,
   mint: string | string[]
-) {
-  await axios.post(API_URL, {
-    attributes,
-    address,
-    public_key,
-    signature,
-    mint,
-  });
+): Promise<boolean> {
+  try {
+    const res = await axios.post(API_URL, {
+      attributes,
+      address,
+      public_key,
+      signature,
+      mint,
+    });
+    return res.data.success;
+  } catch (e) {
+    return false;
+  }
 }
