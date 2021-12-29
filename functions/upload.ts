@@ -1,7 +1,7 @@
 import { TrainerAttributes } from "../components/Builder";
 import axios from "axios";
 
-const API_URL = "https://bitmon-backend.herokuapp.com/";
+const API_URL = "https://api.bitmon.io";
 
 export async function upload(
   attributes: TrainerAttributes,
