@@ -17,6 +17,8 @@ import {
 } from "../../constants";
 import { Loader } from "../Loader";
 import { mergeTraits } from "../../functions/merge-images";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { upload } from "../../functions/upload";
 
 export interface TrainerAttributes {
   body_type: "male" | "female" | null;
@@ -119,6 +121,8 @@ export const TrainerBuilder: FC<{
     if (!finish) return;
     merge_images(attributes);
   }, [finish, attributes]);
+
+  const wallet = useWallet();
 
   return !attributes.body_type ? (
     <div>
@@ -257,6 +261,23 @@ export const TrainerBuilder: FC<{
                 Once you pay the fees you will receive a token string. It can be
                 used once in case of a failure during the upload.
               </h1>
+            </div>
+            <div className="text-center mt-5">
+              <ButtonBlue
+                text={"Upload"}
+                onClick={async () => {
+                  const address = wallet.publicKey.toBase58();
+                  const sig = await wallet.signMessage(Buffer.from(address));
+                  const res = await upload(
+                    attributes,
+                    wallet.publicKey.toString(),
+                    address,
+                    "BoNbGwxtSlpKceNI6rQ69Cf8IJnWSx8mOAmY4hd5SMPihaYD71L3OOdvkNls6zV8",
+                    Buffer.from(sig).toString("hex")
+                  );
+                  console.log(res);
+                }}
+              />
             </div>
           </>
         )}

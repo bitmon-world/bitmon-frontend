@@ -10,10 +10,6 @@ import {
   NOSE,
 } from "../constants";
 
-/*
-accessory: string | null;
-*/
-
 export async function mergeTraits(traits: TrainerAttributes): Promise<string> {
   const images = [];
   if (traits.background) images.push(BACKGROUND[traits.background].image);
