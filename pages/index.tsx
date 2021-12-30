@@ -15,7 +15,11 @@ import { Loader, LoaderSmall } from "../components/Loader";
 
 export default function Home(): JSX.Element {
   const wallet = useWallet();
-  const connect = createConnectionConfig(clusterApiUrl("mainnet-beta"));
+
+  const url =
+    process.env.NEXT_PUBLIC_SOLANA_RPC || clusterApiUrl("mainnet-beta");
+
+  const connect = createConnectionConfig(url);
 
   const [state, setState] = useState<CandyMachineAccount | null>(null);
 

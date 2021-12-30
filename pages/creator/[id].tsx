@@ -14,7 +14,10 @@ import { isMintOwner } from "../../functions/onwership";
 import { TrainerAttributes, TrainerBuilder } from "../../components/Builder";
 
 export default function CreatorSingle(): JSX.Element {
-  const connect = createConnectionConfig(clusterApiUrl("mainnet-beta"));
+  const url =
+    process.env.NEXT_PUBLIC_SOLANA_RPC || clusterApiUrl("mainnet-beta");
+
+  const connect = createConnectionConfig(url);
 
   const router = useRouter();
 

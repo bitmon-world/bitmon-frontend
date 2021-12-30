@@ -16,9 +16,8 @@ import { FC, ReactNode, useMemo } from "react";
 export const WalletConnectionProvider: FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const network = WalletAdapterNetwork.Mainnet;
-
-  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+  const url =
+    process.env.NEXT_PUBLIC_SOLANA_RPC || clusterApiUrl("mainnet-beta");
 
   const wallets = useMemo(
     () => [
@@ -28,11 +27,11 @@ export const WalletConnectionProvider: FC<{ children: ReactNode }> = ({
       getTorusWallet(),
       getLedgerWallet(),
     ],
-    [network]
+    []
   );
 
   return (
-    <ConnectionProvider endpoint={endpoint}>
+    <ConnectionProvider endpoint={url}>
       <WalletProvider wallets={wallets} autoConnect>
         {children}
       </WalletProvider>

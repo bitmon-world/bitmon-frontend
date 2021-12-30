@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import {
   getParsedNftAccountsByOwner,
   createConnectionConfig,
@@ -13,7 +12,9 @@ import { BITMON_DAO_ADDRESS } from "../../constants";
 import { TrainerImage } from "../../components/TrainerImage";
 
 export default function Creator(): JSX.Element {
-  const connect = createConnectionConfig(clusterApiUrl("mainnet-beta"));
+  const url =
+    process.env.NEXT_PUBLIC_SOLANA_RPC || clusterApiUrl("mainnet-beta");
+  const connect = createConnectionConfig(url);
   const wallet = useWallet();
 
   const [loading, setLoading] = useState(true);
