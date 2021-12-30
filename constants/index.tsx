@@ -198,6 +198,24 @@ export const ACCESSORIES: { [k: number]: { image: string } } = {
   "10": {
     image: "/traits/accessories/10.png",
   },
+  "11": {
+    image: "/traits/accessories/11.png",
+  },
+  "12": {
+    image: "/traits/accessories/12.png",
+  },
+  "13": {
+    image: "/traits/accessories/13.png",
+  },
+  "14": {
+    image: "/traits/accessories/14.png",
+  },
+  "15": {
+    image: "/traits/accessories/15.png",
+  },
+  "16": {
+    image: "/traits/accessories/16.png",
+  },
 };
 
 export const CLOTHES: { [k: number]: { image: string } } = {

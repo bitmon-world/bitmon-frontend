@@ -260,50 +260,53 @@ export const TrainerBuilder: FC<{
                 height={500}
               />
             </div>
-            {finishUpload.finished ? (
-              finishUpload.success ? (
-                <>
-                  <div className="text-center mt-5 bg-green py-2 px-4 text-white w-64 mx-auto">
-                    <h1 style={{ fontFamily: "Candal" }}>Upload successful</h1>
-                  </div>
-                  <div className="text-center mt-2 mx-auto">
-                    <h1>Your image will take some time to load</h1>
-                  </div>
-                </>
-              ) : (
-                  <>
-                    <div className="text-center mt-5 bg-orange py-2 px-4 text-white w-64 mx-auto">
-                      <h1 style={{ fontFamily: "Candal" }}>Upload failed</h1>
-                    </div>
-                    <div className="text-center mt-2 mx-auto">
-                      <h1>Please try again later</h1>
-                    </div>
-                  </>
-              )
+            {finishUpload.finished && finishUpload.success ? (
+              <>
+                <div className="text-center mt-5 bg-green py-2 px-4 text-white w-64 mx-auto">
+                  <h1 style={{ fontFamily: "Candal" }}>Upload successful</h1>
+                </div>
+                <div className="text-center mt-2 mx-auto">
+                  <h1>Your image will take some time to load</h1>
+                </div>
+              </>
             ) : (
               <div className="text-center mt-5">
                 {uploading ? (
                   <Loader />
                 ) : (
-                  <ButtonBlue
-                    text={"Upload"}
-                    onClick={async () => {
-                      setUploading(true);
-                      const address = wallet.publicKey.toBase58();
-                      const sig = await wallet.signMessage(
-                        Buffer.from(address)
-                      );
-                      const success = await upload(
-                        attributes,
-                        wallet.publicKey.toString(),
-                        wallet.publicKey.toBuffer().toString("hex"),
-                        Buffer.from(sig).toString("hex"),
-                        mint
-                      );
-                      setFinishUpload({ finished: true, success: success });
-                      setUploading(false);
-                    }}
-                  />
+                  <>
+                    <ButtonBlue
+                      text={"Upload"}
+                      onClick={async () => {
+                        setUploading(true);
+                        const address = wallet.publicKey.toBase58();
+                        const sig = await wallet.signMessage(
+                          Buffer.from(address)
+                        );
+                        const success = await upload(
+                          attributes,
+                          wallet.publicKey.toString(),
+                          wallet.publicKey.toBuffer().toString("hex"),
+                          Buffer.from(sig).toString("hex"),
+                          mint
+                        );
+                        setFinishUpload({ finished: true, success: success });
+                        setUploading(false);
+                      }}
+                    />
+                    {finishUpload.finished && !finishUpload.success && (
+                      <>
+                        <div className="text-center mt-5 bg-orange py-2 px-4 text-white w-64 mx-auto">
+                          <h1 style={{ fontFamily: "Candal" }}>
+                            Upload failed
+                          </h1>
+                        </div>
+                        <div className="text-center mt-2 mx-auto">
+                          <h1>Try again</h1>
+                        </div>
+                      </>
+                    )}
+                  </>
                 )}
               </div>
             )}
