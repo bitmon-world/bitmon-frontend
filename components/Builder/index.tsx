@@ -1,4 +1,5 @@
 import { FC, useCallback, useEffect, useState } from "react";
+import ReactGA from "react-ga4";
 import Image from "next/image";
 import { ButtonBlue, ButtonBlueDisabled } from "../Button";
 import {
@@ -131,6 +132,27 @@ export const TrainerBuilder: FC<{
     finished: false,
     success: false,
   });
+
+  async function uploadAttributes(wallet, attributes) {
+    setUploading(true);
+    const address = wallet.publicKey.toBase58();
+    const sig = await wallet.signMessage(Buffer.from(address));
+    const success = await upload(
+      attributes,
+      wallet.publicKey.toString(),
+      wallet.publicKey.toBuffer().toString("hex"),
+      Buffer.from(sig).toString("hex"),
+      mint
+    );
+    ReactGA.event({
+      category: "Upload",
+      action: "UploadAttributes",
+      label: "UploadAttributes",
+      value: success ? 1 : 0,
+    });
+    setFinishUpload({ finished: true, success: success });
+    setUploading(false);
+  }
 
   return !attributes.body_type ? (
     <div>
@@ -278,20 +300,7 @@ export const TrainerBuilder: FC<{
                     <ButtonBlue
                       text={"Upload"}
                       onClick={async () => {
-                        setUploading(true);
-                        const address = wallet.publicKey.toBase58();
-                        const sig = await wallet.signMessage(
-                          Buffer.from(address)
-                        );
-                        const success = await upload(
-                          attributes,
-                          wallet.publicKey.toString(),
-                          wallet.publicKey.toBuffer().toString("hex"),
-                          Buffer.from(sig).toString("hex"),
-                          mint
-                        );
-                        setFinishUpload({ finished: true, success: success });
-                        setUploading(false);
+                        await uploadAttributes(wallet, attributes);
                       }}
                     />
                     {finishUpload.finished && !finishUpload.success && (

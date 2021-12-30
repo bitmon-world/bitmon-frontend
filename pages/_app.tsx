@@ -1,8 +1,9 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import { AppProps } from "next/app";
 import { Fragment } from "react";
 import Head from "next/head";
 import Layout from "../layout/Main";
+import ReactGA from "react-ga4";
 
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import dynamic from "next/dynamic";
@@ -21,6 +22,12 @@ const WalletConnectionProvider = dynamic<{ children: ReactNode }>(
 );
 
 function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    if (process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS) {
+      ReactGA.initialize(process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS);
+    }
+  }, []);
+
   return (
     <Fragment>
       <Head>
