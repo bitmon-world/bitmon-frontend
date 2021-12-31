@@ -7,12 +7,13 @@ import {
   BACK_HAIR,
   BACKGROUND,
   BODY_COLORS,
-  CLOTHES,
   EYEBROWS,
   EYES,
   EYES_COLORS,
+  FEMALE_CLOTHES,
   HAIR,
   HAIR_COLORS,
+  MALE_CLOTHES,
   MOUTH,
   NOSE,
 } from "../../constants";
@@ -63,6 +64,8 @@ export const TrainerBuilder: FC<{
   );
 
   function random() {
+    const clothes =
+      attributes.body_type === "female" ? FEMALE_CLOTHES : MALE_CLOTHES;
     setAttributes({
       body_type: attributes.body_type,
       body_color: randomIntFromInterval(
@@ -93,7 +96,7 @@ export const TrainerBuilder: FC<{
         1,
         Object.keys(ACCESSORIES).length
       ).toString(),
-      clothes: randomIntFromInterval(1, Object.keys(CLOTHES).length).toString(),
+      clothes: randomIntFromInterval(1, Object.keys(clothes).length).toString(),
       background: randomIntFromInterval(
         1,
         Object.keys(BACKGROUND).length
@@ -517,7 +520,11 @@ export const TrainerBuilder: FC<{
                 <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
                   <Image
                     className="rounded-lg"
-                    src={CLOTHES[attributes.clothes].image}
+                    src={
+                      attributes.body_type === "female"
+                        ? FEMALE_CLOTHES[attributes.clothes].image
+                        : MALE_CLOTHES[attributes.clothes].image
+                    }
                     width={300}
                     height={300}
                   />
@@ -1011,12 +1018,14 @@ export const TrainerBuilder: FC<{
                           key={i}
                           className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
                         >
-                          <Image
-                            className="object-cover"
-                            src={image}
-                            width={400}
-                            height={500}
-                          />
+                          <div className="h-[150px] w-[220px] overflow-hidden -mt-24">
+                            <Image
+                              className="object-cover"
+                              src={image}
+                              width={400}
+                              height={500}
+                            />
+                          </div>
                         </div>
                       </button>
                     );
@@ -1082,7 +1091,7 @@ export const TrainerBuilder: FC<{
                             key={i}
                             className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
                           >
-                            <div className="mt-14">
+                            <div className="h-[150px] w-[220px] overflow-hidden">
                               <Image
                                 className="object-cover"
                                 src={image}
@@ -1157,7 +1166,7 @@ export const TrainerBuilder: FC<{
                             key={i}
                             className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
                           >
-                            <div className="mt-14">
+                            <div className="h-[150px] w-[220px] overflow-hidden">
                               <Image
                                 className="object-cover"
                                 src={image}
@@ -1272,7 +1281,7 @@ export const TrainerBuilder: FC<{
                             key={i}
                             className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
                           >
-                            <div className="mt-14">
+                            <div className="h-[150px] w-[220px] overflow-hidden">
                               <Image
                                 className="object-cover"
                                 src={image}
@@ -1286,51 +1295,98 @@ export const TrainerBuilder: FC<{
                     })}
                   </>
                 )}
-                {selected === AttributeSelection.Clothes && (
-                  <>
-                    {Object.keys(CLOTHES).map((i) => {
-                      const image = CLOTHES[i].image;
-                      return (
-                        <div
-                          key={i}
-                          className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
-                        >
-                          <button
-                            className="h-[150px] w-[220px] overflow-hidden"
-                            onClick={() =>
-                              setAttributes({
-                                accessory: attributes.accessory,
-                                back_hair: attributes.back_hair,
-                                background: attributes.background,
-                                clothes: i,
-                                eyebrows: attributes.eyebrows,
-                                eyes: attributes.eyes,
-                                eyes_color: attributes.eyes_color,
-                                hair_color: attributes.hair_color,
-                                hair: attributes.hair,
-                                mouth: attributes.mouth,
-                                nose: attributes.nose,
-                                body_type: attributes.body_type,
-                                body_color: attributes.body_color,
-                              })
-                            }
+                {selected === AttributeSelection.Clothes &&
+                  attributes.body_type === "male" && (
+                    <>
+                      {Object.keys(MALE_CLOTHES).map((i) => {
+                        const image = MALE_CLOTHES[i].image;
+                        return (
+                          <div
+                            key={i}
+                            className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
                           >
-                            <div className="relative h-[150px] w-[220px]">
-                              <div className="-mt-44">
-                                <Image
-                                  className="object-crop"
-                                  src={image}
-                                  width={200}
-                                  height={200}
-                                />
+                            <button
+                              className="h-[150px] w-[220px] overflow-hidden"
+                              onClick={() =>
+                                setAttributes({
+                                  accessory: attributes.accessory,
+                                  back_hair: attributes.back_hair,
+                                  background: attributes.background,
+                                  clothes: i,
+                                  eyebrows: attributes.eyebrows,
+                                  eyes: attributes.eyes,
+                                  eyes_color: attributes.eyes_color,
+                                  hair_color: attributes.hair_color,
+                                  hair: attributes.hair,
+                                  mouth: attributes.mouth,
+                                  nose: attributes.nose,
+                                  body_type: attributes.body_type,
+                                  body_color: attributes.body_color,
+                                })
+                              }
+                            >
+                              <div className="relative h-[150px] w-[220px]">
+                                <div className="-mt-44">
+                                  <Image
+                                    className="object-crop"
+                                    src={image}
+                                    width={200}
+                                    height={200}
+                                  />
+                                </div>
                               </div>
-                            </div>
-                          </button>
-                        </div>
-                      );
-                    })}
-                  </>
-                )}
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </>
+                  )}
+                {selected === AttributeSelection.Clothes &&
+                  attributes.body_type === "female" && (
+                    <>
+                      {Object.keys(FEMALE_CLOTHES).map((i) => {
+                        const image = FEMALE_CLOTHES[i].image;
+                        return (
+                          <div
+                            key={i}
+                            className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+                          >
+                            <button
+                              className="h-[150px] w-[220px] overflow-hidden"
+                              onClick={() =>
+                                setAttributes({
+                                  accessory: attributes.accessory,
+                                  back_hair: attributes.back_hair,
+                                  background: attributes.background,
+                                  clothes: i,
+                                  eyebrows: attributes.eyebrows,
+                                  eyes: attributes.eyes,
+                                  eyes_color: attributes.eyes_color,
+                                  hair_color: attributes.hair_color,
+                                  hair: attributes.hair,
+                                  mouth: attributes.mouth,
+                                  nose: attributes.nose,
+                                  body_type: attributes.body_type,
+                                  body_color: attributes.body_color,
+                                })
+                              }
+                            >
+                              <div className="relative h-[150px] w-[220px]">
+                                <div className="-mt-44">
+                                  <Image
+                                    className="object-crop"
+                                    src={image}
+                                    width={200}
+                                    height={200}
+                                  />
+                                </div>
+                              </div>
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </>
+                  )}
                 {selected === AttributeSelection.Background &&
                   Object.keys(BACKGROUND).map((i) => {
                     const image = BACKGROUND[i].image;

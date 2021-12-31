@@ -4,8 +4,9 @@ import {
   ACCESSORIES,
   BACKGROUND,
   BODY_COLORS,
-  CLOTHES,
   EYEBROWS,
+  FEMALE_CLOTHES,
+  MALE_CLOTHES,
   MOUTH,
   NOSE,
 } from "../constants";
@@ -30,7 +31,13 @@ export async function mergeTraits(traits: TrainerAttributes): Promise<string> {
   if (traits.mouth) images.push(MOUTH[traits.mouth].image);
   if (traits.eyebrows) images.push(EYEBROWS[traits.eyebrows].image);
   if (traits.nose) images.push(NOSE[traits.nose].image);
-  if (traits.clothes) images.push(CLOTHES[traits.clothes].image);
+  if (traits.clothes) {
+    const clothes =
+      traits.body_type === "female"
+        ? FEMALE_CLOTHES[traits.clothes].image
+        : MALE_CLOTHES[traits.clothes].image;
+    images.push(clothes);
+  }
   if (traits.eyes && traits.eyes_color)
     images.push(
       "/traits/eyes/" + traits.eyes_color + "/" + traits.eyes + ".png"
