@@ -1,7 +1,7 @@
 import { TrainerAttributes } from "../components/Builder";
 import axios from "axios";
 
-const API_URL = "http://localhost:8080";
+const API_URL = "https://api.bitmon.io/";
 
 export async function upload(
   attributes: TrainerAttributes,
