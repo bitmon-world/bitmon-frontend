@@ -56,6 +56,7 @@ export const MOUTH: { [k: number]: { image: string } } = {
   "7": { image: "/traits/mouth/7.png" },
   "8": { image: "/traits/mouth/8.png" },
   "9": { image: "/traits/mouth/9.png" },
+  "10": { image: "/traits/mouth/10.png" },
 };
 
 export const EYES: { [k: number]: { image: string } } = {
@@ -258,6 +259,12 @@ export const ACCESSORIES: { [k: number]: { image: string } } = {
   },
   "21": {
     image: "/traits/accessories/21.png",
+  },
+  "22": {
+    image: "/traits/accessories/22.png",
+  },
+  "23": {
+    image: "/traits/accessories/23.png",
   },
 };
 
