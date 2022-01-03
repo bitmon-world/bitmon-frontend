@@ -21,6 +21,9 @@ import { Loader } from "../Loader";
 import { mergeTraits } from "../../functions/merge-images";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { upload } from "../../functions/upload";
+import { clusterApiUrl, sendAndConfirmRawTransaction } from "@solana/web3.js";
+import { createConnectionConfig } from "@nfteyez/sol-rayz";
+import { sendSignedTransaction } from "../../functions/sendTransaction";
 
 export interface TrainerAttributes {
   body_type: "male" | "female" | null;
@@ -62,6 +65,10 @@ export const TrainerBuilder: FC<{
   const [selected, setSelected] = useState<AttributeSelection>(
     AttributeSelection.BodyColor
   );
+
+  const url =
+    process.env.NEXT_PUBLIC_SOLANA_RPC || clusterApiUrl("mainnet-beta");
+  const connect = createConnectionConfig(url);
 
   function random() {
     const clothes =
@@ -140,7 +147,7 @@ export const TrainerBuilder: FC<{
     setUploading(true);
     const address = wallet.publicKey.toBase58();
     const sig = await wallet.signMessage(Buffer.from(address));
-    const success = await upload(
+    const response = await upload(
       attributes,
       wallet.publicKey.toString(),
       wallet.publicKey.toBuffer().toString("hex"),
@@ -151,9 +158,17 @@ export const TrainerBuilder: FC<{
       category: "Upload",
       action: "UploadAttributes",
       label: "UploadAttributes",
-      value: success ? 1 : 0,
+      value: response.success ? 1 : 0,
     });
-    setFinishUpload({ finished: true, success: success });
+    const tx = await wallet.signTransaction(response.data);
+    const broadcast = await sendSignedTransaction({
+      signedTransaction: tx,
+      connection: connect,
+    });
+    setFinishUpload({
+      finished: true,
+      success: broadcast.txid !== "" && broadcast.slot !== 0,
+    });
     setUploading(false);
   }
 

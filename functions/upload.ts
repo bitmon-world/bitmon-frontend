@@ -1,5 +1,6 @@
 import { TrainerAttributes } from "../components/Builder";
 import axios from "axios";
+import { Transaction } from "@solana/web3.js";
 
 const API_URL = "https://api.bitmon.io/";
 
@@ -9,7 +10,7 @@ export async function upload(
   public_key: string,
   signature: string,
   mint: string | string[]
-): Promise<boolean> {
+): Promise<{ success: boolean; data?: Transaction }> {
   try {
     const res = await axios.post(API_URL, {
       attributes,
@@ -18,8 +19,9 @@ export async function upload(
       signature,
       mint,
     });
-    return res.data.success;
+    const tx = Transaction.from(Buffer.from(res.data.tx, "hex"));
+    return { success: true, data: tx };
   } catch (e) {
-    return false;
+    return { success: false };
   }
 }

@@ -15,6 +15,7 @@ export default function Creator(): JSX.Element {
   const url =
     process.env.NEXT_PUBLIC_SOLANA_RPC || clusterApiUrl("mainnet-beta");
   const connect = createConnectionConfig(url);
+
   const wallet = useWallet();
 
   const [loading, setLoading] = useState(true);
