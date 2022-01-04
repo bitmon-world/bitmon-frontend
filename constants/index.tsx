@@ -57,6 +57,13 @@ export const MOUTH: { [k: number]: { image: string } } = {
   "8": { image: "/traits/mouth/8.png" },
   "9": { image: "/traits/mouth/9.png" },
   "10": { image: "/traits/mouth/10.png" },
+  "11": { image: "/traits/mouth/11.png" },
+  "12": { image: "/traits/mouth/12.png" },
+  "13": { image: "/traits/mouth/13.png" },
+  "14": { image: "/traits/mouth/14.png" },
+  "15": { image: "/traits/mouth/15.png" },
+  "16": { image: "/traits/mouth/16.png" },
+  "17": { image: "/traits/mouth/17.png" },
 };
 
 export const EYES: { [k: number]: { image: string } } = {
@@ -65,6 +72,13 @@ export const EYES: { [k: number]: { image: string } } = {
   "3": { image: "/traits/eyes/1/3.png" },
   "4": { image: "/traits/eyes/1/4.png" },
   "5": { image: "/traits/eyes/1/5.png" },
+  "6": { image: "/traits/eyes/1/6.png" },
+  "7": { image: "/traits/eyes/1/7.png" },
+  "8": { image: "/traits/eyes/1/8.png" },
+  "9": { image: "/traits/eyes/1/9.png" },
+  "10": { image: "/traits/eyes/1/10.png" },
+  "11": { image: "/traits/eyes/1/11.png" },
+  "12": { image: "/traits/eyes/1/12.png" },
 };
 
 export const EYES_COLORS: { [k: number]: { color: string } } = {
@@ -85,6 +99,8 @@ export const EYEBROWS: { [k: number]: { image: string } } = {
   "4": { image: "/traits/eyebrow/4.png" },
   "5": { image: "/traits/eyebrow/5.png" },
   "6": { image: "/traits/eyebrow/6.png" },
+  "7": { image: "/traits/eyebrow/7.png" },
+  "8": { image: "/traits/eyebrow/8.png" },
 };
 
 export const NOSE: { [k: number]: { image: string } } = {
@@ -92,6 +108,7 @@ export const NOSE: { [k: number]: { image: string } } = {
   "2": { image: "/traits/nose/2.png" },
   "3": { image: "/traits/nose/3.png" },
   "4": { image: "/traits/nose/4.png" },
+  "5": { image: "/traits/nose/5.png" },
 };
 
 export const HAIR: { [k: number]: { image: string } } = {
@@ -265,6 +282,9 @@ export const ACCESSORIES: { [k: number]: { image: string } } = {
   },
   "23": {
     image: "/traits/accessories/23.png",
+  },
+  "24": {
+    image: "/traits/accessories/24.png",
   },
 };
 
