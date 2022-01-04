@@ -73,7 +73,8 @@ export const TrainerBuilder: FC<{
   function random() {
     const clothes =
       attributes.body_type === "female" ? FEMALE_CLOTHES : MALE_CLOTHES;
-    setAttributes({
+
+    const randomAttributes: TrainerAttributes = {
       body_type: attributes.body_type,
       body_color: randomIntFromInterval(
         1,
@@ -108,7 +109,9 @@ export const TrainerBuilder: FC<{
         1,
         Object.keys(BACKGROUND).length
       ).toString(),
-    });
+    };
+
+    setAttributes(randomAttributes);
   }
 
   function randomIntFromInterval(min, max) {
@@ -860,6 +863,7 @@ export const TrainerBuilder: FC<{
                     const image = MOUTH[i].image;
                     return (
                       <button
+                        key={i}
                         onClick={() =>
                           setAttributes({
                             accessory: attributes.accessory,
@@ -878,10 +882,7 @@ export const TrainerBuilder: FC<{
                           })
                         }
                       >
-                        <div
-                          key={i}
-                          className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
-                        >
+                        <div className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]">
                           <Image
                             className="object-cover"
                             src={image}
@@ -897,6 +898,7 @@ export const TrainerBuilder: FC<{
                     const image = EYES[i].image;
                     return (
                       <button
+                        key={i}
                         onClick={() =>
                           setAttributes({
                             accessory: attributes.accessory,
@@ -915,10 +917,7 @@ export const TrainerBuilder: FC<{
                           })
                         }
                       >
-                        <div
-                          key={i}
-                          className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
-                        >
+                        <div className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]">
                           <Image
                             className="object-cover"
                             src={image}
@@ -974,6 +973,7 @@ export const TrainerBuilder: FC<{
                     const image = EYEBROWS[i].image;
                     return (
                       <button
+                        key={i}
                         onClick={() =>
                           setAttributes({
                             accessory: attributes.accessory,
@@ -992,10 +992,7 @@ export const TrainerBuilder: FC<{
                           })
                         }
                       >
-                        <div
-                          key={i}
-                          className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
-                        >
+                        <div className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]">
                           <Image
                             className="object-cover"
                             src={image}
