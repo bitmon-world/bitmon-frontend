@@ -4,6 +4,7 @@ npx imagemin public/*.png --out-dir=public/
 npx imagemin public/icons/*.svg --out-dir=public/icons
 npx imagemin public/icons/builder/* --out-dir=public/icons/builder
 npx imagemin public/img/* --out-dir=public/img
+npx imagemin public/bitmons/* --out-dir=public/bitmons
 npx imagemin public/traits/accessories/* --out-dir=public/traits/accessories/
 npx imagemin public/traits/backgrounds/* --out-dir=public/traits/backgrounds/
 npx imagemin public/traits/eyebrow/* --out-dir=public/traits/eyebrow/

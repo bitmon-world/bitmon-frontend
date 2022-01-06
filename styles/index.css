@@ -61,3 +61,8 @@ h1,h2,h3,h4,h5,h6 {
     overflow: hidden;
     opacity: 0.05;
 }
+
+.landing-background {
+    background: rgb(0,136,226);
+    background: linear-gradient(90deg, rgba(0,136,226,1) 0%, rgba(0,136,226,1) 50%, rgba(111,197,225,1) 100%);
+}

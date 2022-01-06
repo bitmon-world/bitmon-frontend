@@ -1,4 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
+import { useRouter } from "next/router";
 
 class MyDocument extends Document {
   render() {
@@ -83,9 +84,6 @@ class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-        <div className="z-0 watermark">
-          <div className="watermark-image" />
-        </div>
       </Html>
     );
   }
