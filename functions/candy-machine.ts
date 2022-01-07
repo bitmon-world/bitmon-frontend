@@ -183,7 +183,6 @@ export const mintOneToken = async (
   payer: anchor.web3.PublicKey
 ): Promise<(string | undefined)[]> => {
   const mint = anchor.web3.Keypair.generate();
-
   const userTokenAccountAddress = (
     await getAtaForMint(mint.publicKey, payer)
   )[0];

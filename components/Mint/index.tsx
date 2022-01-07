@@ -12,6 +12,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { createConnectionConfig } from "@nfteyez/sol-rayz";
 import { useCallback, useEffect, useState } from "react";
 import Wallet from "@project-serum/sol-wallet-adapter";
+import { GatewayProvider } from "@civic/solana-gateway-react";
 
 export const MintPage = () => {
   const wallet = useWallet();
@@ -40,6 +41,7 @@ export const MintPage = () => {
   );
 
   useEffect(() => {
+    if (!wallet.connected) return
     fetch_state(wallet);
   }, [wallet]);
 
@@ -115,7 +117,6 @@ export const MintPage = () => {
         <div className="mt-5 mx-auto">
           {!wallet ||
           !wallet.connected ||
-          !wallet.ready ||
           !wallet.publicKey ||
           !state ||
           !state.program.provider.wallet ? (
@@ -123,14 +124,24 @@ export const MintPage = () => {
           ) : minting ? (
             <LoaderSmall />
           ) : (
-            <ButtonBlue
-              text={"Mint"}
-              onClick={async () => {
-                setMinting(true);
-                await mintOneToken(state, wallet.publicKey);
-                setMinting(false);
+            <GatewayProvider
+              wallet={{
+                publicKey: wallet.publicKey,
+                signTransaction: wallet.signTransaction,
               }}
-            />
+              gatekeeperNetwork={state?.state?.gatekeeper?.gatekeeperNetwork}
+              clusterUrl={url}
+              options={{ autoShowModal: false }}
+            >
+              <ButtonBlue
+                text={"Mint"}
+                onClick={async () => {
+                  setMinting(true);
+                  await mintOneToken(state, wallet.publicKey);
+                  setMinting(false);
+                }}
+              />
+            </GatewayProvider>
           )}
         </div>
       </div>

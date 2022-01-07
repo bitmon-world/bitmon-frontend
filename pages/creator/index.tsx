@@ -44,8 +44,7 @@ export default function Creator(): JSX.Element {
   }, [wallet, connect, getParsedNftAccountsByOwner]);
 
   useEffect(() => {
-    if (!wallet || !wallet.connected || !wallet.ready || !wallet.publicKey)
-      return;
+    if (!wallet || !wallet.connected || !wallet.publicKey) return;
     fetch_tokens();
   }, [wallet]);
 

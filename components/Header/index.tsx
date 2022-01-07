@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Popover } from "@headlessui/react";
-import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { shortenString } from "../../functions/format";
 import { ButtonGreen, ButtonOrange } from "../Button";
 import { FC } from "react";
 import { classNames } from "../../functions/classnames";
+import {
+    useWalletModal,
+} from "@solana/wallet-adapter-react-ui";
 
 export const Header: FC<{ background: boolean }> = ({ background }) => {
   const modal = useWalletModal();
@@ -144,10 +146,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                         onClick={() => wallet.disconnect()}
                       />
                     ) : (
-                      <ButtonGreen
-                        text={"Connect"}
-                        onClick={() => modal.setVisible(true)}
-                      />
+                      <ButtonGreen text={"Connect"} onClick={ () => modal.setVisible(true)} />
                     )}
                   </div>
                   <div className="flex -mr-2 md:hidden">
