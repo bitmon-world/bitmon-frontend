@@ -12,7 +12,6 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { createConnectionConfig } from "@nfteyez/sol-rayz";
 import { useCallback, useEffect, useState } from "react";
 import Wallet from "@project-serum/sol-wallet-adapter";
-import { GatewayProvider } from "@civic/solana-gateway-react";
 
 export const MintPage = () => {
   const wallet = useWallet();
@@ -22,7 +21,7 @@ export const MintPage = () => {
 
   const connect = createConnectionConfig(url);
 
-  const [state, setState] = useState<CandyMachineAccount | null>(null);
+  const [candyMachine, setCandyMachine] = useState<CandyMachineAccount | null>(null);
 
   const fetch_state = useCallback(
     async (wallet) => {
@@ -35,7 +34,7 @@ export const MintPage = () => {
         CANDY_MACHINE_ID,
         connect
       );
-      setState(data);
+      setCandyMachine(data);
     },
     [wallet]
   );
@@ -93,19 +92,19 @@ export const MintPage = () => {
           Bitmon trainers can be customized and the first generation will
           receive a ticket to mint the first Bitmons.
         </p>
-        {state ? (
+        {candyMachine ? (
           <>
             <h1 className="text-lg mt-4">
               Public Mint Price:{" "}
-              {state.state.price.toNumber() / LAMPORTS_PER_SOL}
+              {candyMachine.state.price.toNumber() / LAMPORTS_PER_SOL}
             </h1>
             <h1 className="text-lg">
               Whitelist Mint Price:{" "}
-              {state.state.whitelistMintSettings.discountPrice.toNumber() /
+              {candyMachine.state.whitelistMintSettings.discountPrice.toNumber() /
                 LAMPORTS_PER_SOL}
             </h1>
             <h1 className="text-lg">
-              {state.state.itemsRedeemed} / 10000 Trainers Minted
+              {candyMachine.state.itemsRedeemed} / 10000 Trainers Minted
             </h1>
           </>
         ) : (
@@ -118,30 +117,20 @@ export const MintPage = () => {
           {!wallet ||
           !wallet.connected ||
           !wallet.publicKey ||
-          !state ||
-          !state.program.provider.wallet ? (
+          !candyMachine ||
+          !candyMachine.program.provider.wallet ? (
             <ButtonBlueDisabled text={"Connect wallet"} />
           ) : minting ? (
             <LoaderSmall />
           ) : (
-            <GatewayProvider
-              wallet={{
-                publicKey: wallet.publicKey,
-                signTransaction: wallet.signTransaction,
-              }}
-              gatekeeperNetwork={state?.state?.gatekeeper?.gatekeeperNetwork}
-              clusterUrl={url}
-              options={{ autoShowModal: false }}
-            >
               <ButtonBlue
-                text={"Mint"}
-                onClick={async () => {
-                  setMinting(true);
-                  await mintOneToken(state, wallet.publicKey);
-                  setMinting(false);
-                }}
+                  text={"Mint"}
+                  onClick={async () => {
+                    setMinting(true);
+                    await mintOneToken(candyMachine, wallet.publicKey);
+                    setMinting(false);
+                  }}
               />
-            </GatewayProvider>
           )}
         </div>
       </div>
