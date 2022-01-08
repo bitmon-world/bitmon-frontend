@@ -2,7 +2,7 @@ import { TrainerAttributes } from "../components/Builder";
 import axios from "axios";
 import { Transaction } from "@solana/web3.js";
 
-const API_URL = "https://api.bitmon.io/";
+const API_URL = "https://api.bitmon.io";
 
 export async function upload(
   attributes: TrainerAttributes,
