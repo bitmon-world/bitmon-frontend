@@ -181,7 +181,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                 </div>
               </div>
             </div>
-            <Popover.Panel className="sm:hidden uppercase">
+            <Popover.Panel className="sm:hidden uppercase bg-blue">
               <div className="flex flex-col px-4 pt-2 pb-3 space-y-1 text-center">
                 {about()}
                 {whitepaper()}

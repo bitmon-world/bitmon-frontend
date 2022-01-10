@@ -25,13 +25,13 @@ export const Landing = () => {
             <Image src="/bitmons/gullet.png" width="301" height="340" />
           </div>
         </div>
-        <div className="text-white text-center text-3xl mx-4">
+        <div className="text-white text-center text-2xl mx-4">
           <h1>Welcome to the world of</h1>
         </div>
         <div className="flex flex-row justify-center mx-4">
           <Image src="/img/bitmon.png" width="500" height="219" />
         </div>
-        <div className="text-white text-center text-3xl pb-20 mx-4">
+        <div className="text-white text-center text-2xl pb-20 mx-4">
           <h1>
             The first decentralized videogame created by the people, for the
             people.
