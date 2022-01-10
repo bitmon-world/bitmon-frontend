@@ -65,7 +65,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
     return (
       <div className="flex flex-row justify-center md:mr-5 gap-x-4 mt-2">
         <a
-          href="https://discord.gg/6PTUWzDZ8P"
+          href="https://discord.gg/bitmon"
           target="_blank"
           rel="noreferrer"
         >
