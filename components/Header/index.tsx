@@ -31,19 +31,9 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
     );
   }
 
-  function faq(): JSX.Element {
-    return (
-      <Link href="/#faq" passHref>
-        <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey">
-          <p>FAQ</p>
-        </div>
-      </Link>
-    );
-  }
-
   function whitepaper(): JSX.Element {
     return (
-      <Link href="/whitepaper" passHref>
+      <Link href="/#whitepaper" passHref>
         <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey">
           <p>Whitepaper</p>
         </div>
@@ -131,9 +121,10 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                 <div className="flex flex-row justify-center items-center gap-x-10">
                   <div className="hidden md:block sm:ml-2">
                     <div className="flex uppercase">
-                      {/*                      {about()}
+                      {about()}
+                      {whitepaper()}
                       {roadmap()}
-                      {faq()}*/}
+                      {creator()}
                     </div>
                   </div>
                   <div className="flex flex-row items-center gap-2">
@@ -192,9 +183,10 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
             </div>
             <Popover.Panel className="sm:hidden uppercase">
               <div className="flex flex-col px-4 pt-2 pb-3 space-y-1 text-center">
-                {/*                {about()}
+                {about()}
+                {whitepaper()}
                 {roadmap()}
-                {faq()}*/}
+                {creator()}
                 {socials()}
               </div>
             </Popover.Panel>

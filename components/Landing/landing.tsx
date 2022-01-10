@@ -14,15 +14,15 @@ export const Landing = () => {
             />
           </div>
         </div>
-        <div className="flex flex-row justify-center items-center pt-28 mx-4">
-          <div className="-mx-48">
-            <Image src="/bitmons/birblu.png" width="350" height="250" />
+        <div className="flex flex-row justify-center items-center pt-28 max-w-[600px] mx-auto">
+          <div className="-mr-14 ml-2">
+            <Image src="/bitmons/birblu.png" width="272" height="340" />
           </div>
           <div className="z-10">
-            <Image src="/bitmons/eldercott.png" width="350" height="250" />
+            <Image src="/bitmons/eldercott.png" width="222" height="340" />
           </div>
-          <div className="-mx-48">
-            <Image src="/bitmons/gullet.png" width="350" height="250" />
+          <div className="-ml-14 mr-2">
+            <Image src="/bitmons/gullet.png" width="301" height="340" />
           </div>
         </div>
         <div className="text-white text-center text-3xl mx-4">
