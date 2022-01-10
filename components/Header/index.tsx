@@ -127,7 +127,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                       {creator()}
                     </div>
                   </div>
-                  <div className="flex flex-row items-center gap-2">
+                  <div className="flex flex-row items-center pl-4">
                     <div className="hidden md:block">{socials()}</div>
                     {wallet.connected ? (
                       <ButtonOrange
