@@ -6,9 +6,7 @@ import { shortenString } from "../../functions/format";
 import { ButtonGreen, ButtonOrange } from "../Button";
 import { FC } from "react";
 import { classNames } from "../../functions/classnames";
-import {
-    useWalletModal,
-} from "@solana/wallet-adapter-react-ui";
+import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 
 export const Header: FC<{ background: boolean }> = ({ background }) => {
   const modal = useWalletModal();
@@ -146,7 +144,10 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                         onClick={() => wallet.disconnect()}
                       />
                     ) : (
-                      <ButtonGreen text={"Connect"} onClick={ () => modal.setVisible(true)} />
+                      <ButtonGreen
+                        text={"Connect"}
+                        onClick={() => modal.setVisible(true)}
+                      />
                     )}
                   </div>
                   <div className="flex -mr-2 md:hidden">

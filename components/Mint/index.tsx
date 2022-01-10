@@ -21,7 +21,9 @@ export const MintPage = () => {
 
   const connect = createConnectionConfig(url);
 
-  const [candyMachine, setCandyMachine] = useState<CandyMachineAccount | null>(null);
+  const [candyMachine, setCandyMachine] = useState<CandyMachineAccount | null>(
+    null
+  );
 
   const fetch_state = useCallback(
     async (wallet) => {
@@ -40,7 +42,7 @@ export const MintPage = () => {
   );
 
   useEffect(() => {
-    if (!wallet.connected) return
+    if (!wallet.connected) return;
     fetch_state(wallet);
   }, [wallet]);
 
@@ -123,14 +125,14 @@ export const MintPage = () => {
           ) : minting ? (
             <LoaderSmall />
           ) : (
-              <ButtonBlue
-                  text={"Mint"}
-                  onClick={async () => {
-                    setMinting(true);
-                    await mintOneToken(candyMachine, wallet.publicKey);
-                    setMinting(false);
-                  }}
-              />
+            <ButtonBlue
+              text={"Mint"}
+              onClick={async () => {
+                setMinting(true);
+                await mintOneToken(candyMachine, wallet.publicKey);
+                setMinting(false);
+              }}
+            />
           )}
         </div>
       </div>
