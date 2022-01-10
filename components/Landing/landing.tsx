@@ -25,7 +25,7 @@ export const Landing = () => {
             <Image src="/bitmons/gullet.png" width="301" height="340" />
           </div>
         </div>
-        <div className="text-white text-center text-2xl mx-4">
+        <div className="text-white text-center text-2xl mx-4 z-10">
           <h1>Welcome to the world of</h1>
         </div>
         <div className="flex flex-row justify-center mx-4">
@@ -136,8 +136,8 @@ export const Landing = () => {
         </div>
       </div>
       <div id="roadmap" className="bg-light-blue pt-7 mb-20">
-        <div className="mx-8 md:mx-20 lg:mx-40 pt-32">
-          <h1 className="text-4xl uppercase">The Plan</h1>
+        <div className="mx-8 md:mx-20 lg:mx-40 pt-24">
+          <h1 className="text-4xl">The Plan</h1>
           <h1 className="text-orange text-xl">What lies ahead</h1>
           <div className="mt-20">
             <Image src="/img/roadmap.png" width="3000" height="3000" />
