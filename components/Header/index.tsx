@@ -118,7 +118,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                     </a>
                   </Link>
                 </div>
-                <div className="flex flex-row justify-center items-center gap-x-10">
+                <div className="flex flex-row justify-center items-center gap-x-2">
                   <div className="hidden md:block sm:ml-2">
                     <div className="flex uppercase">
                       {about()}
@@ -127,7 +127,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                       {creator()}
                     </div>
                   </div>
-                  <div className="flex flex-row items-center pl-4">
+                  <div className="flex flex-row items-center">
                     <div className="hidden md:block">{socials()}</div>
                     {wallet.connected ? (
                       <ButtonOrange
@@ -141,7 +141,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                       />
                     )}
                   </div>
-                  <div className="flex -mr-2 md:hidden">
+                  <div className="flex md:hidden">
                     <Popover.Button className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-high-emphesis focus:outline-none">
                       <span className="sr-only">Open Menu</span>
                       {open ? (
