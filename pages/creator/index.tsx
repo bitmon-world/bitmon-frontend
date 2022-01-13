@@ -8,7 +8,7 @@ import { clusterApiUrl } from "@solana/web3.js";
 import { useCallback, useEffect, useState } from "react";
 import { Loader } from "../../components/Loader";
 import { ConnectWalletWarning } from "../../components/ConnectWalletWarning";
-import { BITMON_DAO_ADDRESS } from "../../constants";
+import { BITMON_UPDATE_AUTHORITY } from "../../constants";
 import { TrainerImage } from "../../components/TrainerImage";
 
 export default function Creator(): JSX.Element {
@@ -30,15 +30,11 @@ export default function Creator(): JSX.Element {
       connection: connect,
     });
 
-    const bitmon_tokens = tokensList.filter((t) => {
-      if (t.data.creators) {
-        return (
-          t.data.creators
-            .map((c) => c.address.toLowerCase())
-            .indexOf(BITMON_DAO_ADDRESS.toLowerCase()) !== -1
-        );
-      }
-    });
+    const bitmon_tokens = tokensList.filter(
+      (t) =>
+        t.updateAuthority.toLowerCase() ===
+        BITMON_UPDATE_AUTHORITY.toLowerCase()
+    );
     setTokens(bitmon_tokens);
     setLoading(false);
   }, [wallet, connect, getParsedNftAccountsByOwner]);

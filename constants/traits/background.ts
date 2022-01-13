@@ -1,0 +1,17 @@
+export const BACKGROUND: { [k: number]: { image: string; name: string } } = {
+  "1": { image: "/traits/background/1.png", name: "Beach" },
+  "2": { image: "/traits/background/2.png", name: "Forest" },
+  "3": { image: "/traits/background/3.png", name: "Space" },
+  "4": { image: "/traits/background/4.png", name: "Desert" },
+  "5": { image: "/traits/background/5.png", name: "City" },
+  "6": { image: "/traits/background/6.png", name: "Purple" },
+  "7": { image: "/traits/background/7.png", name: "Aqua" },
+  "8": { image: "/traits/background/8.png", name: "Pink" },
+  "9": { image: "/traits/background/9.png", name: "Dark Grey" },
+  "10": { image: "/traits/background/10.png", name: "Mahogany" },
+  "11": { image: "/traits/background/11.png", name: "Orange" },
+  "12": { image: "/traits/background/12.png", name: "Red" },
+  "13": { image: "/traits/background/13.png", name: "Blue" },
+  "14": { image: "/traits/background/14.png", name: "Light Grey" },
+  "15": { image: "/traits/background/15.png", name: "Black" },
+};
