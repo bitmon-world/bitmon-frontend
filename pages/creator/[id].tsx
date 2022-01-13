@@ -12,7 +12,7 @@ import { TrainerImage } from "../../components/TrainerImage";
 import { ButtonOrange, ButtonOrangeDisabled } from "../../components/Button";
 import { isMintOwner } from "../../functions/onwership";
 import { TrainerBuilder } from "../../components/Builder";
-import {TrainerAttributes} from "../../components/Builder/BuiltImage";
+import { TrainerAttributes } from "../../components/Builder/BuiltImage";
 
 export default function CreatorSingle(): JSX.Element {
   const url =

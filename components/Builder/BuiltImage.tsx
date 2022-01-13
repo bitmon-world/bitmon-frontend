@@ -79,9 +79,11 @@ export const TrainerBuiltImage: FC<{ attributes: TrainerAttributes }> = ({
             <Image
               className="rounded-lg"
               src={
-                attributes.body_type === "male"
-                  ? BODY_COLOR[attributes.body_color].male_image
-                  : BODY_COLOR[attributes.body_color].female_image
+                "/traits/body/" +
+                attributes.body_type +
+                "/" +
+                attributes.body_color +
+                ".png"
               }
               width={300}
               height={300}
@@ -91,7 +93,7 @@ export const TrainerBuiltImage: FC<{ attributes: TrainerAttributes }> = ({
             <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
               <Image
                 className="rounded-lg"
-                src={MOUTH[attributes.mouth].image}
+                src={"/traits/mouth/" + attributes.mouth + ".png"}
                 width={300}
                 height={300}
               />
@@ -104,9 +106,11 @@ export const TrainerBuiltImage: FC<{ attributes: TrainerAttributes }> = ({
               <Image
                 className="rounded-lg"
                 src={
-                  "/traits/eyes/" + attributes.eye_color
-                    ? attributes.eye_color
-                    : "1" + "/" + attributes.eye + ".png"
+                  "/traits/eye/" +
+                  (attributes.eye_color || "1") +
+                  "/" +
+                  attributes.eye +
+                  ".png"
                 }
                 width={300}
                 height={300}
@@ -119,7 +123,7 @@ export const TrainerBuiltImage: FC<{ attributes: TrainerAttributes }> = ({
             <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
               <Image
                 className="rounded-lg"
-                src={EYEBROW[attributes.eyebrow].image}
+                src={"/traits/eyebrow/" + attributes.eyebrow + ".png"}
                 width={300}
                 height={300}
               />

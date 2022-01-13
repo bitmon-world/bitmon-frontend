@@ -19,13 +19,11 @@ export async function mergeTraits(traits: TrainerAttributes): Promise<string> {
     images.push("/traits/back-hair/1/" + traits.back_hair + ".png");
 
   if (traits.body_type && traits.body_color) {
-    const body =
-      traits.body_type === "female"
-        ? BODY_COLOR[traits.body_color].female_image
-        : BODY_COLOR[traits.body_color].male_image;
-    images.push(body);
+    images.push(
+      "/traits/body/" + traits.body_type + "/" + traits.body_color + ".png"
+    );
   }
-  if (traits.mouth) images.push(MOUTH[traits.mouth].image);
+  if (traits.mouth) images.push("/traits/mouth/" + traits.mouth + ".png");
   if (traits.eyebrow) images.push(EYEBROW[traits.eyebrow].image);
   if (traits.nose) images.push(NOSE[traits.nose].image);
   if (traits.clothes) {
@@ -36,9 +34,9 @@ export async function mergeTraits(traits: TrainerAttributes): Promise<string> {
     images.push(clothes);
   }
   if (traits.eye && traits.eye_color)
-    images.push("/traits/eyes/" + traits.eye_color + "/" + traits.eye + ".png");
+    images.push("/traits/eye/" + traits.eye_color + "/" + traits.eye + ".png");
   if (traits.eye && !traits.eye_color)
-    images.push("/traits/eyes/1/" + traits.eye + ".png");
+    images.push("/traits/eye/1/" + traits.eye + ".png");
   if (traits.hair && traits.hair_color)
     images.push(
       "/traits/hair/" + traits.hair_color + "/" + traits.hair + ".png"
