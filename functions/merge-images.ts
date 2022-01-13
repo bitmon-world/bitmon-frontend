@@ -1,15 +1,12 @@
 import mergeImages from "merge-images";
 import { TrainerAttributes } from "../components/Builder";
-import {
-  ACCESSORIES,
-  BACKGROUND,
-  BODY_COLORS,
-  EYEBROWS,
-  FEMALE_CLOTHES,
-  MALE_CLOTHES,
-  MOUTH,
-  NOSE,
-} from "../constants";
+import { BACKGROUND } from "../constants/traits/background";
+import { BODY_COLOR } from "../constants/traits/body";
+import { MOUTH } from "../constants/traits/mouth";
+import { EYEBROW } from "../constants/traits/eyebrow";
+import { NOSE } from "../constants/traits/nose";
+import { FEMALE_CLOTHES, MALE_CLOTHES } from "../constants/traits/clothes";
+import { ACCESSORY } from "../constants/traits/accessory";
 
 export async function mergeTraits(traits: TrainerAttributes): Promise<string> {
   const images = [];
@@ -24,12 +21,12 @@ export async function mergeTraits(traits: TrainerAttributes): Promise<string> {
   if (traits.body_type && traits.body_color) {
     const body =
       traits.body_type === "female"
-        ? BODY_COLORS[traits.body_color].female_image
-        : BODY_COLORS[traits.body_color].male_image;
+        ? BODY_COLOR[traits.body_color].female_image
+        : BODY_COLOR[traits.body_color].male_image;
     images.push(body);
   }
   if (traits.mouth) images.push(MOUTH[traits.mouth].image);
-  if (traits.eyebrows) images.push(EYEBROWS[traits.eyebrows].image);
+  if (traits.eyebrows) images.push(EYEBROW[traits.eyebrows].image);
   if (traits.nose) images.push(NOSE[traits.nose].image);
   if (traits.clothes) {
     const clothes =
@@ -50,7 +47,7 @@ export async function mergeTraits(traits: TrainerAttributes): Promise<string> {
     );
   if (traits.hair && !traits.hair_color)
     images.push("/traits/hair/1/" + traits.hair + ".png");
-  if (traits.accessory) images.push(ACCESSORIES[traits.accessory].image);
+  if (traits.accessory) images.push(ACCESSORY[traits.accessory].image);
 
   return await mergeImages(images);
 }
