@@ -2,6 +2,8 @@ export const HAIR: { [k: number]: { image: string; name: string } } = {};
 
 export const BACK_HAIR: { [k: number]: { image: string; name: string } } = {};
 
+export const BEARD: { [k: number]: { image: string; name: string } } = {};
+
 export const HAIR_COLOR: { [k: number]: { color: string; name: string } } = {
   1: { color: "#100f0f", name: "Black" },
   2: { color: "#f1c669", name: "Blonde" },
