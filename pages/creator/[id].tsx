@@ -44,7 +44,7 @@ export default function CreatorSingle(): JSX.Element {
 
   const [attributes, setAttributes] = useState<TrainerAttributes>({
     accessory: null,
-    back_hair: null,
+    "back-hair": null,
     back_hair_color: null,
     background: null,
     beard: null,
@@ -53,7 +53,7 @@ export default function CreatorSingle(): JSX.Element {
     eyebrow: null,
     eye: null,
     eye_color: null,
-    face_accessory: null,
+    "face-accessory": null,
     glasses: null,
     hair: null,
     hair_color: null,

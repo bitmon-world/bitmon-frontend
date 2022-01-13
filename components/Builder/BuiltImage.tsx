@@ -1,14 +1,5 @@
 import { FC } from "react";
 import Image from "next/image";
-import { BACKGROUND } from "../../constants/traits/background";
-import { BODY_COLOR } from "../../constants/traits/body";
-import { MOUTH } from "../../constants/traits/mouth";
-import { EYE } from "../../constants/traits/eye";
-import { EYEBROW } from "../../constants/traits/eyebrow";
-import { NOSE } from "../../constants/traits/nose";
-import { BACK_HAIR, HAIR } from "../../constants/traits/hair";
-import { ACCESSORY } from "../../constants/traits/accessory";
-import { FEMALE_CLOTHES, MALE_CLOTHES } from "../../constants/traits/clothes";
 
 export interface TrainerAttributes {
   body_type: "male" | "female" | null;
@@ -18,7 +9,7 @@ export interface TrainerAttributes {
   eyebrow: string | null;
   nose: string | null;
   hair: string | null;
-  back_hair: string | null;
+  "back-hair": string | null;
   beard: string | null;
   accessory: string | null;
   "face-accessory": string | null;
@@ -207,7 +198,7 @@ export const TrainerBuiltImage: FC<{ attributes: TrainerAttributes }> = ({
           ) : (
             <div />
           )}
-          {attributes.back_hair ? (
+          {attributes["back-hair"] ? (
             <div className="rounded-lg h-[300px] w-[300px] z-0 absolute top-0">
               <Image
                 className="rounded-lg"
@@ -215,7 +206,7 @@ export const TrainerBuiltImage: FC<{ attributes: TrainerAttributes }> = ({
                   "/traits/back-hair/" +
                   (attributes.back_hair_color || "1") +
                   "/" +
-                  attributes.back_hair +
+                  attributes["back-hair"] +
                   ".png"
                 }
                 width={300}

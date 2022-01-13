@@ -68,7 +68,7 @@ export const TrainerBuilder: FC<{
       eyebrow: randomIntFromInterval(1, Object.keys(EYEBROW).length).toString(),
       nose: randomIntFromInterval(1, Object.keys(NOSE).length).toString(),
       hair: randomIntFromInterval(1, Object.keys(HAIR).length).toString(),
-      back_hair: randomIntFromInterval(
+      "back-hair": randomIntFromInterval(
         1,
         Object.keys(BACK_HAIR).length
       ).toString(),
@@ -860,7 +860,7 @@ export const TrainerBuilder: FC<{
                         body_type: attributes.body_type,
                         accessory: null,
                         "face-accessory": null,
-                        back_hair: null,
+                        "back-hair": null,
                         back_hair_color: null,
                         background: null,
                         clothes: null,
