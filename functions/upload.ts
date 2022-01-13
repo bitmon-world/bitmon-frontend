@@ -1,6 +1,6 @@
-import { TrainerAttributes } from "../components/Builder";
 import axios from "axios";
 import { Transaction } from "@solana/web3.js";
+import {TrainerAttributes} from "../components/Builder/BuiltImage";
 
 const API_URL = "https://api.bitmon.io";
 

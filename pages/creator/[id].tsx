@@ -11,7 +11,8 @@ import { Loader } from "../../components/Loader";
 import { TrainerImage } from "../../components/TrainerImage";
 import { ButtonOrange, ButtonOrangeDisabled } from "../../components/Button";
 import { isMintOwner } from "../../functions/onwership";
-import { TrainerAttributes, TrainerBuilder } from "../../components/Builder";
+import { TrainerBuilder } from "../../components/Builder";
+import {TrainerAttributes} from "../../components/Builder/BuiltImage";
 
 export default function CreatorSingle(): JSX.Element {
   const url =
@@ -44,11 +45,16 @@ export default function CreatorSingle(): JSX.Element {
   const [attributes, setAttributes] = useState<TrainerAttributes>({
     accessory: null,
     back_hair: null,
+    back_hair_color: null,
     background: null,
+    beard: null,
+    beard_color: null,
     clothes: null,
-    eyebrows: null,
-    eyes: null,
-    eyes_color: null,
+    eyebrow: null,
+    eye: null,
+    eye_color: null,
+    face_accessory: null,
+    glasses: null,
     hair: null,
     hair_color: null,
     mouth: null,
