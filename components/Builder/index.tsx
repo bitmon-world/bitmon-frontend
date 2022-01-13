@@ -89,7 +89,7 @@ export const TrainerBuilder: FC<{
         1,
         Object.keys(ACCESSORY).length
       ).toString(),
-      face_accessory: randomIntFromInterval(
+      "face-accessory": randomIntFromInterval(
         1,
         Object.keys(FACE_ACCESSORY).length
       ).toString(),
@@ -859,7 +859,7 @@ export const TrainerBuilder: FC<{
                       setAttributes({
                         body_type: attributes.body_type,
                         accessory: null,
-                        face_accessory: null,
+                        "face-accessory": null,
                         back_hair: null,
                         back_hair_color: null,
                         background: null,

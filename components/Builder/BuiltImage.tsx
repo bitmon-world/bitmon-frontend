@@ -21,7 +21,7 @@ export interface TrainerAttributes {
   back_hair: string | null;
   beard: string | null;
   accessory: string | null;
-  face_accessory: string | null;
+  "face-accessory": string | null;
   clothes: string | null;
   background: string | null;
   eye_color: string | null;
@@ -60,7 +60,7 @@ export const TrainerBuiltImage: FC<{ attributes: TrainerAttributes }> = ({
             <div className="rounded-lg h-[338px] w-[338px] z-0 static">
               <Image
                 className="rounded-lg"
-                src={BACKGROUND[attributes.background].image}
+                src={"/traits/background/" + attributes.background + ".png"}
                 width={300}
                 height={300}
               />
@@ -135,7 +135,53 @@ export const TrainerBuiltImage: FC<{ attributes: TrainerAttributes }> = ({
             <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
               <Image
                 className="rounded-lg"
-                src={NOSE[attributes.nose].image}
+                src={"/traits/nose/" + attributes.nose + ".png"}
+                width={300}
+                height={300}
+              />
+            </div>
+          ) : (
+            <div />
+          )}
+          {attributes.clothes ? (
+            <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
+              <Image
+                className="rounded-lg"
+                src={
+                  "/traits/clothes/" +
+                  attributes.body_type +
+                  "/" +
+                  attributes.clothes +
+                  ".png"
+                }
+                width={300}
+                height={300}
+              />
+            </div>
+          ) : (
+            <div />
+          )}
+          {attributes["face-accessory"] ? (
+            <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
+              <Image
+                className="rounded-lg"
+                src={
+                  "/traits/face-accessory/" +
+                  attributes["face-accessory"] +
+                  ".png"
+                }
+                width={300}
+                height={300}
+              />
+            </div>
+          ) : (
+            <div />
+          )}
+          {attributes.glasses ? (
+            <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
+              <Image
+                className="rounded-lg"
+                src={"/traits/glasses/" + attributes.glasses + ".png"}
                 width={300}
                 height={300}
               />
@@ -148,9 +194,11 @@ export const TrainerBuiltImage: FC<{ attributes: TrainerAttributes }> = ({
               <Image
                 className="rounded-lg"
                 src={
-                  "/traits/hair/" + attributes.hair_color
-                    ? attributes.hair_color
-                    : "1" + "/" + attributes.hair + ".png"
+                  "/traits/hair/" +
+                  (attributes.hair_color || "1") +
+                  "/" +
+                  attributes.hair +
+                  ".png"
                 }
                 width={300}
                 height={300}
@@ -164,9 +212,11 @@ export const TrainerBuiltImage: FC<{ attributes: TrainerAttributes }> = ({
               <Image
                 className="rounded-lg"
                 src={
-                  "/traits/back-hair/" + attributes.back_hair_color
-                    ? attributes.back_hair_color
-                    : "1" + "/" + attributes.back_hair + ".png"
+                  "/traits/back-hair/" +
+                  (attributes.back_hair_color || "1") +
+                  "/" +
+                  attributes.back_hair +
+                  ".png"
                 }
                 width={300}
                 height={300}
@@ -179,23 +229,7 @@ export const TrainerBuiltImage: FC<{ attributes: TrainerAttributes }> = ({
             <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
               <Image
                 className="rounded-lg"
-                src={ACCESSORY[attributes.accessory].image}
-                width={300}
-                height={300}
-              />
-            </div>
-          ) : (
-            <div />
-          )}
-          {attributes.clothes ? (
-            <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
-              <Image
-                className="rounded-lg"
-                src={
-                  attributes.body_type === "female"
-                    ? FEMALE_CLOTHES[attributes.clothes].image
-                    : MALE_CLOTHES[attributes.clothes].image
-                }
+                src={"/traits/accessory/" + attributes.accessory + ".png"}
                 width={300}
                 height={300}
               />
