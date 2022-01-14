@@ -92,6 +92,24 @@ export const TrainerBuiltImage: FC<{ attributes: TrainerAttributes }> = ({
           ) : (
             <div />
           )}
+          {attributes.beard ? (
+            <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
+              <Image
+                className="rounded-lg"
+                src={
+                  "/traits/beard/" +
+                  (attributes.beard_color || "1") +
+                  "/" +
+                  attributes.beard +
+                  ".png"
+                }
+                width={300}
+                height={300}
+              />
+            </div>
+          ) : (
+            <div />
+          )}
           {attributes.eye ? (
             <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
               <Image
