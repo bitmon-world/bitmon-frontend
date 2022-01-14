@@ -1,7 +1,4 @@
 import mergeImages from "merge-images";
-import { EYEBROW } from "../constants/traits/eyebrow";
-import { NOSE } from "../constants/traits/nose";
-import { FEMALE_CLOTHES, MALE_CLOTHES } from "../constants/traits/clothes";
 import { TrainerAttributes } from "../components/Builder/BuiltImage";
 
 export async function mergeTraits(traits: TrainerAttributes): Promise<string> {
@@ -25,15 +22,12 @@ export async function mergeTraits(traits: TrainerAttributes): Promise<string> {
     );
   }
   if (traits.mouth) images.push("/traits/mouth/" + traits.mouth + ".png");
-  if (traits.eyebrow) images.push(EYEBROW[traits.eyebrow].image);
-  if (traits.nose) images.push(NOSE[traits.nose].image);
-  if (traits.clothes) {
-    const clothes =
-      traits.body_type === "female"
-        ? FEMALE_CLOTHES[traits.clothes].image
-        : MALE_CLOTHES[traits.clothes].image;
-    images.push(clothes);
-  }
+  if (traits.eyebrow) images.push("/traits/eyebrow/" + traits.eyebrow + ".png");
+  if (traits.nose) images.push("/traits/nose/" + traits.nose + ".png");
+  if (traits.clothes)
+    images.push(
+      "/traits/clothes/" + traits.body_type + "/" + traits.clothes + ".png"
+    );
   if (traits.eye && traits.eye_color)
     images.push("/traits/eye/" + traits.eye_color + "/" + traits.eye + ".png");
   if (traits.eye && !traits.eye_color)

@@ -9,20 +9,7 @@ import { upload } from "../../functions/upload";
 import { clusterApiUrl } from "@solana/web3.js";
 import { createConnectionConfig } from "@nfteyez/sol-rayz";
 import { sendSignedTransaction } from "../../functions/sendTransaction";
-import { FEMALE_CLOTHES, MALE_CLOTHES } from "../../constants/traits/clothes";
-import { MOUTH } from "../../constants/traits/mouth";
-import { EYE } from "../../constants/traits/eye";
-import { EYEBROW } from "../../constants/traits/eyebrow";
-import { NOSE } from "../../constants/traits/nose";
-import {
-  BACK_HAIR,
-  BEARD,
-  HAIR,
-  HAIR_COLOR,
-} from "../../constants/traits/hair";
 import { BodyTypeSelector } from "./BodyTypeSelector";
-import { FACE_ACCESSORY } from "../../constants/traits/face-accessory";
-import { GLASSES } from "../../constants/traits/glasses";
 import { TrainerAttributes, TrainerBuiltImage } from "./BuiltImage";
 import { Popover, Transition } from "@headlessui/react";
 import {
@@ -31,6 +18,7 @@ import {
   ATTRIBUTES_PREFIX,
   BODY_COLOR,
   EYE_COLORS,
+  HAIR_COLOR,
 } from "../../constants";
 
 export const TrainerBuilder: FC<{
@@ -49,7 +37,9 @@ export const TrainerBuilder: FC<{
 
   function random() {
     const clothes =
-      attributes.body_type === "female" ? FEMALE_CLOTHES : MALE_CLOTHES;
+      attributes.body_type === "female"
+        ? ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.FEMALE_CLOTHES]
+        : ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.MALE_CLOTHES];
 
     const randomAttributes: TrainerAttributes = {
       body_type: attributes.body_type,
@@ -58,18 +48,33 @@ export const TrainerBuilder: FC<{
         Object.keys(BODY_COLOR).length
       ).toString(),
 
-      mouth: randomIntFromInterval(1, Object.keys(MOUTH).length).toString(),
-      eye: randomIntFromInterval(1, Object.keys(EYE).length).toString(),
+      mouth: randomIntFromInterval(
+        1,
+        ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.MOUTH]
+      ).toString(),
+      eye: randomIntFromInterval(
+        1,
+        ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.EYE]
+      ).toString(),
       eye_color: randomIntFromInterval(
         1,
         Object.keys(EYE_COLORS).length
       ).toString(),
-      eyebrow: randomIntFromInterval(1, Object.keys(EYEBROW).length).toString(),
-      nose: randomIntFromInterval(1, Object.keys(NOSE).length).toString(),
-      hair: randomIntFromInterval(1, Object.keys(HAIR).length).toString(),
+      eyebrow: randomIntFromInterval(
+        1,
+        ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.EYEBROW]
+      ).toString(),
+      nose: randomIntFromInterval(
+        1,
+        ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.NOSE]
+      ).toString(),
+      hair: randomIntFromInterval(
+        1,
+        ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.HAIR]
+      ).toString(),
       "back-hair": randomIntFromInterval(
         1,
-        Object.keys(BACK_HAIR).length
+        Object.keys(ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.BACK_HAIR]).length
       ).toString(),
       back_hair_color: randomIntFromInterval(
         1,
@@ -79,7 +84,10 @@ export const TrainerBuilder: FC<{
         1,
         Object.keys(HAIR_COLOR).length
       ).toString(),
-      beard: randomIntFromInterval(1, Object.keys(BEARD).length).toString(),
+      beard: randomIntFromInterval(
+        1,
+        ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.BEARD]
+      ).toString(),
       beard_color: randomIntFromInterval(
         1,
         Object.keys(HAIR_COLOR).length
@@ -90,14 +98,17 @@ export const TrainerBuilder: FC<{
       ).toString(),
       "face-accessory": randomIntFromInterval(
         1,
-        Object.keys(FACE_ACCESSORY).length
+        Object.keys(ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.FACE_ACCESSORY]).length
       ).toString(),
-      clothes: randomIntFromInterval(1, Object.keys(clothes).length).toString(),
+      clothes: randomIntFromInterval(1, clothes).toString(),
       background: randomIntFromInterval(
         1,
         Object.keys(ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.BACKGROUND]).length
       ).toString(),
-      glasses: randomIntFromInterval(1, Object.keys(GLASSES).length).toString(),
+      glasses: randomIntFromInterval(
+        1,
+        ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.GLASSES]
+      ).toString(),
     };
 
     setAttributes(randomAttributes);

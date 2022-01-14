@@ -94,3 +94,15 @@ export const BODY_COLOR: { [k: number]: string } = {
   29: "#e06666",
   30: "#f4cccc",
 };
+
+export const HAIR_COLOR: { [k: number]: string } = {
+  1: "#100f0f",
+  2: "#f1c669",
+  3: "#aa9f9a",
+  4: "#457fa1",
+  5: "#7d6b65",
+  6: "#cb466e",
+  7: "#486829",
+  8: "#d16151",
+  9: "#79358b",
+};
