@@ -149,29 +149,37 @@ export const TrainerBuilder: FC<{
     setUploading(true);
     const address = wallet.publicKey.toBase58();
     const sig = await wallet.signMessage(Buffer.from(address));
-    const response = await upload(
-      attributes,
-      wallet.publicKey.toString(),
-      wallet.publicKey.toBuffer().toString("hex"),
-      Buffer.from(sig).toString("hex"),
-      mint
-    );
-    ReactGA.event({
-      category: "Upload",
-      action: "UploadAttributes",
-      label: "UploadAttributes",
-      value: response.success ? 1 : 0,
-    });
-    const tx = await wallet.signTransaction(response.data);
-    const broadcast = await sendSignedTransaction({
-      signedTransaction: tx,
-      connection: connect,
-    });
-    setFinishUpload({
-      finished: true,
-      success: broadcast.txid !== "" && broadcast.slot !== 0,
-    });
-    setUploading(false);
+    try {
+      const response = await upload(
+          attributes,
+          wallet.publicKey.toString(),
+          wallet.publicKey.toBuffer().toString("hex"),
+          Buffer.from(sig).toString("hex"),
+          mint
+      );
+      ReactGA.event({
+        category: "Upload",
+        action: "UploadAttributes",
+        label: "UploadAttributes",
+        value: response.success ? 1 : 0,
+      });
+      const tx = await wallet.signTransaction(response.data);
+      const broadcast = await sendSignedTransaction({
+        signedTransaction: tx,
+        connection: connect,
+      });
+      setFinishUpload({
+        finished: true,
+        success: broadcast.txid !== "" && broadcast.slot !== 0,
+      });
+      setUploading(false);
+    } catch (_) {
+      setFinishUpload({
+        finished: true,
+        success: false,
+      });
+    }
+
   }
 
   async function setAttribute(key: string, value: string) {
@@ -720,7 +728,12 @@ export const TrainerBuilder: FC<{
                   <Loader />
                 ) : (
                   <>
-                    <ButtonBlueDisabled text={"Upload"} />
+                    <ButtonBlue
+                      text={"Upload"}
+                      onClick={async () =>
+                        await uploadAttributes(wallet, attributes)
+                      }
+                    />
                     {finishUpload.finished && !finishUpload.success && (
                       <>
                         <div className="text-center mt-5 bg-orange py-2 px-4 text-white w-64 mx-auto">
