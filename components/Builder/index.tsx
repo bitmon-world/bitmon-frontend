@@ -720,11 +720,8 @@ export const TrainerBuilder: FC<{
                   <Loader />
                 ) : (
                   <>
-                    <ButtonBlue
+                    <ButtonBlueDisabled
                       text={"Upload"}
-                      onClick={async () => {
-                        await uploadAttributes(wallet, attributes);
-                      }}
                     />
                     {finishUpload.finished && !finishUpload.success && (
                       <>
