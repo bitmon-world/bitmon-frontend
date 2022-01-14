@@ -307,39 +307,200 @@ export const TrainerBuilder: FC<{
         const eyes = [];
         for (let i = 1; i <= ATTRIBUTES_AMOUNT[selected]; i++) {
           eyes.push(
-              <div
-                  key={i}
-                  className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+            <div
+              key={i}
+              className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+            >
+              <button
+                className="h-[150px] w-[220px] overflow-hidden"
+                onClick={() =>
+                  setAttribute(ATTRIBUTES_PREFIX[selected], i.toString())
+                }
               >
-                <button
-                    className="h-[150px] w-[220px] overflow-hidden"
-                    onClick={() =>
-                        setAttribute(ATTRIBUTES_PREFIX[selected], i.toString())
-                    }
-                >
-                  <div className="relative h-[200px] w-[220px]">
-                    <div>
-                      <Image
-                          className="object-crop"
-                          src={
-                            "/traits/eye/" +
-                            (attributes.eye_color || "1")
-                            + "/" +
-                            ATTRIBUTES_PREFIX[selected] +
-                            "/" +
-                            i.toString() +
-                            ".png"
-                          }
-                          width={300}
-                          height={300}
-                      />
-                    </div>
+                <div className="relative h-[200px] w-[220px] -mt-8">
+                  <div>
+                    <Image
+                      className="object-crop"
+                      src={
+                        "/traits/eye/" +
+                        (attributes.eye_color || "1") +
+                        "/" +
+                        i.toString() +
+                        ".png"
+                      }
+                      width={300}
+                      height={300}
+                    />
                   </div>
-                </button>
-              </div>
+                </div>
+              </button>
+            </div>
           );
         }
         return eyes;
+      case ATTRIBUTES_INDEX.HAIR:
+        const hairs = [];
+        for (let i = 1; i <= ATTRIBUTES_AMOUNT[selected]; i++) {
+          hairs.push(
+            <div
+              key={i}
+              className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+            >
+              <button
+                className="h-[150px] w-[220px] overflow-hidden"
+                onClick={() =>
+                  setAttribute(ATTRIBUTES_PREFIX[selected], i.toString())
+                }
+              >
+                <div className="relative h-[200px] w-[220px]">
+                  <div>
+                    <Image
+                      className="object-crop"
+                      src={
+                        "/traits/hair/" +
+                        (attributes.hair_color || "1") +
+                        "/" +
+                        i.toString() +
+                        ".png"
+                      }
+                      width={180}
+                      height={180}
+                    />
+                  </div>
+                </div>
+              </button>
+            </div>
+          );
+        }
+        return hairs;
+      case ATTRIBUTES_INDEX.BACK_HAIR:
+        const back_hairs = [];
+        for (let i = 1; i <= ATTRIBUTES_AMOUNT[selected]; i++) {
+          back_hairs.push(
+            <div
+              key={i}
+              className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+            >
+              <button
+                className="h-[150px] w-[220px] overflow-hidden"
+                onClick={() =>
+                  setAttribute(ATTRIBUTES_PREFIX[selected], i.toString())
+                }
+              >
+                <div className="relative h-[200px] w-[220px]">
+                  <div>
+                    <Image
+                      className="object-crop"
+                      src={
+                        "/traits/back-hair/" +
+                        (attributes.back_hair_color || "1") +
+                        "/" +
+                        i.toString() +
+                        ".png"
+                      }
+                      width={180}
+                      height={180}
+                    />
+                  </div>
+                </div>
+              </button>
+            </div>
+          );
+        }
+        return back_hairs;
+      case ATTRIBUTES_INDEX.BEARD:
+        const beards = [];
+        for (let i = 1; i <= ATTRIBUTES_AMOUNT[selected]; i++) {
+          beards.push(
+            <div
+              key={i}
+              className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+            >
+              <button
+                className="h-[150px] w-[220px] overflow-hidden"
+                onClick={() =>
+                  setAttribute(ATTRIBUTES_PREFIX[selected], i.toString())
+                }
+              >
+                <div className="relative h-[200px] w-[220px] -mt-10">
+                  <div>
+                    <Image
+                      className="object-crop"
+                      src={
+                        "/traits/beard/" +
+                        (attributes.beard_color || "1") +
+                        "/" +
+                        i.toString() +
+                        ".png"
+                      }
+                      width={200}
+                      height={200}
+                    />
+                  </div>
+                </div>
+              </button>
+            </div>
+          );
+        }
+        return beards;
+      case ATTRIBUTES_INDEX.MALE_CLOTHES:
+        const male_clothes = [];
+        for (let i = 1; i <= ATTRIBUTES_AMOUNT[selected]; i++) {
+          male_clothes.push(
+            <div
+              key={i}
+              className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+            >
+              <button
+                className="h-[150px] w-[220px] overflow-hidden"
+                onClick={() =>
+                  setAttribute(ATTRIBUTES_PREFIX[selected], i.toString())
+                }
+              >
+                <div className="relative h-[200px] w-[220px] -mt-32">
+                  <div>
+                    <Image
+                      className="object-crop"
+                      src={"/traits/clothes/male/" + i.toString() + ".png"}
+                      width={200}
+                      height={200}
+                    />
+                  </div>
+                </div>
+              </button>
+            </div>
+          );
+        }
+        return male_clothes;
+      case ATTRIBUTES_INDEX.FEMALE_CLOTHES:
+        const female_clothes = [];
+        for (let i = 1; i <= ATTRIBUTES_AMOUNT[selected]; i++) {
+          female_clothes.push(
+            <div
+              key={i}
+              className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+            >
+              <button
+                className="h-[150px] w-[220px] overflow-hidden"
+                onClick={() =>
+                  setAttribute(ATTRIBUTES_PREFIX[selected], i.toString())
+                }
+              >
+                <div className="relative h-[200px] w-[220px] -mt-32">
+                  <div>
+                    <Image
+                      className="object-crop"
+                      src={"/traits/clothes/female/" + i.toString() + ".png"}
+                      width={200}
+                      height={200}
+                    />
+                  </div>
+                </div>
+              </button>
+            </div>
+          );
+        }
+        return female_clothes;
       default:
         return <div />;
     }
@@ -645,8 +806,17 @@ export const TrainerBuilder: FC<{
                 </button>
               </div>
               <div>
-                <button onClick={() => setSelected(ATTRIBUTES_INDEX.CLOTHES)}>
-                  {selected === ATTRIBUTES_INDEX.CLOTHES ? (
+                <button
+                  onClick={() =>
+                    setSelected(
+                      attributes.body_type === "female"
+                        ? ATTRIBUTES_INDEX.FEMALE_CLOTHES
+                        : ATTRIBUTES_INDEX.MALE_CLOTHES
+                    )
+                  }
+                >
+                  {selected === ATTRIBUTES_INDEX.MALE_CLOTHES ||
+                  selected === ATTRIBUTES_INDEX.FEMALE_CLOTHES ? (
                     <Image
                       src="/icons/builder/clothes-selected.svg"
                       width="50px"
