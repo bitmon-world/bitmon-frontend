@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, Fragment, useCallback, useEffect, useState } from "react";
 import ReactGA from "react-ga4";
 import Image from "next/image";
 import { ButtonBlue, ButtonBlueDisabled } from "../Button";
@@ -10,9 +10,8 @@ import { clusterApiUrl } from "@solana/web3.js";
 import { createConnectionConfig } from "@nfteyez/sol-rayz";
 import { sendSignedTransaction } from "../../functions/sendTransaction";
 import { FEMALE_CLOTHES, MALE_CLOTHES } from "../../constants/traits/clothes";
-import { BODY_COLOR } from "../../constants/traits/body";
 import { MOUTH } from "../../constants/traits/mouth";
-import { EYE, EYE_COLOR } from "../../constants/traits/eye";
+import { EYE } from "../../constants/traits/eye";
 import { EYEBROW } from "../../constants/traits/eyebrow";
 import { NOSE } from "../../constants/traits/nose";
 import {
@@ -21,8 +20,6 @@ import {
   HAIR,
   HAIR_COLOR,
 } from "../../constants/traits/hair";
-import { ACCESSORY } from "../../constants/traits/accessory";
-import { BACKGROUND } from "../../constants/traits/background";
 import { BodyTypeSelector } from "./BodyTypeSelector";
 import { FACE_ACCESSORY } from "../../constants/traits/face-accessory";
 import { GLASSES } from "../../constants/traits/glasses";
@@ -32,6 +29,8 @@ import {
   ATTRIBUTES_AMOUNT,
   ATTRIBUTES_INDEX,
   ATTRIBUTES_PREFIX,
+  BODY_COLOR,
+  EYE_COLORS,
 } from "../../constants";
 
 export const TrainerBuilder: FC<{
@@ -63,7 +62,7 @@ export const TrainerBuilder: FC<{
       eye: randomIntFromInterval(1, Object.keys(EYE).length).toString(),
       eye_color: randomIntFromInterval(
         1,
-        Object.keys(EYE_COLOR).length
+        Object.keys(EYE_COLORS).length
       ).toString(),
       eyebrow: randomIntFromInterval(1, Object.keys(EYEBROW).length).toString(),
       nose: randomIntFromInterval(1, Object.keys(NOSE).length).toString(),
@@ -87,7 +86,7 @@ export const TrainerBuilder: FC<{
       ).toString(),
       accessory: randomIntFromInterval(
         1,
-        Object.keys(ACCESSORY).length
+        Object.keys(ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.ACCESSORY]).length
       ).toString(),
       "face-accessory": randomIntFromInterval(
         1,
@@ -96,7 +95,7 @@ export const TrainerBuilder: FC<{
       clothes: randomIntFromInterval(1, Object.keys(clothes).length).toString(),
       background: randomIntFromInterval(
         1,
-        Object.keys(BACKGROUND).length
+        Object.keys(ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.BACKGROUND]).length
       ).toString(),
       glasses: randomIntFromInterval(1, Object.keys(GLASSES).length).toString(),
     };
@@ -200,9 +199,9 @@ export const TrainerBuilder: FC<{
       case ATTRIBUTES_INDEX.EYEBROW:
       case ATTRIBUTES_INDEX.FACE_ACCESSORY:
       case ATTRIBUTES_INDEX.GLASSES:
-        const attributes = [];
+        const traits = [];
         for (let i = 1; i <= ATTRIBUTES_AMOUNT[selected]; i++) {
-          attributes.push(
+          traits.push(
             <div
               key={i}
               className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
@@ -233,7 +232,7 @@ export const TrainerBuilder: FC<{
             </div>
           );
         }
-        return attributes;
+        return traits;
       case ATTRIBUTES_INDEX.BACKGROUND:
         const backgrounds = [];
         for (let i = 1; i <= ATTRIBUTES_AMOUNT[selected]; i++) {
@@ -304,6 +303,43 @@ export const TrainerBuilder: FC<{
           );
         }
         return accessories;
+      case ATTRIBUTES_INDEX.EYE:
+        const eyes = [];
+        for (let i = 1; i <= ATTRIBUTES_AMOUNT[selected]; i++) {
+          eyes.push(
+              <div
+                  key={i}
+                  className="flex flex-row items-center justify-center mx-auto bg-attribute-background bg-no-repeat bg-center h-[150px] w-[220px]"
+              >
+                <button
+                    className="h-[150px] w-[220px] overflow-hidden"
+                    onClick={() =>
+                        setAttribute(ATTRIBUTES_PREFIX[selected], i.toString())
+                    }
+                >
+                  <div className="relative h-[200px] w-[220px]">
+                    <div>
+                      <Image
+                          className="object-crop"
+                          src={
+                            "/traits/eye/" +
+                            (attributes.eye_color || "1")
+                            + "/" +
+                            ATTRIBUTES_PREFIX[selected] +
+                            "/" +
+                            i.toString() +
+                            ".png"
+                          }
+                          width={300}
+                          height={300}
+                      />
+                    </div>
+                  </div>
+                </button>
+              </div>
+          );
+        }
+        return eyes;
       default:
         return <div />;
     }
@@ -403,25 +439,25 @@ export const TrainerBuilder: FC<{
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-5 w-4/5 mx-auto mt-12">
         <TrainerBuiltImage attributes={attributes} />
         <div className="col-span-2">
-          <div>
-            <div className="flex flex-row items-center justify-between bg-contain bg-no-repeat bg-center bg-title-background h-[48px] mx-auto">
-              <div className="flex flex-row items-center gap-x-10 items-center mx-auto">
-                <div>
-                  <span
-                    className="bg-orange text-white text-4xl md:text-6xl"
-                    style={{ fontFamily: "Candal" }}
-                  >
-                    02
-                  </span>{" "}
-                </div>
-                <div className="text-xl">
-                  <span className="text-white">
-                    Choose your <span className="text-orange">attributes</span>
-                  </span>
-                </div>
+          <div className="flex flex-row items-center justify-between bg-contain bg-no-repeat bg-center bg-title-background h-[48px] mx-auto">
+            <div className="flex flex-row items-center gap-x-10 items-center mx-auto">
+              <div>
+                <span
+                  className="bg-orange text-white text-4xl md:text-6xl"
+                  style={{ fontFamily: "Candal" }}
+                >
+                  02
+                </span>{" "}
+              </div>
+              <div className="text-xl">
+                <span className="text-white">
+                  Choose your <span className="text-orange">attributes</span>
+                </span>
               </div>
             </div>
-            <div className="flex flex-row gap-x-2 mt-7 items-center justify-center">
+          </div>
+          <div className="relative">
+            <div className="flex relative flex-row gap-x-2 mt-7 items-center justify-center">
               <button
                 onClick={() => {
                   if (selected === ATTRIBUTES_INDEX.BODY_COLOR) return;
@@ -685,140 +721,160 @@ export const TrainerBuilder: FC<{
               selected === ATTRIBUTES_INDEX.BEARD ||
               selected === ATTRIBUTES_INDEX.EYE ? (
                 <Popover>
-                  <div>
-                    <div className={"w-26 mx-auto"}>
-                      <Popover.Button
-                        className={
-                          "text-white text-xl uppercase relative w-full"
-                        }
-                      >
-                        <div className="flex flex-row items-center justify-center">
-                          <Image
-                            src="/icons/builder/color-selector.svg"
-                            width="41"
-                            height="41"
-                          />
-                        </div>
-                      </Popover.Button>
-                    </div>
-                  </div>
-                  <Popover.Panel className="absolute z-10">
-                    <Transition
-                      enter="transition duration-100 ease-out"
-                      enterFrom="transform scale-95 opacity-0"
-                      enterTo="transform scale-100 opacity-100"
-                      leave="transition duration-75 ease-out"
-                      leaveFrom="transform scale-100 opacity-100"
-                      leaveTo="transform scale-95 opacity-0"
-                    >
-                      <div className="relative bg-white/30 rounded-lg h-[400px] mt-5 overflow-y-scroll z-20">
-                        <div className="grid grid-cols-1 md:grid-cols-3">
-                          {selected === ATTRIBUTES_INDEX.HAIR &&
-                            Object.keys(HAIR_COLOR).map((i) => {
-                              return (
-                                <div
-                                  key={i}
-                                  className="flex flex-row items-center justify-center h-32 w-32 mx-auto"
-                                >
-                                  <button
-                                    onClick={() =>
-                                      setAttribute("hair_color", i)
-                                    }
-                                  >
-                                    <svg width="100" height="100">
-                                      <circle
-                                        cx="50"
-                                        cy="50"
-                                        r="40"
-                                        stroke="white"
-                                        strokeWidth="4"
-                                        fill={HAIR_COLOR[i].color}
-                                      />
-                                    </svg>
-                                  </button>
-                                </div>
-                              );
-                            })}
-                          {selected === ATTRIBUTES_INDEX.BACK_HAIR &&
-                            Object.keys(HAIR_COLOR).map((i) => {
-                              return (
-                                <div
-                                  key={i}
-                                  className="flex flex-row items-center justify-center h-32 w-32 mx-auto"
-                                >
-                                  <button
-                                    onClick={() =>
-                                      setAttribute("back_hair_color", i)
-                                    }
-                                  >
-                                    <svg width="100" height="100">
-                                      <circle
-                                        cx="50"
-                                        cy="50"
-                                        r="40"
-                                        stroke="white"
-                                        strokeWidth="4"
-                                        fill={HAIR_COLOR[i].color}
-                                      />
-                                    </svg>
-                                  </button>
-                                </div>
-                              );
-                            })}
-                          {selected === ATTRIBUTES_INDEX.BEARD &&
-                            Object.keys(HAIR_COLOR).map((i) => {
-                              return (
-                                <div
-                                  key={i}
-                                  className="flex flex-row items-center justify-center h-32 w-32 mx-auto"
-                                >
-                                  <button
-                                    onClick={() =>
-                                      setAttribute("beard_color", i)
-                                    }
-                                  >
-                                    <svg width="100" height="100">
-                                      <circle
-                                        cx="50"
-                                        cy="50"
-                                        r="40"
-                                        stroke="white"
-                                        strokeWidth="4"
-                                        fill={HAIR_COLOR[i].color}
-                                      />
-                                    </svg>
-                                  </button>
-                                </div>
-                              );
-                            })}
-                          {selected === ATTRIBUTES_INDEX.EYE &&
-                            Object.keys(EYE_COLOR).map((i) => {
-                              return (
-                                <div
-                                  key={i}
-                                  className="flex flex-row items-center justify-center h-32 w-32 mx-auto"
-                                >
-                                  <button
-                                    onClick={() => setAttribute("eye_color", i)}
-                                  >
-                                    <svg width="100" height="100">
-                                      <circle
-                                        cx="50"
-                                        cy="50"
-                                        r="40"
-                                        stroke="white"
-                                        strokeWidth="4"
-                                        fill={EYE_COLOR[i].color}
-                                      />
-                                    </svg>
-                                  </button>
-                                </div>
-                              );
-                            })}
+                  {({ open, close }) => (
+                    <div>
+                      <div>
+                        <div className={"w-26 mx-auto"}>
+                          <Popover.Button
+                            className={
+                              "text-white text-xl uppercase relative w-full"
+                            }
+                          >
+                            <div className="flex flex-row items-center justify-center">
+                              <Image
+                                src="/icons/builder/color-selector.svg"
+                                width="41"
+                                height="41"
+                              />
+                            </div>
+                          </Popover.Button>
                         </div>
                       </div>
-                    </Transition>
-                  </Popover.Panel>
+                      <Popover.Overlay
+                        className={`${
+                          open ? "opacity-20 fixed inset-0" : "opacity-0"
+                        } bg-blue`}
+                      />
+                      <Transition
+                        show={open}
+                        as={Fragment}
+                        enter="transition ease-out duration-200"
+                        enterFrom="opacity-0 translate-y-1"
+                        enterTo="opacity-100 translate-y-0"
+                        leave="transition ease-in duration-150"
+                        leaveFrom="opacity-100 translate-y-0"
+                        leaveTo="opacity-0 translate-y-1"
+                      >
+                        <Popover.Panel className="absolute top-10 z-20 right-5">
+                          <div className="relative bg-white/70 rounded-lg h-[400px] z-20 overflow-y-scroll md:overflow-hidden">
+                            <div className="grid grid-cols-2 md:grid-cols-3">
+                              {selected === ATTRIBUTES_INDEX.HAIR &&
+                                Object.keys(HAIR_COLOR).map((i) => {
+                                  return (
+                                    <div
+                                      key={i}
+                                      className="flex flex-row items-center justify-center h-32 w-32 mx-auto"
+                                    >
+                                      <button
+                                        onClick={async () => {
+                                          await setAttribute("hair_color", i);
+                                          close();
+                                        }}
+                                      >
+                                        <svg width="100" height="100">
+                                          <circle
+                                            cx="50"
+                                            cy="50"
+                                            r="40"
+                                            stroke="white"
+                                            strokeWidth="4"
+                                            fill={HAIR_COLOR[i].color}
+                                          />
+                                        </svg>
+                                      </button>
+                                    </div>
+                                  );
+                                })}
+                              {selected === ATTRIBUTES_INDEX.BACK_HAIR &&
+                                Object.keys(HAIR_COLOR).map((i) => {
+                                  return (
+                                    <div
+                                      key={i}
+                                      className="flex flex-row items-center justify-center h-32 w-32 mx-auto"
+                                    >
+                                      <button
+                                        onClick={async () => {
+                                          await setAttribute(
+                                            "back_hair_color",
+                                            i
+                                          );
+                                          close();
+                                        }}
+                                      >
+                                        <svg width="100" height="100">
+                                          <circle
+                                            cx="50"
+                                            cy="50"
+                                            r="40"
+                                            stroke="white"
+                                            strokeWidth="4"
+                                            fill={HAIR_COLOR[i].color}
+                                          />
+                                        </svg>
+                                      </button>
+                                    </div>
+                                  );
+                                })}
+                              {selected === ATTRIBUTES_INDEX.BEARD &&
+                                Object.keys(HAIR_COLOR).map((i) => {
+                                  return (
+                                    <div
+                                      key={i}
+                                      className="flex flex-row items-center justify-center h-32 w-32 mx-auto"
+                                    >
+                                      <button
+                                        onClick={async () => {
+                                          await setAttribute("beard_color", i);
+                                          close();
+                                        }}
+                                      >
+                                        <svg width="100" height="100">
+                                          <circle
+                                            cx="50"
+                                            cy="50"
+                                            r="40"
+                                            stroke="white"
+                                            strokeWidth="4"
+                                            fill={HAIR_COLOR[i].color}
+                                          />
+                                        </svg>
+                                      </button>
+                                    </div>
+                                  );
+                                })}
+                              {selected === ATTRIBUTES_INDEX.EYE &&
+                                Object.keys(EYE_COLORS).map((i) => {
+                                  return (
+                                    <div
+                                      key={i}
+                                      className="flex flex-row items-center justify-center h-32 w-32 mx-auto"
+                                    >
+                                      <button
+                                        onClick={async () => {
+                                          await setAttribute("eye_color", i);
+                                          close();
+                                        }}
+                                      >
+                                        <svg width="100" height="100">
+                                          <circle
+                                            cx="50"
+                                            cy="50"
+                                            r="40"
+                                            stroke="white"
+                                            strokeWidth="4"
+                                            fill={EYE_COLORS[i]}
+                                          />
+                                        </svg>
+                                      </button>
+                                    </div>
+                                  );
+                                })}
+                            </div>
+                          </div>
+                        </Popover.Panel>
+                      </Transition>
+                    </div>
+                  )}
                 </Popover>
               ) : (
                 <div />

@@ -1,14 +1,13 @@
 import mergeImages from "merge-images";
-import { BACKGROUND } from "../constants/traits/background";
 import { EYEBROW } from "../constants/traits/eyebrow";
 import { NOSE } from "../constants/traits/nose";
 import { FEMALE_CLOTHES, MALE_CLOTHES } from "../constants/traits/clothes";
-import { ACCESSORY } from "../constants/traits/accessory";
 import { TrainerAttributes } from "../components/Builder/BuiltImage";
 
 export async function mergeTraits(traits: TrainerAttributes): Promise<string> {
   const images = [];
-  if (traits.background) images.push(BACKGROUND[traits.background].image);
+  if (traits.background)
+    images.push("/traits/background/" + traits.background + ".png");
   if (traits["back-hair"] && traits.back_hair_color)
     images.push(
       "/traits/back-hair/" +
@@ -45,7 +44,8 @@ export async function mergeTraits(traits: TrainerAttributes): Promise<string> {
     );
   if (traits.hair && !traits.hair_color)
     images.push("/traits/hair/1/" + traits.hair + ".png");
-  if (traits.accessory) images.push(ACCESSORY[traits.accessory].image);
+  if (traits.accessory)
+    images.push("/traits/accessory/" + traits.accessory + ".png");
 
   return await mergeImages(images);
 }
