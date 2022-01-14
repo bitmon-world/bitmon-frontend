@@ -1,56 +1,51 @@
 import mergeImages from "merge-images";
-import { TrainerAttributes } from "../components/Builder";
-import {
-  ACCESSORIES,
-  BACKGROUND,
-  BODY_COLORS,
-  EYEBROWS,
-  FEMALE_CLOTHES,
-  MALE_CLOTHES,
-  MOUTH,
-  NOSE,
-} from "../constants";
+import { TrainerAttributes } from "../components/Builder/BuiltImage";
 
 export async function mergeTraits(traits: TrainerAttributes): Promise<string> {
   const images = [];
-  if (traits.background) images.push(BACKGROUND[traits.background].image);
-  if (traits.back_hair && traits.hair_color)
-    images.push(
-      "/traits/back-hair/" + traits.hair_color + "/" + traits.back_hair + ".png"
-    );
-  if (traits.back_hair && !traits.hair_color)
-    images.push("/traits/back-hair/1/" + traits.back_hair + ".png");
 
-  if (traits.body_type && traits.body_color) {
-    const body =
-      traits.body_type === "female"
-        ? BODY_COLORS[traits.body_color].female_image
-        : BODY_COLORS[traits.body_color].male_image;
-    images.push(body);
-  }
-  if (traits.mouth) images.push(MOUTH[traits.mouth].image);
-  if (traits.eyebrows) images.push(EYEBROWS[traits.eyebrows].image);
-  if (traits.nose) images.push(NOSE[traits.nose].image);
-  if (traits.clothes) {
-    const clothes =
-      traits.body_type === "female"
-        ? FEMALE_CLOTHES[traits.clothes].image
-        : MALE_CLOTHES[traits.clothes].image;
-    images.push(clothes);
-  }
-  if (traits.eyes && traits.eyes_color)
+  if (traits.background)
+    images.push("/traits/background/" + traits.background + ".png");
+  if (traits["back-hair"])
     images.push(
-      "/traits/eyes/" + traits.eyes_color + "/" + traits.eyes + ".png"
+      "/traits/back-hair/" +
+        (traits.back_hair_color || "1") +
+        "/" +
+        traits["back-hair"] +
+        ".png"
     );
-  if (traits.eyes && !traits.eyes_color)
-    images.push("/traits/eyes/1/" + traits.eyes + ".png");
-  if (traits.hair && traits.hair_color)
+  if (traits.body_type && traits.body_color)
     images.push(
-      "/traits/hair/" + traits.hair_color + "/" + traits.hair + ".png"
+      "/traits/body/" + traits.body_type + "/" + traits.body_color + ".png"
     );
-  if (traits.hair && !traits.hair_color)
-    images.push("/traits/hair/1/" + traits.hair + ".png");
-  if (traits.accessory) images.push(ACCESSORIES[traits.accessory].image);
+  if (traits.mouth) images.push("/traits/mouth/" + traits.mouth + ".png");
+  if (traits.eyebrow) images.push("/traits/eyebrow/" + traits.eyebrow + ".png");
+  if (traits.nose) images.push("/traits/nose/" + traits.nose + ".png");
+  if (traits.clothes && traits.body_type)
+    images.push(
+      "/traits/clothes/" + traits.body_type + "/" + traits.clothes + ".png"
+    );
+  if (traits.beard)
+    images.push(
+      "/traits/beard/" +
+        (traits.beard_color || "1") +
+        "/" +
+        traits.beard +
+        ".png"
+    );
+  if (traits.eye)
+    images.push(
+      "/traits/eye/" + (traits.eye_color || "1") + "/" + traits.eye + ".png"
+    );
+  if (traits.glasses) images.push("/traits/glasses/" + traits.glasses + ".png");
+  if (traits.hair)
+    images.push(
+      "/traits/hair/" + (traits.hair_color || "1") + "/" + traits.hair + ".png"
+    );
+  if (traits.accessory)
+    images.push("/traits/accessory/" + traits.accessory + ".png");
+  if (traits["face-accessory"])
+    images.push("/traits/face-accessory/" + traits["face-accessory"] + ".png");
 
   return await mergeImages(images);
 }

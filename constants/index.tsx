@@ -1,380 +1,108 @@
-export const BITMON_DAO_ADDRESS =
-  "61SCcKSsfWtCYb3khNpnZCq72Q1q1mzGsjKaBmVLvcQy";
+export const BITMON_UPDATE_AUTHORITY =
+  "Cw4wy1Yg1334gRQ5SxG43Qt5QbM1DM665ur8R6imWGkR";
 
-export const BODY_COLORS: {
-  [k: number]: { female_image: string; color: string; male_image: string };
-} = {
-  "1": {
-    color: "#D0A884",
-    female_image: "/traits/body/female/1.png",
-    male_image: "/traits/body/male/1.png",
-  },
-  "2": {
-    color: "#FCEEE3",
-    female_image: "/traits/body/female/2.png",
-    male_image: "/traits/body/male/2.png",
-  },
-  "3": {
-    color: "#EAB874",
-    female_image: "/traits/body/female/3.png",
-    male_image: "/traits/body/male/3.png",
-  },
-  "4": {
-    color: "#392A27",
-    female_image: "/traits/body/female/4.png",
-    male_image: "/traits/body/male/4.png",
-  },
-  "5": {
-    color: "#F7C7C3",
-    female_image: "/traits/body/female/5.png",
-    male_image: "/traits/body/male/5.png",
-  },
-  "6": {
-    color: "#BBB7CD",
-    female_image: "/traits/body/female/6.png",
-    male_image: "/traits/body/male/6.png",
-  },
-  "7": {
-    color: "#CEC96B",
-    female_image: "/traits/body/female/7.png",
-    male_image: "/traits/body/male/7.png",
-  },
-  "8": {
-    color: "#CF7BB3",
-    female_image: "/traits/body/female/8.png",
-    male_image: "/traits/body/male/8.png",
-  },
+export enum ATTRIBUTES_INDEX {
+  BODY_COLOR,
+  MOUTH,
+  EYE,
+  EYEBROW,
+  NOSE,
+  HAIR,
+  BACK_HAIR,
+  BEARD,
+  ACCESSORY,
+  FACE_ACCESSORY,
+  MALE_CLOTHES,
+  FEMALE_CLOTHES,
+  GLASSES,
+  BACKGROUND,
+}
+
+export const ATTRIBUTES_AMOUNT: { [k: number]: number } = {
+  [ATTRIBUTES_INDEX.MOUTH]: 19,
+  [ATTRIBUTES_INDEX.EYE]: 15,
+  [ATTRIBUTES_INDEX.NOSE]: 6,
+  [ATTRIBUTES_INDEX.EYEBROW]: 9,
+  [ATTRIBUTES_INDEX.ACCESSORY]: 80,
+  [ATTRIBUTES_INDEX.FACE_ACCESSORY]: 22,
+  [ATTRIBUTES_INDEX.BACKGROUND]: 64,
+  [ATTRIBUTES_INDEX.GLASSES]: 17,
+  [ATTRIBUTES_INDEX.HAIR]: 16,
+  [ATTRIBUTES_INDEX.BACK_HAIR]: 10,
+  [ATTRIBUTES_INDEX.BEARD]: 14,
+  [ATTRIBUTES_INDEX.MALE_CLOTHES]: 71,
+  [ATTRIBUTES_INDEX.FEMALE_CLOTHES]: 79,
 };
 
-export const MOUTH: { [k: number]: { image: string } } = {
-  "1": { image: "/traits/mouth/1.png" },
-  "2": { image: "/traits/mouth/2.png" },
-  "3": { image: "/traits/mouth/3.png" },
-  "4": { image: "/traits/mouth/4.png" },
-  "5": { image: "/traits/mouth/5.png" },
-  "6": { image: "/traits/mouth/6.png" },
-  "7": { image: "/traits/mouth/7.png" },
-  "8": { image: "/traits/mouth/8.png" },
-  "9": { image: "/traits/mouth/9.png" },
-  "10": { image: "/traits/mouth/10.png" },
-  "11": { image: "/traits/mouth/11.png" },
-  "12": { image: "/traits/mouth/12.png" },
-  "13": { image: "/traits/mouth/13.png" },
-  "14": { image: "/traits/mouth/14.png" },
-  "15": { image: "/traits/mouth/15.png" },
-  "16": { image: "/traits/mouth/16.png" },
-  "17": { image: "/traits/mouth/17.png" },
+export const ATTRIBUTES_PREFIX: { [k: number]: string } = {
+  [ATTRIBUTES_INDEX.MOUTH]: "mouth",
+  [ATTRIBUTES_INDEX.EYE]: "eye",
+  [ATTRIBUTES_INDEX.NOSE]: "nose",
+  [ATTRIBUTES_INDEX.EYEBROW]: "eyebrow",
+  [ATTRIBUTES_INDEX.ACCESSORY]: "accessory",
+  [ATTRIBUTES_INDEX.FACE_ACCESSORY]: "face-accessory",
+  [ATTRIBUTES_INDEX.BACKGROUND]: "background",
+  [ATTRIBUTES_INDEX.GLASSES]: "glasses",
+  [ATTRIBUTES_INDEX.HAIR]: "hair",
+  [ATTRIBUTES_INDEX.BACK_HAIR]: "back-hair",
+  [ATTRIBUTES_INDEX.BEARD]: "beard",
+  [ATTRIBUTES_INDEX.GLASSES]: "glasses",
+  [ATTRIBUTES_INDEX.MALE_CLOTHES]: "clothes",
+  [ATTRIBUTES_INDEX.FEMALE_CLOTHES]: "clothes",
 };
 
-export const EYES: { [k: number]: { image: string } } = {
-  "1": { image: "/traits/eyes/1/1.png" },
-  "2": { image: "/traits/eyes/1/2.png" },
-  "3": { image: "/traits/eyes/1/3.png" },
-  "4": { image: "/traits/eyes/1/4.png" },
-  "5": { image: "/traits/eyes/1/5.png" },
-  "6": { image: "/traits/eyes/1/6.png" },
-  "7": { image: "/traits/eyes/1/7.png" },
-  "8": { image: "/traits/eyes/1/8.png" },
-  "9": { image: "/traits/eyes/1/9.png" },
-  "10": { image: "/traits/eyes/1/10.png" },
-  "11": { image: "/traits/eyes/1/11.png" },
-  "12": { image: "/traits/eyes/1/12.png" },
+export const EYE_COLORS: { [k: number]: string } = {
+  1: "#483823",
+  2: "#afaaaf",
+  3: "#799b2d",
+  4: "#5a3f5e",
+  5: "#4f92bd",
+  6: "#b53839",
+  7: "#af4369",
+  8: "#b58850",
 };
 
-export const EYES_COLORS: { [k: number]: { color: string } } = {
-  "1": { color: "#483823" },
-  "2": { color: "#AFAAAF" },
-  "3": { color: "#799B2D" },
-  "4": { color: "#5A3F5E" },
-  "5": { color: "#4F92BD" },
-  "6": { color: "#B53839" },
-  "7": { color: "#AF4369" },
-  "8": { color: "#B58850" },
+export const BODY_COLOR: { [k: number]: string } = {
+  1: "#d0a884",
+  2: "#fceee3",
+  3: "#eab874",
+  4: "#392a27",
+  5: "#f7c7c3",
+  6: "#bbb7cd",
+  7: "#cec96b",
+  8: "#cf7bb3",
+  9: "#b58850",
+  10: "#ffe599",
+  11: "#ffd966",
+  12: "#bf9000",
+  13: "#7f6000",
+  14: "#f9cb9c",
+  15: "#f6b26b",
+  16: "#e69138",
+  17: "#b45f06",
+  18: "#ea9999",
+  19: "#e06666",
+  20: "#a61c00",
+  21: "#85200c",
+  22: "#660000",
+  23: "#5b0f00",
+  24: "#000000",
+  25: "#cc4125",
+  26: "#dd7e6b",
+  27: "#ffd966",
+  28: "#ea9999",
+  29: "#e06666",
+  30: "#f4cccc",
 };
 
-export const EYEBROWS: { [k: number]: { image: string } } = {
-  "1": { image: "/traits/eyebrow/1.png" },
-  "2": { image: "/traits/eyebrow/2.png" },
-  "3": { image: "/traits/eyebrow/3.png" },
-  "4": { image: "/traits/eyebrow/4.png" },
-  "5": { image: "/traits/eyebrow/5.png" },
-  "6": { image: "/traits/eyebrow/6.png" },
-  "7": { image: "/traits/eyebrow/7.png" },
-  "8": { image: "/traits/eyebrow/8.png" },
-};
-
-export const NOSE: { [k: number]: { image: string } } = {
-  "1": { image: "/traits/nose/1.png" },
-  "2": { image: "/traits/nose/2.png" },
-  "3": { image: "/traits/nose/3.png" },
-  "4": { image: "/traits/nose/4.png" },
-  "5": { image: "/traits/nose/5.png" },
-};
-
-export const HAIR: { [k: number]: { image: string } } = {
-  "1": {
-    image: "/traits/hair/1/1.png",
-  },
-  "2": {
-    image: "/traits/hair/1/2.png",
-  },
-  "3": {
-    image: "/traits/hair/1/3.png",
-  },
-  "4": {
-    image: "/traits/hair/1/4.png",
-  },
-  "5": {
-    image: "/traits/hair/1/5.png",
-  },
-  "6": {
-    image: "/traits/hair/1/6.png",
-  },
-  "7": {
-    image: "/traits/hair/1/7.png",
-  },
-  "8": {
-    image: "/traits/hair/1/8.png",
-  },
-  "9": {
-    image: "/traits/hair/1/9.png",
-  },
-  "10": {
-    image: "/traits/hair/1/10.png",
-  },
-  "11": {
-    image: "/traits/hair/1/11.png",
-  },
-  "12": {
-    image: "/traits/hair/1/12.png",
-  },
-  "13": {
-    image: "/traits/hair/1/13.png",
-  },
-  "14": {
-    image: "/traits/hair/1/14.png",
-  },
-  "15": {
-    image: "/traits/hair/1/15.png",
-  },
-  "16": {
-    image: "/traits/hair/1/16.png",
-  },
-  "17": {
-    image: "/traits/hair/1/17.png",
-  },
-  "18": {
-    image: "/traits/hair/1/18.png",
-  },
-};
-
-export const HAIR_COLORS: { [k: number]: { color: string } } = {
-  "1": { color: "#100F0F" },
-  "2": { color: "#F1C669" },
-  "3": { color: "#AA9F9A" },
-  "4": { color: "#457FA1" },
-  "5": { color: "#7D6B65" },
-  "6": { color: "#CB466E" },
-  "7": { color: "#486829" },
-  "8": { color: "#D16151" },
-  "9": { color: "#79358B" },
-};
-
-export const BACK_HAIR: { [k: number]: { image: string } } = {
-  "1": {
-    image: "/traits/back-hair/1/1.png",
-  },
-  "2": {
-    image: "/traits/back-hair/1/2.png",
-  },
-  "3": {
-    image: "/traits/back-hair/1/3.png",
-  },
-  "4": {
-    image: "/traits/back-hair/1/4.png",
-  },
-  "5": {
-    image: "/traits/back-hair/1/5.png",
-  },
-  "6": {
-    image: "/traits/back-hair/1/6.png",
-  },
-  "7": {
-    image: "/traits/back-hair/1/7.png",
-  },
-  "8": {
-    image: "/traits/back-hair/1/8.png",
-  },
-  "9": {
-    image: "/traits/back-hair/1/9.png",
-  },
-  "10": {
-    image: "/traits/back-hair/1/10.png",
-  },
-};
-
-export const ACCESSORIES: { [k: number]: { image: string } } = {
-  "1": {
-    image: "/traits/accessories/1.png",
-  },
-  "2": {
-    image: "/traits/accessories/2.png",
-  },
-  "3": {
-    image: "/traits/accessories/3.png",
-  },
-  "4": {
-    image: "/traits/accessories/4.png",
-  },
-  "5": {
-    image: "/traits/accessories/5.png",
-  },
-  "6": {
-    image: "/traits/accessories/6.png",
-  },
-  "7": {
-    image: "/traits/accessories/7.png",
-  },
-  "8": {
-    image: "/traits/accessories/8.png",
-  },
-  "9": {
-    image: "/traits/accessories/9.png",
-  },
-  "10": {
-    image: "/traits/accessories/10.png",
-  },
-  "11": {
-    image: "/traits/accessories/11.png",
-  },
-  "12": {
-    image: "/traits/accessories/12.png",
-  },
-  "13": {
-    image: "/traits/accessories/13.png",
-  },
-  "14": {
-    image: "/traits/accessories/14.png",
-  },
-  "15": {
-    image: "/traits/accessories/15.png",
-  },
-  "16": {
-    image: "/traits/accessories/16.png",
-  },
-  "17": {
-    image: "/traits/accessories/17.png",
-  },
-  "18": {
-    image: "/traits/accessories/18.png",
-  },
-  "19": {
-    image: "/traits/accessories/19.png",
-  },
-  "20": {
-    image: "/traits/accessories/20.png",
-  },
-  "21": {
-    image: "/traits/accessories/21.png",
-  },
-  "22": {
-    image: "/traits/accessories/22.png",
-  },
-  "23": {
-    image: "/traits/accessories/23.png",
-  },
-  "24": {
-    image: "/traits/accessories/24.png",
-  },
-};
-
-export const MALE_CLOTHES: {
-  [k: number]: { image: string };
-} = {
-  "1": {
-    image: "/traits/clothes/male/1.png",
-  },
-  "2": {
-    image: "/traits/clothes/male/2.png",
-  },
-  "3": {
-    image: "/traits/clothes/male/3.png",
-  },
-  "4": {
-    image: "/traits/clothes/male/4.png",
-  },
-  "5": {
-    image: "/traits/clothes/male/5.png",
-  },
-  "6": {
-    image: "/traits/clothes/male/6.png",
-  },
-  "7": {
-    image: "/traits/clothes/male/7.png",
-  },
-  "8": {
-    image: "/traits/clothes/male/8.png",
-  },
-  "9": {
-    image: "/traits/clothes/male/9.png",
-  },
-  "10": {
-    image: "/traits/clothes/male/10.png",
-  },
-};
-
-export const FEMALE_CLOTHES: {
-  [k: number]: { image: string };
-} = {
-  "1": {
-    image: "/traits/clothes/female/1.png",
-  },
-  "2": {
-    image: "/traits/clothes/female/2.png",
-  },
-  "3": {
-    image: "/traits/clothes/female/3.png",
-  },
-  "4": {
-    image: "/traits/clothes/female/4.png",
-  },
-  "5": {
-    image: "/traits/clothes/female/5.png",
-  },
-  "6": {
-    image: "/traits/clothes/female/6.png",
-  },
-  "7": {
-    image: "/traits/clothes/female/7.png",
-  },
-  "8": {
-    image: "/traits/clothes/female/8.png",
-  },
-  "9": {
-    image: "/traits/clothes/female/9.png",
-  },
-  "10": {
-    image: "/traits/clothes/female/10.png",
-  },
-  "11": {
-    image: "/traits/clothes/female/11.png",
-  },
-};
-
-export const BACKGROUND: { [k: number]: { image: string } } = {
-  "1": {
-    image: "/traits/backgrounds/1.png",
-  },
-  "2": {
-    image: "/traits/backgrounds/2.png",
-  },
-  "3": {
-    image: "/traits/backgrounds/3.png",
-  },
-  "4": {
-    image: "/traits/backgrounds/4.png",
-  },
-  "5": {
-    image: "/traits/backgrounds/5.png",
-  },
+export const HAIR_COLOR: { [k: number]: string } = {
+  1: "#100f0f",
+  2: "#f1c669",
+  3: "#aa9f9a",
+  4: "#457fa1",
+  5: "#7d6b65",
+  6: "#cb466e",
+  7: "#486829",
+  8: "#d16151",
+  9: "#79358b",
 };
