@@ -959,7 +959,7 @@ export const TrainerBuilder: FC<{
                                             r="40"
                                             stroke="white"
                                             strokeWidth="4"
-                                            fill={HAIR_COLOR[i].color}
+                                            fill={HAIR_COLOR[i]}
                                           />
                                         </svg>
                                       </button>
@@ -989,7 +989,7 @@ export const TrainerBuilder: FC<{
                                             r="40"
                                             stroke="white"
                                             strokeWidth="4"
-                                            fill={HAIR_COLOR[i].color}
+                                            fill={HAIR_COLOR[i]}
                                           />
                                         </svg>
                                       </button>
@@ -1016,7 +1016,7 @@ export const TrainerBuilder: FC<{
                                             r="40"
                                             stroke="white"
                                             strokeWidth="4"
-                                            fill={HAIR_COLOR[i].color}
+                                            fill={HAIR_COLOR[i]}
                                           />
                                         </svg>
                                       </button>
