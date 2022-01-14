@@ -151,11 +151,11 @@ export const TrainerBuilder: FC<{
     const sig = await wallet.signMessage(Buffer.from(address));
     try {
       const response = await upload(
-          attributes,
-          wallet.publicKey.toString(),
-          wallet.publicKey.toBuffer().toString("hex"),
-          Buffer.from(sig).toString("hex"),
-          mint
+        attributes,
+        wallet.publicKey.toString(),
+        wallet.publicKey.toBuffer().toString("hex"),
+        Buffer.from(sig).toString("hex"),
+        mint
       );
       ReactGA.event({
         category: "Upload",
@@ -179,7 +179,6 @@ export const TrainerBuilder: FC<{
         success: false,
       });
     }
-
   }
 
   async function setAttribute(key: string, value: string) {

@@ -51,6 +51,7 @@ npx imagemin --plugin.pngquant public/traits/hair/8/* --out-dir=public/traits/ha
 npx imagemin --plugin.pngquant public/traits/hair/9/* --out-dir=public/traits/hair/9/
 npx imagemin --plugin.pngquant public/traits/mouth/* --out-dir=public/traits/mouth/
 npx imagemin --plugin.pngquant public/traits/nose/* --out-dir=public/traits/nose/
+npx imagemin --plugin.pngquant public/traits/specials/* --out-dir=public/specials/nose/
 
 
 
