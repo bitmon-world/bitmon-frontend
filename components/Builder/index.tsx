@@ -720,9 +720,7 @@ export const TrainerBuilder: FC<{
                   <Loader />
                 ) : (
                   <>
-                    <ButtonBlueDisabled
-                      text={"Upload"}
-                    />
+                    <ButtonBlueDisabled text={"Upload"} />
                     {finishUpload.finished && !finishUpload.success && (
                       <>
                         <div className="text-center mt-5 bg-orange py-2 px-4 text-white w-64 mx-auto">
