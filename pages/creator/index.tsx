@@ -40,8 +40,10 @@ export default function Creator(): JSX.Element {
         bitmonMints.data,
         tokensList.map((t) => t.mint)
       );
-      tokensList.filter((t) => validBitmonMints.indexOf(t.mint) !== -1);
-      setTokens(tokensList);
+      const tokens = tokensList.filter((t) =>
+        validBitmonMints.includes(t.mint)
+      );
+      setTokens(tokens);
       setLoading(false);
     }
   }, [wallet, connect, getParsedNftAccountsByOwner]);
