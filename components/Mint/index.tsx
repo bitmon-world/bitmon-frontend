@@ -36,6 +36,7 @@ export const MintPage = () => {
         CANDY_MACHINE_ID,
         connect
       );
+
       setCandyMachine(data);
     },
     [wallet]

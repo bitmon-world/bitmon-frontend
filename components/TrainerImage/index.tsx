@@ -28,9 +28,11 @@ export const TrainerImage: FC<{ uri: string; mint: string; link: boolean }> = ({
   return (
     <div className="mx-auto bg-white border-lg rounded-lg">
       {loading ? (
-        <div className="flex items-center justify-center w-[325px] h-[325px]">
-          <LoaderGrey />
-        </div>
+        <Link href={"/creator/" + mint} passHref>
+          <div className="flex items-center justify-center w-[325px] h-[325px]">
+            <LoaderGrey />
+          </div>
+        </Link>
       ) : link ? (
         <Link href={"/creator/" + mint} passHref>
           <div className="flex items-center justify-center border-4 border-white rounded-lg cursor-pointer hover:drop-shadow-lg hover:shadow-black">
