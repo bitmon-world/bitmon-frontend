@@ -97,14 +97,9 @@ export const MintPage = () => {
         </p>
         {candyMachine ? (
           <>
-            {/*            <h1 className="text-lg mt-4">
-              Public Mint Price:{" "}
+            <h1 className="text-lg mt-4">
+              Mint Price:{" "}
               {candyMachine.state.price.toNumber() / LAMPORTS_PER_SOL}
-            </h1>*/}
-            <h1 className="text-lg">
-              Monkette DAO Mint Price:{" "}
-              {candyMachine.state.whitelistMintSettings.discountPrice.toNumber() /
-                LAMPORTS_PER_SOL}
             </h1>
             <h1 className="text-lg">
               {candyMachine.state.itemsRedeemed} / 10000 Trainers Minted
