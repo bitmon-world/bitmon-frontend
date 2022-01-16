@@ -107,3 +107,5 @@ export const HAIR_COLOR: { [k: number]: string } = {
   8: "#d16151",
   9: "#79358b",
 };
+
+export const API_URL = "https://api.bitmon.io";

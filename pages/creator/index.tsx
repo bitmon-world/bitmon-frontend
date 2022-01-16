@@ -10,6 +10,8 @@ import { Loader } from "../../components/Loader";
 import { ConnectWalletWarning } from "../../components/ConnectWalletWarning";
 import { BITMON_UPDATE_AUTHORITY } from "../../constants";
 import { TrainerImage } from "../../components/TrainerImage";
+import { fetchBitmons } from "../../functions/fetch-bitmons";
+import { intersect } from "@hapi/hoek";
 
 export default function Creator(): JSX.Element {
   const url =
@@ -24,19 +26,24 @@ export default function Creator(): JSX.Element {
 
   const fetch_tokens = useCallback(async () => {
     setLoading(true);
-    // Fetch tokens from phantom wallet
+
+    // Fetch user tokens
     const tokensList = await getParsedNftAccountsByOwner({
       publicAddress: wallet.publicKey.toString(),
       connection: connect,
     });
 
-    const bitmon_tokens = tokensList.filter(
-      (t) =>
-        t.updateAuthority.toLowerCase() ===
-        BITMON_UPDATE_AUTHORITY.toLowerCase()
-    );
-    setTokens(bitmon_tokens);
-    setLoading(false);
+    const bitmonMints = await fetchBitmons();
+    // TODO handle error
+    if (bitmonMints.success) {
+      const validBitmonMints = intersect(
+        bitmonMints.data,
+        tokensList.map((t) => t.mint)
+      );
+      tokensList.filter((t) => validBitmonMints.indexOf(t.mint) !== -1);
+      setTokens(tokensList);
+      setLoading(false);
+    }
   }, [wallet, connect, getParsedNftAccountsByOwner]);
 
   useEffect(() => {
