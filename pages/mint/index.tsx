@@ -7,7 +7,6 @@ import {
   getCandyMachineState,
 } from "../../functions/candy-machine";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { GatewayProvider } from "@civic/solana-gateway-react";
 import { useCallback, useEffect, useState } from "react";
 import Wallet from "@project-serum/sol-wallet-adapter";
 import { createConnectionConfig } from "@nfteyez/sol-rayz";
@@ -47,16 +46,6 @@ export default function Mint(): JSX.Element {
   }, [wallet]);
 
   return (
-    <GatewayProvider
-      wallet={{
-        publicKey: wallet.publicKey || new PublicKey(CANDY_MACHINE_PROGRAM),
-        signTransaction: wallet.signTransaction,
-      }}
-      gatekeeperNetwork={candyMachine?.state?.gatekeeper?.gatekeeperNetwork}
-      clusterUrl={url}
-      options={{ autoShowModal: false }}
-    >
       <MintPage candyMachine={candyMachine} />
-    </GatewayProvider>
   );
 }

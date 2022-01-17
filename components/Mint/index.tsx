@@ -1,18 +1,15 @@
 import Image from "next/image";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { Loader, LoaderSmall } from "../Loader";
-import { ButtonBlue, ButtonBlueDisabled, ButtonOrange } from "../Button";
+import { ButtonBlue, ButtonBlueDisabled } from "../Button";
 import { mintOneToken } from "../../functions/candy-machine";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { FC, useState } from "react";
-import { GatewayStatus, useGateway } from "@civic/solana-gateway-react";
 
 export const MintPage: FC<{ candyMachine }> = ({ candyMachine }) => {
   const wallet = useWallet();
 
   const [minting, setMinting] = useState(false);
-
-  const { requestGatewayToken, gatewayStatus } = useGateway();
 
   return (
     <div className="relative z-10 mx-4 h-full pb-10">
