@@ -1,7 +1,11 @@
 import Image from "next/image";
 import { clusterApiUrl, LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 import { Loader, LoaderSmall } from "../Loader";
-import { ButtonBlue, ButtonBlueDisabled } from "../Button";
+import {
+  ButtonBlue,
+  ButtonBlueDisabled,
+  ButtonOrangeDisabled,
+} from "../Button";
 import {
   CANDY_MACHINE_ID,
   CANDY_MACHINE_PROGRAM,
@@ -13,7 +17,11 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { createConnectionConfig } from "@nfteyez/sol-rayz";
 import { useCallback, useEffect, useState } from "react";
 import Wallet from "@project-serum/sol-wallet-adapter";
-import {GatewayProvider, GatewayStatus, useGateway} from "@civic/solana-gateway-react";
+import {
+  GatewayProvider,
+  GatewayStatus,
+  useGateway,
+} from "@civic/solana-gateway-react";
 
 export const MintPage = () => {
   const wallet = useWallet();
@@ -52,7 +60,6 @@ export const MintPage = () => {
   const [minting, setMinting] = useState(false);
 
   const { requestGatewayToken, gatewayStatus } = useGateway();
-
 
   return (
     <div className="relative z-10 mx-4 h-full pb-10">
@@ -134,11 +141,14 @@ export const MintPage = () => {
               <ButtonBlueDisabled text={"Connect wallet"} />
             ) : minting ? (
               <LoaderSmall />
-            ) : (
+            ) : candyMachine.state.isActive ? (
               <ButtonBlue
                 text={"Mint"}
                 onClick={async () => {
-                  if (candyMachine?.state.isActive && candyMachine?.state.gatekeeper) {
+                  if (
+                    candyMachine?.state.isActive &&
+                    candyMachine?.state.gatekeeper
+                  ) {
                     if (gatewayStatus === GatewayStatus.ACTIVE) {
                       setMinting(true);
                       await mintOneToken(candyMachine, wallet.publicKey);
@@ -153,6 +163,8 @@ export const MintPage = () => {
                   }
                 }}
               />
+            ) : (
+              <ButtonBlueDisabled text={"Mint"} />
             )}
           </div>
         </GatewayProvider>
