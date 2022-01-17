@@ -1,61 +1,14 @@
 import Image from "next/image";
-import { clusterApiUrl, LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
+import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { Loader, LoaderSmall } from "../Loader";
-import {
-  ButtonBlue,
-  ButtonBlueDisabled,
-  ButtonOrangeDisabled,
-} from "../Button";
-import {
-  CANDY_MACHINE_ID,
-  CANDY_MACHINE_PROGRAM,
-  CandyMachineAccount,
-  getCandyMachineState,
-  mintOneToken,
-} from "../../functions/candy-machine";
+import { ButtonBlue, ButtonBlueDisabled, ButtonOrange } from "../Button";
+import { mintOneToken } from "../../functions/candy-machine";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { createConnectionConfig } from "@nfteyez/sol-rayz";
-import { useCallback, useEffect, useState } from "react";
-import Wallet from "@project-serum/sol-wallet-adapter";
-import {
-  GatewayProvider,
-  GatewayStatus,
-  useGateway,
-} from "@civic/solana-gateway-react";
+import { FC, useState } from "react";
+import { GatewayStatus, useGateway } from "@civic/solana-gateway-react";
 
-export const MintPage = () => {
+export const MintPage: FC<{ candyMachine }> = ({ candyMachine }) => {
   const wallet = useWallet();
-
-  const url =
-    process.env.NEXT_PUBLIC_SOLANA_RPC || clusterApiUrl("mainnet-beta");
-
-  const connect = createConnectionConfig(url);
-
-  const [candyMachine, setCandyMachine] = useState<CandyMachineAccount | null>(
-    null
-  );
-
-  const fetch_state = useCallback(
-    async (wallet) => {
-      const data = await getCandyMachineState(
-        {
-          publicKey: wallet.publicKey,
-          signAllTransactions: wallet.signAllTransactions,
-          signTransaction: wallet.signTransaction,
-        } as Wallet,
-        CANDY_MACHINE_ID,
-        connect
-      );
-
-      setCandyMachine(data);
-    },
-    [wallet]
-  );
-
-  useEffect(() => {
-    if (!wallet.connected) return;
-    fetch_state(wallet);
-  }, [wallet]);
 
   const [minting, setMinting] = useState(false);
 
@@ -122,52 +75,34 @@ export const MintPage = () => {
             <Loader />
           </div>
         )}
-
-        <GatewayProvider
-          wallet={{
-            publicKey: wallet.publicKey || new PublicKey(CANDY_MACHINE_PROGRAM),
-            signTransaction: wallet.signTransaction,
-          }}
-          gatekeeperNetwork={candyMachine?.state?.gatekeeper?.gatekeeperNetwork}
-          clusterUrl={url}
-          options={{ autoShowModal: false }}
-        >
-          <div className="mt-5 mx-auto">
-            {!wallet ||
-            !wallet.connected ||
-            !wallet.publicKey ||
-            !candyMachine ||
-            !candyMachine.program.provider.wallet ? (
-              <ButtonBlueDisabled text={"Connect wallet"} />
-            ) : minting ? (
-              <LoaderSmall />
-            ) : candyMachine.state.isActive ? (
-              <ButtonBlue
-                text={"Mint"}
-                onClick={async () => {
-                  if (
-                    candyMachine?.state.isActive &&
-                    candyMachine?.state.gatekeeper
-                  ) {
-                    if (gatewayStatus === GatewayStatus.ACTIVE) {
-                      setMinting(true);
-                      await mintOneToken(candyMachine, wallet.publicKey);
-                      setMinting(false);
-                    } else {
-                      await requestGatewayToken();
-                    }
-                  } else {
-                    setMinting(true);
-                    await mintOneToken(candyMachine, wallet.publicKey);
-                    setMinting(false);
-                  }
-                }}
-              />
-            ) : (
-              <ButtonBlueDisabled text={"Mint"} />
-            )}
-          </div>
-        </GatewayProvider>
+        <div className="mt-5 mx-auto">
+          {!wallet ||
+          !wallet.connected ||
+          !wallet.publicKey ||
+          !candyMachine ||
+          !candyMachine.program.provider.wallet ? (
+            <ButtonBlueDisabled text={"Connect wallet"} />
+          ) : minting ? (
+            <LoaderSmall />
+          ) : gatewayStatus === GatewayStatus.ACTIVE ? (
+            <ButtonBlue
+              text={"Mint"}
+              onClick={async () => {
+                setMinting(true);
+                await mintOneToken(candyMachine, wallet.publicKey);
+                setMinting(false);
+              }}
+            />
+          ) : gatewayStatus === GatewayStatus.NOT_REQUESTED ||
+            gatewayStatus === GatewayStatus.ERROR ||
+            gatewayStatus === GatewayStatus.UNKNOWN ? (
+            <div className="w-32 mx-auto">
+              <ButtonOrange text="Validate" onClick={requestGatewayToken} />
+            </div>
+          ) : (
+            <LoaderSmall />
+          )}
+        </div>
       </div>
     </div>
   );
