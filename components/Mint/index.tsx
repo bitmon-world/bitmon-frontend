@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { clusterApiUrl, LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 import { Loader, LoaderSmall } from "../Loader";
 import { ButtonBlue, ButtonBlueDisabled } from "../Button";
 import {
   CANDY_MACHINE_ID,
+  CANDY_MACHINE_PROGRAM,
   CandyMachineAccount,
   getCandyMachineState,
   mintOneToken,
@@ -12,6 +13,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { createConnectionConfig } from "@nfteyez/sol-rayz";
 import { useCallback, useEffect, useState } from "react";
 import Wallet from "@project-serum/sol-wallet-adapter";
+import {GatewayProvider, GatewayStatus, useGateway} from "@civic/solana-gateway-react";
 
 export const MintPage = () => {
   const wallet = useWallet();
@@ -48,6 +50,9 @@ export const MintPage = () => {
   }, [wallet]);
 
   const [minting, setMinting] = useState(false);
+
+  const { requestGatewayToken, gatewayStatus } = useGateway();
+
 
   return (
     <div className="relative z-10 mx-4 h-full pb-10">
@@ -111,26 +116,46 @@ export const MintPage = () => {
           </div>
         )}
 
-        <div className="mt-5 mx-auto">
-          {!wallet ||
-          !wallet.connected ||
-          !wallet.publicKey ||
-          !candyMachine ||
-          !candyMachine.program.provider.wallet ? (
-            <ButtonBlueDisabled text={"Connect wallet"} />
-          ) : minting ? (
-            <LoaderSmall />
-          ) : (
-            <ButtonBlue
-              text={"Mint"}
-              onClick={async () => {
-                setMinting(true);
-                await mintOneToken(candyMachine, wallet.publicKey);
-                setMinting(false);
-              }}
-            />
-          )}
-        </div>
+        <GatewayProvider
+          wallet={{
+            publicKey: wallet.publicKey || new PublicKey(CANDY_MACHINE_PROGRAM),
+            signTransaction: wallet.signTransaction,
+          }}
+          gatekeeperNetwork={candyMachine?.state?.gatekeeper?.gatekeeperNetwork}
+          clusterUrl={url}
+          options={{ autoShowModal: false }}
+        >
+          <div className="mt-5 mx-auto">
+            {!wallet ||
+            !wallet.connected ||
+            !wallet.publicKey ||
+            !candyMachine ||
+            !candyMachine.program.provider.wallet ? (
+              <ButtonBlueDisabled text={"Connect wallet"} />
+            ) : minting ? (
+              <LoaderSmall />
+            ) : (
+              <ButtonBlue
+                text={"Mint"}
+                onClick={async () => {
+                  if (candyMachine?.state.isActive && candyMachine?.state.gatekeeper) {
+                    if (gatewayStatus === GatewayStatus.ACTIVE) {
+                      setMinting(true);
+                      await mintOneToken(candyMachine, wallet.publicKey);
+                      setMinting(false);
+                    } else {
+                      await requestGatewayToken();
+                    }
+                  } else {
+                    setMinting(true);
+                    await mintOneToken(candyMachine, wallet.publicKey);
+                    setMinting(false);
+                  }
+                }}
+              />
+            )}
+          </div>
+        </GatewayProvider>
       </div>
     </div>
   );
