@@ -84,7 +84,7 @@ export const MintPage: FC<{ candyMachine }> = ({ candyMachine }) => {
             <ButtonBlueDisabled text={"Connect wallet"} />
           ) : minting ? (
             <LoaderSmall />
-          ) : (
+          ) : gatewayStatus === GatewayStatus.ACTIVE ? (
             <ButtonBlue
               text={"Mint"}
               onClick={async () => {
@@ -93,6 +93,14 @@ export const MintPage: FC<{ candyMachine }> = ({ candyMachine }) => {
                 setMinting(false);
               }}
             />
+          ) : gatewayStatus === GatewayStatus.NOT_REQUESTED ||
+            gatewayStatus === GatewayStatus.ERROR ||
+            gatewayStatus === GatewayStatus.UNKNOWN ? (
+            <div className="w-32 mx-auto">
+              <ButtonOrange text="Validate" onClick={requestGatewayToken} />
+            </div>
+          ) : (
+            <LoaderSmall />
           )}
         </div>
       </div>
