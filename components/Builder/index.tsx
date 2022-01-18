@@ -73,7 +73,7 @@ export const TrainerBuilder: FC<{
       ).toString(),
       "back-hair": randomIntFromInterval(
         1,
-        Object.keys(ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.BACK_HAIR]).length
+        ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.BACK_HAIR]
       ).toString(),
       back_hair_color: randomIntFromInterval(
         1,

@@ -170,6 +170,18 @@ export const TrainerBuiltImage: FC<{ attributes: TrainerAttributes }> = ({
           ) : (
             <div />
           )}
+          {attributes.glasses ? (
+            <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
+              <Image
+                className="rounded-lg"
+                src={"/traits/glasses/" + attributes.glasses + ".png"}
+                width={300}
+                height={300}
+              />
+            </div>
+          ) : (
+            <div />
+          )}
           {attributes["face-accessory"] ? (
             <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
               <Image
@@ -179,18 +191,6 @@ export const TrainerBuiltImage: FC<{ attributes: TrainerAttributes }> = ({
                   attributes["face-accessory"] +
                   ".png"
                 }
-                width={300}
-                height={300}
-              />
-            </div>
-          ) : (
-            <div />
-          )}
-          {attributes.glasses ? (
-            <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
-              <Image
-                className="rounded-lg"
-                src={"/traits/glasses/" + attributes.glasses + ".png"}
                 width={300}
                 height={300}
               />

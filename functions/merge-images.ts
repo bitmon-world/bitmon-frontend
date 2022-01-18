@@ -37,6 +37,8 @@ export async function mergeTraits(traits: TrainerAttributes): Promise<string> {
     images.push(
       "/traits/eye/" + (traits.eye_color || "1") + "/" + traits.eye + ".png"
     );
+  if (traits["face-accessory"])
+    images.push("/traits/face-accessory/" + traits["face-accessory"] + ".png");
   if (traits.glasses) images.push("/traits/glasses/" + traits.glasses + ".png");
   if (traits.hair)
     images.push(
@@ -44,8 +46,6 @@ export async function mergeTraits(traits: TrainerAttributes): Promise<string> {
     );
   if (traits.accessory)
     images.push("/traits/accessory/" + traits.accessory + ".png");
-  if (traits["face-accessory"])
-    images.push("/traits/face-accessory/" + traits["face-accessory"] + ".png");
 
   return await mergeImages(images);
 }
