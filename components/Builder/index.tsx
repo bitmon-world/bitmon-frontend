@@ -174,6 +174,7 @@ export const TrainerBuilder: FC<{
       });
       setUploading(false);
     } catch (_) {
+      setUploading(false);
       setFinishUpload({
         finished: true,
         success: false,
