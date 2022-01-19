@@ -742,7 +742,7 @@ export const TrainerBuilder: FC<{
                           </h1>
                         </div>
                         <div className="text-center mt-2 mx-auto">
-                          <h1>Try again</h1>
+                          <h1>Please refresh the website and try again</h1>
                         </div>
                       </>
                     )}
