@@ -70,7 +70,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
             target="_blank"
             rel="noreferrer"
           >
-            Creator
+            Marketplace
           </a>
         </div>
       </Link>
