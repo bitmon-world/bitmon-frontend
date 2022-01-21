@@ -61,6 +61,22 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
     );
   }
 
+  function marketplace(): JSX.Element {
+    return (
+      <Link href="https://magiceden.io/marketplace/bitmon_adventures" passHref>
+        <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey">
+          <a
+            href="https://magiceden.io/marketplace/bitmon_adventures"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Creator
+          </a>
+        </div>
+      </Link>
+    );
+  }
+
   function socials() {
     return (
       <div className="flex flex-row justify-center md:mr-5 gap-x-4 mt-2">
@@ -121,6 +137,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                       {whitepaper()}
                       {roadmap()}
                       {creator()}
+                      {marketplace()}
                     </div>
                   </div>
                   <div className="flex flex-row items-center">
@@ -183,6 +200,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                 {whitepaper()}
                 {roadmap()}
                 {creator()}
+                {marketplace()}
                 {socials()}
               </div>
             </Popover.Panel>
