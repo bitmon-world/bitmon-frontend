@@ -8,10 +8,9 @@ import { clusterApiUrl } from "@solana/web3.js";
 import { useCallback, useEffect, useState } from "react";
 import { Loader } from "../../components/Loader";
 import { ConnectWalletWarning } from "../../components/ConnectWalletWarning";
-import { BITMON_UPDATE_AUTHORITY } from "../../constants";
 import { TrainerImage } from "../../components/TrainerImage";
-import { fetchBitmons } from "../../functions/fetch-bitmons";
 import { intersect } from "@hapi/hoek";
+import { BITMON_MINTS } from "../../constants/mints";
 
 export default function Creator(): JSX.Element {
   const url =
@@ -33,19 +32,13 @@ export default function Creator(): JSX.Element {
       connection: connect,
     });
 
-    const bitmonMints = await fetchBitmons();
-    // TODO handle error
-    if (bitmonMints.success) {
-      const validBitmonMints = intersect(
-        bitmonMints.data,
-        tokensList.map((t) => t.mint)
-      );
-      const tokens = tokensList.filter((t) =>
-        validBitmonMints.includes(t.mint)
-      );
-      setTokens(tokens);
-      setLoading(false);
-    }
+    const validBitmonMints = intersect(
+      BITMON_MINTS,
+      tokensList.map((t) => t.mint)
+    );
+    const tokens = tokensList.filter((t) => validBitmonMints.includes(t.mint));
+    setTokens(tokens);
+    setLoading(false);
   }, [wallet, connect, getParsedNftAccountsByOwner]);
 
   useEffect(() => {
