@@ -77,6 +77,16 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
     );
   }
 
+  function stake(): JSX.Element {
+    return (
+      <Link href="/stake" passHref>
+        <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey">
+          <p>Stake</p>
+        </div>
+      </Link>
+    );
+  }
+
   function socials() {
     return (
       <div className="flex flex-row justify-center md:mr-5 gap-x-4 mt-2">
