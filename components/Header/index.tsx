@@ -79,9 +79,11 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
 
   function stake(): JSX.Element {
     return (
-      <Link href="/stake" passHref>
+      <Link href="https://stake.bitmon.io" passHref>
         <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey">
-          <p>Stake</p>
+          <a href="https://stake.bitmon.io" target="_blank" rel="noreferrer">
+            Stake
+          </a>
         </div>
       </Link>
     );
@@ -148,6 +150,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                       {roadmap()}
                       {creator()}
                       {marketplace()}
+                      {stake()}
                     </div>
                   </div>
                   <div className="flex flex-row items-center">
@@ -211,6 +214,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                 {roadmap()}
                 {creator()}
                 {marketplace()}
+                {stake()}
                 {socials()}
               </div>
             </Popover.Panel>
