@@ -1,6 +1,4 @@
 import axios from "axios";
-import { Transaction } from "@solana/web3.js";
-import { TrainerAttributes } from "../components/Builder/BuiltImage";
 import { API_URL } from "../constants";
 
 export async function fetchBitmons(): Promise<{
