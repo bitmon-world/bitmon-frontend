@@ -1,5 +1,8 @@
-export const BITMON_UPDATE_AUTHORITY =
-  "Cw4wy1Yg1334gRQ5SxG43Qt5QbM1DM665ur8R6imWGkR";
+import { PublicKey } from "@solana/web3.js";
+
+export const PROGRAM_NFT_STAKING = new PublicKey(
+  "Fk6vWeq3aVujGCxYWNvFmeuo9m5tCaukyJi27P47Ug4y"
+);
 
 export enum ATTRIBUTES_INDEX {
   BODY_COLOR,
@@ -108,4 +111,4 @@ export const HAIR_COLOR: { [k: number]: string } = {
   9: "#79358b",
 };
 
-export const API_URL = "https://api.bitmon.io";
+export const API_URL = "http://localhost:8080";

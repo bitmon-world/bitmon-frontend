@@ -8,7 +8,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { upload } from "../../functions/upload";
 import { clusterApiUrl } from "@solana/web3.js";
 import { createConnectionConfig } from "@nfteyez/sol-rayz";
-import { sendSignedTransaction } from "../../functions/sendTransaction";
+import { sendSignedTransaction } from "../../functions/send-transaction";
 import { BodyTypeSelector } from "./BodyTypeSelector";
 import { TrainerAttributes, TrainerBuiltImage } from "./BuiltImage";
 import { Popover, Transition } from "@headlessui/react";

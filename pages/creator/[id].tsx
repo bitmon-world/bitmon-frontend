@@ -28,7 +28,7 @@ export default function CreatorSingle(): JSX.Element {
 
   const [owner, setOwner] = useState(false);
 
-  const fetch_metadata = useCallback(async (id: string | string[]) => {
+  const fetch_metadata = useCallback(async (id: string) => {
     const data = await getMintMetadata(id, connect);
     const owner = await isMintOwner(id, wallet.publicKey, connect);
     setMetadata(data);
@@ -37,7 +37,8 @@ export default function CreatorSingle(): JSX.Element {
 
   useEffect(() => {
     if (!router.query.id || !wallet || !wallet.publicKey) return;
-    fetch_metadata(router.query.id);
+    const id = router.query.id;
+    fetch_metadata(id as string);
   }, [router]);
 
   const [builder, setBuilder] = useState(false);

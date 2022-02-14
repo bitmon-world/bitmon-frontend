@@ -1,8 +1,5 @@
 import Image from "next/image";
-import {
-  getParsedNftAccountsByOwner,
-  createConnectionConfig,
-} from "@nfteyez/sol-rayz";
+import { createConnectionConfig } from "@nfteyez/sol-rayz";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { clusterApiUrl } from "@solana/web3.js";
 import { useCallback, useEffect, useState } from "react";
@@ -10,7 +7,8 @@ import { Loader } from "../../components/Loader";
 import { ConnectWalletWarning } from "../../components/ConnectWalletWarning";
 import { TrainerImage } from "../../components/TrainerImage";
 import { intersect } from "@hapi/hoek";
-import { BITMON_MINTS } from "../../constants/mints";
+import { TRAINER_MINTS } from "../../constants/mints";
+import { fetchTrainers } from "../../functions/fetch-trainers";
 
 export default function Creator(): JSX.Element {
   const url =
@@ -27,19 +25,18 @@ export default function Creator(): JSX.Element {
     setLoading(true);
 
     // Fetch user tokens
-    const tokensList = await getParsedNftAccountsByOwner({
-      publicAddress: wallet.publicKey.toString(),
-      connection: connect,
-    });
-
+    const trainers = await fetchTrainers(wallet.publicKey.toBase58(), connect);
+    console.log(trainers);
     const validBitmonMints = intersect(
-      BITMON_MINTS,
-      tokensList.map((t) => t.mint)
+      TRAINER_MINTS,
+      trainers.map((t) => t.mint)
     );
-    const tokens = tokensList.filter((t) => validBitmonMints.includes(t.mint));
+
+    const tokens = trainers.filter((t) => validBitmonMints.includes(t.mint));
+
     setTokens(tokens);
     setLoading(false);
-  }, [wallet, connect, getParsedNftAccountsByOwner]);
+  }, [wallet, connect]);
 
   useEffect(() => {
     if (!wallet || !wallet.connected || !wallet.publicKey) return;

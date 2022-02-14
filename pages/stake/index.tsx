@@ -8,9 +8,8 @@ import { clusterApiUrl } from "@solana/web3.js";
 import { useCallback, useEffect, useState } from "react";
 import { Loader } from "../../components/Loader";
 import { ConnectWalletWarning } from "../../components/ConnectWalletWarning";
-import { TrainerImage } from "../../components/TrainerImage";
 import { intersect } from "@hapi/hoek";
-import { BITMON_MINTS } from "../../constants/mints";
+import { TRAINER_MINTS } from "../../constants/mints";
 
 export default function Stake(): JSX.Element {
   const url =
@@ -33,7 +32,7 @@ export default function Stake(): JSX.Element {
     });
 
     const validBitmonMints = intersect(
-      BITMON_MINTS,
+      TRAINER_MINTS,
       tokensList.map((t) => t.mint)
     );
     const tokens = tokensList.filter((t) => validBitmonMints.includes(t.mint));

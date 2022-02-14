@@ -1,4 +1,4 @@
-export const BITMON_MINTS = [
+export const TRAINER_MINTS = [
   "6PpCbw2GtHMaQ9sFRCRJWzSygqQAVVAVYbhfoFeixUs9",
   "86HHRLMuvX7H3uahRp8x6a8jhbBRLLz2id12KrYnKzYD",
   "BdeYDi9LmvMB3EJrQiqYU2zsEaKAmT4fU8BR6MGxSCY7",
@@ -10000,3 +10000,5 @@ export const BITMON_MINTS = [
   "687XhCtavZSARqtkFT9L3qtCwEuThrWSmCYYxYFtnh1F",
   "6GuXjtYz2V3FfAtA1W6N6pywzGSRh7xwi52JyGPq3mPx",
 ];
+
+export const GENESIS_COLLECTION_MINTS = [];
