@@ -222,7 +222,7 @@ export default function Stake(): JSX.Element {
                     {tokens.staked.map((t) => {
                       return (
                         <TrainerImage
-                          link
+                          link={false}
                           key={t.mint}
                           uri={t.data.uri}
                           mint={t.mint}
@@ -242,12 +242,18 @@ export default function Stake(): JSX.Element {
                   <div className="z-10 mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-3/4 mx-auto">
                     {tokens.unstaked.map((t) => {
                       return (
-                        <TrainerImage
-                          link
-                          key={t.mint}
-                          uri={t.data.uri}
-                          mint={t.mint}
-                        />
+                          <div className="bg-white rounded-lg py-2">
+                            <TrainerImage
+                                link={false}
+                                key={t.mint}
+                                uri={t.data.uri}
+                                mint={t.mint}
+                            />
+                            <div className="mt-2">
+                              <ButtonBlue text="Stake" onClick={ () => console.log("stake")} />
+                            </div>
+                          </div>
+
                       );
                     })}
                   </div>
