@@ -1,6 +1,5 @@
 import Image from "next/image";
 import {
-  getParsedNftAccountsByOwner,
   createConnectionConfig,
 } from "@nfteyez/sol-rayz";
 import { useWallet } from "@solana/wallet-adapter-react";
@@ -8,15 +7,11 @@ import { clusterApiUrl } from "@solana/web3.js";
 import { useCallback, useEffect, useState } from "react";
 import { Loader } from "../../components/Loader";
 import { ConnectWalletWarning } from "../../components/ConnectWalletWarning";
-import { intersect } from "@hapi/hoek";
-import { TRAINER_MINTS } from "../../constants/mints";
 import { fetchTrainers } from "../../functions/fetch-trainers";
 import { MetadataData } from "@metaplex-foundation/mpl-token-metadata";
 import { TrainerImage } from "../../components/TrainerImage";
 import {
   ButtonBlue,
-  ButtonBlueDisabled,
-  ButtonGreen,
 } from "../../components/Button";
 
 export default function Stake(): JSX.Element {
