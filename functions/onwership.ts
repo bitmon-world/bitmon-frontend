@@ -11,8 +11,8 @@ export async function isMintOwner(
 ): Promise<boolean> {
   const staked = await isMintStaked(mint, connection);
   if (staked) {
-    const stakedMints = await fetchTrainers(owner.toBase58(), connection);
-    return stakedMints.map((d) => d.mint).includes(mint);
+    const mints = await fetchTrainers(owner.toBase58(), connection);
+    return mints.staked.map((d) => d.mint).includes(mint);
   } else {
     const data = await connection.getTokenAccountsByOwner(owner, {
       mint: new PublicKey(mint),
