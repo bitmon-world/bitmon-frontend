@@ -10,6 +10,8 @@ import { Loader } from "../../components/Loader";
 import { ConnectWalletWarning } from "../../components/ConnectWalletWarning";
 import { intersect } from "@hapi/hoek";
 import { TRAINER_MINTS } from "../../constants/mints";
+import { fetchTrainers } from "../../functions/fetch-trainers";
+import { MetadataData } from "@metaplex-foundation/mpl-token-metadata";
 
 export default function Stake(): JSX.Element {
   const url =
@@ -20,31 +22,25 @@ export default function Stake(): JSX.Element {
 
   const [loading, setLoading] = useState(true);
 
-  const [tokens, setTokens] = useState([]);
+  const [tokens, setTokens] = useState<{
+    staked: MetadataData[];
+    unstaked: MetadataData[];
+  }>({ staked: [], unstaked: [] });
 
   const fetch_tokens = useCallback(async () => {
     setLoading(true);
 
     // Fetch user tokens
-    const tokensList = await getParsedNftAccountsByOwner({
-      publicAddress: wallet.publicKey.toString(),
-      connection: connect,
-    });
+    const mints = await fetchTrainers(wallet.publicKey.toBase58(), connect);
 
-    const validBitmonMints = intersect(
-      TRAINER_MINTS,
-      tokensList.map((t) => t.mint)
-    );
-    const tokens = tokensList.filter((t) => validBitmonMints.includes(t.mint));
-    setTokens(tokens);
+    setTokens({ staked: mints.staked, unstaked: mints.unstaked });
     setLoading(false);
-  }, [wallet, connect, getParsedNftAccountsByOwner]);
+  }, [wallet, connect]);
 
   useEffect(() => {
     if (!wallet || !wallet.connected || !wallet.publicKey) return;
     fetch_tokens();
   }, [wallet]);
-
   return (
     <div className="relative z-10 mx-4 h-full pb-10">
       <div className="pt-14 text-center flex flex-row justify-center items-center gap-x-10">
@@ -58,7 +54,7 @@ export default function Stake(): JSX.Element {
         </div>
         <div>
           <Image
-            src="/img/trainer-creator.png"
+            src="/img/trainer-staking.png"
             width="200"
             height="85"
             alt="Bitmon Separator"

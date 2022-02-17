@@ -25,15 +25,10 @@ export default function Creator(): JSX.Element {
     setLoading(true);
 
     // Fetch user tokens
-    const trainers = await fetchTrainers(wallet.publicKey.toBase58(), connect);
-    const validBitmonMints = intersect(
-      TRAINER_MINTS,
-      trainers.map((t) => t.mint)
-    );
+    const mints = await fetchTrainers(wallet.publicKey.toBase58(), connect);
+    const trainers = [].concat(mints.staked).concat(mints.unstaked);
 
-    const tokens = trainers.filter((t) => validBitmonMints.includes(t.mint));
-
-    setTokens(tokens);
+    setTokens(trainers);
     setLoading(false);
   }, [wallet, connect]);
 

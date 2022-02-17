@@ -79,11 +79,9 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
 
   function stake(): JSX.Element {
     return (
-      <Link href="https://stake.bitmon.io" passHref>
+      <Link href="/stake" passHref>
         <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey">
-          <a href="https://stake.bitmon.io" target="_blank" rel="noreferrer">
-            Stake
-          </a>
+          <p>Stake</p>
         </div>
       </Link>
     );
