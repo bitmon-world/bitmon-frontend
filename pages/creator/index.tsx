@@ -26,7 +26,6 @@ export default function Creator(): JSX.Element {
 
     // Fetch user tokens
     const trainers = await fetchTrainers(wallet.publicKey.toBase58(), connect);
-    console.log(trainers);
     const validBitmonMints = intersect(
       TRAINER_MINTS,
       trainers.map((t) => t.mint)
