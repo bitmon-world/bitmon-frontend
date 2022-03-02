@@ -9,7 +9,7 @@ export async function fetchTrainers(
   address: string,
   connect: Connection
 ): Promise<{ staked: MetadataData[]; unstaked: MetadataData[] }> {
-  const res = await axios.get(API_URL + "/mints/" + address);
+  const res = await axios.get(API_URL + "/trainers/mints/" + address);
   return {
     staked: await fetchMetadata(res.data.mints.staked, connect),
     unstaked: await fetchMetadata(res.data.mints.unstaked, connect),

@@ -11,7 +11,7 @@ export async function upload(
   mint: string | string[]
 ): Promise<{ success: boolean; data?: Transaction }> {
   try {
-    const res = await axios.post(API_URL + "/upload", {
+    const res = await axios.post(API_URL + "/trainers/upload", {
       attributes,
       address,
       public_key,
