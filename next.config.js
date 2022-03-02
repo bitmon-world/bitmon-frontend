@@ -1,14 +1,19 @@
 const withPWA = require("next-pwa");
 const runtimeCaching = require("next-pwa/cache");
 
-const withTM = require("next-transpile-modules")([
-  "@blocto/sdk",
-  "@project-serum/sol-wallet-adapter",
-]);
-
 const nextConfig = {
   reactStrictMode: true,
   webpack5: true,
+  webpack: (config) => {
+    config.resolve.fallback = {
+      fs: false,
+      stream: false,
+      crypto: false,
+      path: false,
+      os: false,
+    };
+    return config;
+  },
   pwa: {
     disable: process.env.NODE_ENV === "development",
     dest: "public",
@@ -19,4 +24,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPWA(withTM(nextConfig));
+module.exports = withPWA(nextConfig);
