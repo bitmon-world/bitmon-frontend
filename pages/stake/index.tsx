@@ -1,7 +1,5 @@
 import Image from "next/image";
-import {
-  createConnectionConfig,
-} from "@nfteyez/sol-rayz";
+import { createConnectionConfig } from "@nfteyez/sol-rayz";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { clusterApiUrl } from "@solana/web3.js";
 import { useCallback, useEffect, useState } from "react";
@@ -10,9 +8,7 @@ import { ConnectWalletWarning } from "../../components/ConnectWalletWarning";
 import { fetchTrainers } from "../../functions/fetch-trainers";
 import { MetadataData } from "@metaplex-foundation/mpl-token-metadata";
 import { TrainerImage } from "../../components/TrainerImage";
-import {
-  ButtonBlue,
-} from "../../components/Button";
+import { ButtonBlue } from "../../components/Button";
 
 export default function Stake(): JSX.Element {
   enum View {
@@ -237,18 +233,20 @@ export default function Stake(): JSX.Element {
                   <div className="z-10 mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-3/4 mx-auto">
                     {tokens.unstaked.map((t) => {
                       return (
-                          <div className="bg-white rounded-lg py-2">
-                            <TrainerImage
-                                link={false}
-                                key={t.mint}
-                                uri={t.data.uri}
-                                mint={t.mint}
+                        <div className="bg-white rounded-lg py-2">
+                          <TrainerImage
+                            link={false}
+                            key={t.mint}
+                            uri={t.data.uri}
+                            mint={t.mint}
+                          />
+                          <div className="mt-2">
+                            <ButtonBlue
+                              text="Stake"
+                              onClick={() => console.log("stake")}
                             />
-                            <div className="mt-2">
-                              <ButtonBlue text="Stake" onClick={ () => console.log("stake")} />
-                            </div>
                           </div>
-
+                        </div>
                       );
                     })}
                   </div>

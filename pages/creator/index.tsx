@@ -6,8 +6,6 @@ import { useCallback, useEffect, useState } from "react";
 import { Loader } from "../../components/Loader";
 import { ConnectWalletWarning } from "../../components/ConnectWalletWarning";
 import { TrainerImage } from "../../components/TrainerImage";
-import { intersect } from "@hapi/hoek";
-import { TRAINER_MINTS } from "../../constants/mints";
 import { fetchTrainers } from "../../functions/fetch-trainers";
 
 export default function Creator(): JSX.Element {

@@ -1,93 +1,21 @@
+import { FC, Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { useWallet } from "@solana/wallet-adapter-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Popover } from "@headlessui/react";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { shortenString } from "../../functions/format";
 import { ButtonGreen, ButtonOrange } from "../Button";
-import { FC } from "react";
-import { classNames } from "../../functions/classnames";
+import { shortenString } from "../../functions/format";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
+import { classNames } from "../../functions/classnames";
+
+const navigation = [
+  { name: "about", href: " /#about" },
+  { name: "whitepaper", href: "/#whitepaper" },
+  { name: "roadmap", href: "/#roadmap" },
+];
 
 export const Header: FC<{ background: boolean }> = ({ background }) => {
-  const modal = useWalletModal();
-
-  function about(): JSX.Element {
-    return (
-      <Link href="/#about" passHref>
-        <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey">
-          <p>About</p>
-        </div>
-      </Link>
-    );
-  }
-
-  function roadmap(): JSX.Element {
-    return (
-      <Link href="/#roadmap" passHref>
-        <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey">
-          <p>Roadmap</p>
-        </div>
-      </Link>
-    );
-  }
-
-  function whitepaper(): JSX.Element {
-    return (
-      <Link href="/#whitepaper" passHref>
-        <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey">
-          <p>Whitepaper</p>
-        </div>
-      </Link>
-    );
-  }
-
-  function bitdex(): JSX.Element {
-    return (
-      <Link href="/bitdex" passHref>
-        <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey">
-          <p>Bitdex</p>
-        </div>
-      </Link>
-    );
-  }
-
-  function creator(): JSX.Element {
-    return (
-      <Link href="/creator" passHref>
-        <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey">
-          <p>Creator</p>
-        </div>
-      </Link>
-    );
-  }
-
-  function marketplace(): JSX.Element {
-    return (
-      <Link href="https://magiceden.io/marketplace/bitmon_adventures" passHref>
-        <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey">
-          <a
-            href="https://magiceden.io/marketplace/bitmon_adventures"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Marketplace
-          </a>
-        </div>
-      </Link>
-    );
-  }
-
-  function stake(): JSX.Element {
-    return (
-      <Link href="/stake" passHref>
-        <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey">
-          <p>Stake</p>
-        </div>
-      </Link>
-    );
-  }
-
-  function socials() {
+  function socials(): JSX.Element {
     return (
       <div className="flex flex-row justify-center md:mr-5 gap-x-4 mt-2">
         <a href="https://discord.gg/bitmon" target="_blank" rel="noreferrer">
@@ -114,21 +42,169 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
     );
   }
 
+  function trainers(): JSX.Element {
+    return (
+      <Menu as="div" className="relative">
+        <div>
+          <Menu.Button>
+            <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey uppercase">
+              <p>Trainers</p>
+            </div>
+          </Menu.Button>
+        </div>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Menu.Items className="origin-top-right md:absolute left-0 md:right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Menu.Item>
+              {() => (
+                <a href="#" className={"block px-4 py-2 text-sm text-gray-700"}>
+                  Your Profile
+                </a>
+              )}
+            </Menu.Item>
+          </Menu.Items>
+        </Transition>
+      </Menu>
+    );
+  }
+
+  function bitmons(): JSX.Element {
+    return (
+      <Menu as="div" className="relative">
+        <div>
+          <Menu.Button>
+            <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey uppercase">
+              <p>Bitmons</p>
+            </div>
+          </Menu.Button>
+        </div>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Menu.Items className="origin-top-right md:absolute left-0 md:right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Menu.Item>
+              {() => (
+                <a href="#" className={"block px-4 py-2 text-sm text-gray-700"}>
+                  Your Profile
+                </a>
+              )}
+            </Menu.Item>
+          </Menu.Items>
+        </Transition>
+      </Menu>
+    );
+  }
+  function ecosystem(): JSX.Element {
+    return (
+      <Menu as="div" className="relative">
+        <div>
+          <Menu.Button>
+            <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey uppercase">
+              <p>Ecosystem</p>
+            </div>
+          </Menu.Button>
+        </div>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Menu.Items className="origin-top-right md:absolute left-0 md:right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Menu.Item>
+              {() => (
+                <a href="#" className={"block px-4 py-2 text-sm text-gray-700"}>
+                  Your Profile
+                </a>
+              )}
+            </Menu.Item>
+          </Menu.Items>
+        </Transition>
+      </Menu>
+    );
+  }
+
   const wallet = useWallet();
+  const modal = useWalletModal();
+
+  function connect(): JSX.Element {
+    return wallet.connected ? (
+      <ButtonOrange
+        text={shortenString(wallet.publicKey.toString(), 9)}
+        onClick={() => wallet.disconnect()}
+      />
+    ) : (
+      <ButtonGreen text={"Connect"} onClick={() => modal.setVisible(true)} />
+    );
+  }
 
   return (
-    <header
+    <Disclosure
+      as="nav"
       className={classNames(
         "flex-shrink-0 w-full relative z-20",
         background ? "header-background" : ""
       )}
     >
-      <Popover as="nav" className="w-full">
-        {({ open }) => (
-          <>
-            <div className="px-4">
-              <div className="flex items-center justify-between h-16">
-                <div className="flex items-center cursor-pointer">
+      {({ open }) => (
+        <>
+          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+            <div className="relative flex items-center justify-between h-16">
+              <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
+                <Disclosure.Button className="flex flex-row justify-end items-center p-2 rounded-md text-white hover:text-high-emphesis focus:outline-none">
+                  <span className="sr-only">Open main menu</span>
+                  {open ? (
+                    <svg
+                      className="block w-6 h-6"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      className="block w-6 h-6"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M4 6h16M4 12h16M4 18h16"
+                      />
+                    </svg>
+                  )}
+                </Disclosure.Button>
+              </div>
+              <div className="flex flex-row items-center">
+                <div className="flex justify-center">
                   <Link href="/" passHref>
                     <a>
                       <Image
@@ -140,85 +216,49 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                     </a>
                   </Link>
                 </div>
-                <div className="flex flex-row justify-center items-center gap-x-2">
-                  <div className="hidden md:block sm:ml-2">
-                    <div className="flex uppercase">
-                      {about()}
-                      {whitepaper()}
-                      {roadmap()}
-                      {creator()}
-                      {marketplace()}
-                      {stake()}
-                    </div>
-                  </div>
-                  <div className="flex flex-row items-center">
-                    <div className="hidden md:block">{socials()}</div>
-                    {wallet.connected ? (
-                      <ButtonOrange
-                        text={shortenString(wallet.publicKey.toString(), 9)}
-                        onClick={() => wallet.disconnect()}
-                      />
-                    ) : (
-                      <ButtonGreen
-                        text={"Connect"}
-                        onClick={() => modal.setVisible(true)}
-                      />
-                    )}
-                  </div>
-                  <div className="flex md:hidden">
-                    <Popover.Button className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-high-emphesis focus:outline-none">
-                      <span className="sr-only">Open Menu</span>
-                      {open ? (
-                        <svg
-                          className="block w-6 h-6"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      ) : (
-                        <svg
-                          className="block w-6 h-6"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M4 6h16M4 12h16M4 18h16"
-                          />
-                        </svg>
-                      )}
-                    </Popover.Button>
+                <div className="hidden sm:block sm:ml-6">
+                  <div className="flex flex-row justify-end space-x-2 uppercase text-lg items-center">
+                    {navigation.map((item) => (
+                      <Link key={item.name} href={item.href}>
+                        <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey">
+                          <p>{item.name}</p>
+                        </div>
+                      </Link>
+                    ))}
+                    {trainers()}
+                    {bitmons()}
+                    {ecosystem()}
                   </div>
                 </div>
               </div>
-            </div>
-            <Popover.Panel className="sm:hidden uppercase bg-blue">
-              <div className="flex flex-col px-4 pt-2 pb-3 space-y-1 text-center">
-                {about()}
-                {whitepaper()}
-                {roadmap()}
-                {creator()}
-                {marketplace()}
-                {stake()}
-                {socials()}
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <div className="hidden md:block">{socials()}</div>
+                <div className="hidden md:block">{connect()}</div>
               </div>
-            </Popover.Panel>
-          </>
-        )}
-      </Popover>
-    </header>
+            </div>
+          </div>
+
+          <Disclosure.Panel className="sm:hidden uppercase bg-blue">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {navigation.map((item) => (
+                <Disclosure.Button
+                  key={item.name}
+                  as="a"
+                  href={item.href}
+                  className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey uppercase block"
+                >
+                  {item.name}
+                </Disclosure.Button>
+              ))}
+              {trainers()}
+              {bitmons()}
+              {ecosystem()}
+              {socials()}
+              {connect()}
+            </div>
+          </Disclosure.Panel>
+        </>
+      )}
+    </Disclosure>
   );
 };

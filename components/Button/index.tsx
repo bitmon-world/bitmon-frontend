@@ -91,11 +91,11 @@ export const ButtonOrange: FC<{
   return (
     <div
       className={
-        "w-42 mx-auto rounded-full border-2 shadow shadow-blue bg-orange border-orange"
+        "w-40 mx-auto rounded-full border-2 shadow shadow-blue bg-orange border-orange"
       }
     >
       <button
-        className="py-1 px-6 text-white text-xl uppercase border-2 border-black rounded-full relative w-full"
+        className="py-1 px-4 text-white text-lg uppercase border-2 border-black rounded-full relative w-full"
         onClick={() => onClick()}
       >
         <div className="flex flex-row items-center justify-center">
