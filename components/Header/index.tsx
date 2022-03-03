@@ -17,7 +17,7 @@ const navigation = [
 export const Header: FC<{ background: boolean }> = ({ background }) => {
   function socials(): JSX.Element {
     return (
-      <div className="flex flex-row justify-center md:mr-5 gap-x-4 mt-2">
+      <div className="flex flex-row justify-center md:mr-3 gap-x-2 mt-2">
         <a href="https://discord.gg/bitmon" target="_blank" rel="noreferrer">
           <Image
             src="/icons/discord.svg"
@@ -63,12 +63,30 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
         >
           <Menu.Items className="origin-top-right md:absolute left-0 md:right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
             <Menu.Item>
-              {() => (
-                <a href="#" className={"block px-4 py-2 text-sm text-gray-700"}>
-                  Your Profile
-                </a>
-              )}
+              <div className="block px-4 py-2 text-sm uppercase">
+                <Link href="/creator" passHref>
+                  Creator
+                </Link>
+              </div>
             </Menu.Item>
+            <Menu.Item>
+              <div className="block px-4 py-2 text-sm uppercase">
+                <Link href="/stake" passHref>
+                  Stake
+                </Link>
+              </div>
+            </Menu.Item>
+            <div className="block px-4 py-2 text-sm uppercase">
+              <Link href="https://magiceden.io/creators/bitmon_world" passHref>
+                <a
+                  href="https://magiceden.io/creators/bitmon_world"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Marketplace
+                </a>
+              </Link>
+            </div>
           </Menu.Items>
         </Transition>
       </Menu>
@@ -82,38 +100,6 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
           <Menu.Button>
             <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey uppercase">
               <p>Bitmons</p>
-            </div>
-          </Menu.Button>
-        </div>
-        <Transition
-          as={Fragment}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-        >
-          <Menu.Items className="origin-top-right md:absolute left-0 md:right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <Menu.Item>
-              {() => (
-                <a href="#" className={"block px-4 py-2 text-sm text-gray-700"}>
-                  Your Profile
-                </a>
-              )}
-            </Menu.Item>
-          </Menu.Items>
-        </Transition>
-      </Menu>
-    );
-  }
-  function ecosystem(): JSX.Element {
-    return (
-      <Menu as="div" className="relative">
-        <div>
-          <Menu.Button>
-            <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey uppercase">
-              <p>Ecosystem</p>
             </div>
           </Menu.Button>
         </div>
@@ -217,17 +203,15 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                   </Link>
                 </div>
                 <div className="hidden sm:block sm:ml-6">
-                  <div className="flex flex-row justify-end space-x-2 uppercase text-lg items-center">
+                  <div className="flex flex-row justify-end uppercase text-lg items-center">
                     {navigation.map((item) => (
                       <Link key={item.name} href={item.href}>
-                        <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey">
+                        <div className="text-sm mx-1.5 py-1 text-white cursor-pointer hover:text-grey">
                           <p>{item.name}</p>
                         </div>
                       </Link>
                     ))}
                     {trainers()}
-                    {bitmons()}
-                    {ecosystem()}
                   </div>
                 </div>
               </div>
@@ -251,8 +235,6 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                 </Disclosure.Button>
               ))}
               {trainers()}
-              {bitmons()}
-              {ecosystem()}
               {socials()}
               {connect()}
             </div>
