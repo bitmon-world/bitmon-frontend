@@ -40,22 +40,37 @@ export function Firebase({ address }): JSX.Element {
 
   return (
     <div className="absolute w-full top-0">
-      <div className="landing-background pb-20 h-screen">
-        <div className="flex flex-row justify-center">
-          <div className="z-0 absolute opacity-10 pt-20">
-            <Image
-              src="/icons/bitmon-icon-black.svg"
-              width="275"
-              height="275"
-            />
-          </div>
-        </div>
+      <div className="pb-20 h-screen">
         <div className="relative flex flex-row items-center justify-center h-full w-full z-10">
           <div className="w-full">
-            <div className="text-center py-5 font-bold">
-              <h1 className="text-2xl text-white">Bitmon Connect</h1>
-              <p className="text-white text-md">
-                Connect your Bitmon credentials to the Solana network
+            <div className="pt-14 text-center flex flex-row justify-center items-center gap-x-10">
+              <div className="hidden md:inline-flex ml-10">
+                <Image
+                  src="/img/separator-right.svg"
+                  width="250"
+                  height="17"
+                  alt="Bitmon Separator"
+                />
+              </div>
+              <div className="my-4">
+                <h1 className="text-3xl">Minecraft</h1>
+                <h1 className="text-4xl text-orange">Connect</h1>
+              </div>
+              <div className="hidden md:inline-flex mr-10">
+                <Image
+                  src="/img/separator-left.svg"
+                  width="250"
+                  height="17"
+                  alt="Bitmon Separator"
+                />
+              </div>
+            </div>
+            <div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[58px] mx-auto my-4">
+              <p className="top-0 text-xl text-white text-center">
+                <p className="text-white text-md">
+                  Connect your in-game credentials to the{" "}
+                  <span className="text-orange">Solana</span> network
+                </p>
               </p>
             </div>
             <div className="bg-white rounded-lg w-[300px] mx-auto py-5">

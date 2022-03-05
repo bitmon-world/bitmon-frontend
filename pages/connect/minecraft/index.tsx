@@ -1,11 +1,17 @@
 import Image from "next/image";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { toast } from "react-hot-toast";
-import { ButtonBlue, ButtonBlueDisabled } from "../../../components/Button";
+import {
+  ButtonBlue,
+  ButtonBlueDisabled,
+  ButtonGreen,
+  ButtonOrange,
+} from "../../../components/Button";
 import { updateDb } from "../../../functions/connect/database";
+import { shortenString } from "../../../functions/format";
 
 const COLLECTIONS = {
   bitmon: "Bitmon Trainers",
@@ -18,24 +24,52 @@ export function Minecraft(): JSX.Element {
   const [collection, setCollection] = useState<string | null>(null);
   const [username, setUsername] = useState<string | null>(null);
 
+  const modal = useWalletModal();
+
+  function connect(): JSX.Element {
+    return wallet.connected ? (
+      <ButtonOrange
+        text={shortenString(wallet.publicKey.toString(), 9)}
+        onClick={() => wallet.disconnect()}
+      />
+    ) : (
+      <ButtonGreen text={"Connect"} onClick={() => modal.setVisible(true)} />
+    );
+  }
+
   return (
     <div className="absolute w-full top-0">
-      <div className="landing-background pb-20 h-screen">
-        <div className="flex flex-row justify-center">
-          <div className="z-0 absolute opacity-10 pt-20">
-            <Image
-              src="/icons/bitmon-icon-black.svg"
-              width="275"
-              height="275"
-            />
-          </div>
-        </div>
+      <div className="pb-20 h-screen">
         <div className="relative flex flex-row items-center justify-center h-full w-full z-10">
           <div className="w-full">
-            <div className="text-center py-5 font-bold">
-              <h1 className="text-2xl text-white">Minecraft Connect</h1>
-              <p className="text-white text-md">
-                Connect your Minecraft credentials to the Solana network
+            <div className="pt-14 text-center flex flex-row justify-center items-center gap-x-10">
+              <div className="hidden md:inline-flex ml-10">
+                <Image
+                  src="/img/separator-right.svg"
+                  width="250"
+                  height="17"
+                  alt="Bitmon Separator"
+                />
+              </div>
+              <div className="my-4">
+                <h1 className="text-3xl">Minecraft</h1>
+                <h1 className="text-4xl text-orange">Connect</h1>
+              </div>
+              <div className="hidden md:inline-flex mr-10">
+                <Image
+                  src="/img/separator-left.svg"
+                  width="250"
+                  height="17"
+                  alt="Bitmon Separator"
+                />
+              </div>
+            </div>
+            <div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[58px] mx-auto my-4">
+              <p className="top-0 text-xl text-white text-center">
+                <p className="text-white text-md">
+                  Connect your in-game credentials to the{" "}
+                  <span className="text-orange">Solana</span> network
+                </p>
               </p>
             </div>
             <div className="bg-white rounded-lg w-[300px] mx-auto py-5">
@@ -48,7 +82,7 @@ export function Minecraft(): JSX.Element {
                 </h2>
               )}
               <div className="flex flex-row justify-center mt-2">
-                <WalletMultiButton />
+                {connect()}
               </div>
               {wallet.connected ? (
                 <div className="mt-5">

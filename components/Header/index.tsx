@@ -12,6 +12,7 @@ const navigation = [
   { name: "about", href: " /#about" },
   { name: "whitepaper", href: "/#whitepaper" },
   { name: "roadmap", href: "/#roadmap" },
+  { name: "games", href: "/connect" },
 ];
 
 export const Header: FC<{ background: boolean }> = ({ background }) => {
@@ -127,6 +128,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
   }
 
   const wallet = useWallet();
+
   const modal = useWalletModal();
 
   function connect(): JSX.Element {
