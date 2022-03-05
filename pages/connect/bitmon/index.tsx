@@ -13,6 +13,7 @@ import { sign } from "tweetnacl";
 import { shortenString } from "../../../functions/format";
 import { ButtonBlue, ButtonOrange } from "../../../components/Button";
 import { updateFb } from "../../../functions/connect/firebase";
+import {getAddress} from "../../../functions/connect/get-address";
 
 export function Firebase({ address }): JSX.Element {
   const wallet = useWallet();
@@ -139,10 +140,10 @@ export const getServerSideProps = withAuthUserTokenSSR({
   whenUnauthed: AuthAction.REDIRECT_TO_LOGIN,
 })(async ({ AuthUser }) => {
   if (!AuthUser.id) return;
-  // TODO
+  const address = await getAddress(AuthUser.id)
   return {
     props: {
-      address: null,
+      address: address,
     },
   };
 });
