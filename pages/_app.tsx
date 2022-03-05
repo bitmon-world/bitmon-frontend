@@ -10,6 +10,7 @@ import dynamic from "next/dynamic";
 
 require("@solana/wallet-adapter-react-ui/styles.css");
 import "../styles/index.css";
+import initAuth from "../functions/init-auth";
 
 const WalletConnectionProvider = dynamic<{ children: ReactNode }>(
   () =>
@@ -20,6 +21,8 @@ const WalletConnectionProvider = dynamic<{ children: ReactNode }>(
     ssr: false,
   }
 );
+
+initAuth();
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {

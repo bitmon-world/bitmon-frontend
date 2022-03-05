@@ -6,37 +6,46 @@ import {
   withAuthUserTokenSSR,
 } from "next-firebase-auth";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import { sign } from "tweetnacl";
 import { shortenString } from "../../../functions/format";
-import { ButtonBlue, ButtonOrange } from "../../../components/Button";
+import {
+  ButtonBlue,
+  ButtonGreen,
+  ButtonOrange,
+} from "../../../components/Button";
 import { updateFb } from "../../../functions/connect/firebase";
-import {getAddress} from "../../../functions/connect/get-address";
+import { getAddress } from "../../../functions/connect/get-address";
+import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 
 export function Firebase({ address }): JSX.Element {
+  const modal = useWalletModal();
   const wallet = useWallet();
   const auth = useAuthUser();
   const [linkedAddress, setLinkedAddress] = useState(address);
 
   function verifyAndUploadFirebase(
-    address: string,
+    uid: string,
     sig: string,
-    pubkey: string,
-    uid: string
+    public_key: string
   ): Promise<void> {
     return new Promise((resolve, reject) => {
-      let valid = sign.detached.verify(
-        Buffer.from(uid),
-        Buffer.from(sig, "hex"),
-        Buffer.from(pubkey, "hex")
-      );
-      if (!valid) reject();
-      updateFb(address, uid)
+      updateFb(uid, sig, public_key)
         .then(() => resolve())
         .catch(() => reject());
     });
+  }
+
+  function connect(): JSX.Element {
+    return wallet.connected ? (
+      <ButtonOrange
+        text={shortenString(wallet.publicKey.toString(), 9)}
+        onClick={() => wallet.disconnect()}
+      />
+    ) : (
+      <ButtonGreen text={"Connect"} onClick={() => modal.setVisible(true)} />
+    );
   }
 
   return (
@@ -54,7 +63,7 @@ export function Firebase({ address }): JSX.Element {
                 />
               </div>
               <div className="my-4">
-                <h1 className="text-3xl">Minecraft</h1>
+                <h1 className="text-3xl">Bitmon</h1>
                 <h1 className="text-4xl text-orange">Connect</h1>
               </div>
               <div className="hidden md:inline-flex mr-10">
@@ -67,12 +76,12 @@ export function Firebase({ address }): JSX.Element {
               </div>
             </div>
             <div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[58px] mx-auto my-4">
-              <p className="top-0 text-xl text-white text-center">
+              <div className="top-0 text-xl text-white text-center">
                 <p className="text-white text-md">
                   Connect your in-game credentials to the{" "}
                   <span className="text-orange">Solana</span> network
                 </p>
-              </p>
+              </div>
             </div>
             <div className="bg-white rounded-lg w-[300px] mx-auto py-5">
               <h2 className="text-center text-md">Welcome to Bitmon Connect</h2>
@@ -93,9 +102,7 @@ export function Firebase({ address }): JSX.Element {
                 )}
               </h2>
               <h2 className="text-center mt-3 mb-2">Link or update address</h2>
-              <div className="flex flex-row justify-center">
-                <WalletMultiButton />
-              </div>
+              <div className="flex flex-row justify-center">{connect()}</div>
               {wallet.connected ? (
                 <div className="mt-5">
                   <ButtonBlue
@@ -107,10 +114,9 @@ export function Firebase({ address }): JSX.Element {
                       toast
                         .promise(
                           verifyAndUploadFirebase(
-                            wallet.publicKey.toBase58(),
+                            auth.id,
                             Buffer.from(sig).toString("hex"),
-                            wallet.publicKey.toBuffer().toString("hex"),
-                            auth.id
+                            wallet.publicKey.toBuffer().toString("hex")
                           ),
                           {
                             loading: <b>Updating address</b>,
@@ -140,7 +146,7 @@ export const getServerSideProps = withAuthUserTokenSSR({
   whenUnauthed: AuthAction.REDIRECT_TO_LOGIN,
 })(async ({ AuthUser }) => {
   if (!AuthUser.id) return;
-  const address = await getAddress(AuthUser.id)
+  const address = await getAddress(AuthUser.id);
   return {
     props: {
       address: address,

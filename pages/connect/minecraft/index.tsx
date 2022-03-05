@@ -19,12 +19,11 @@ const COLLECTIONS = {
 };
 
 export function Minecraft(): JSX.Element {
-  const wallet = useWallet();
-
   const [collection, setCollection] = useState<string | null>(null);
   const [username, setUsername] = useState<string | null>(null);
 
   const modal = useWalletModal();
+  const wallet = useWallet();
 
   function connect(): JSX.Element {
     return wallet.connected ? (
@@ -65,12 +64,12 @@ export function Minecraft(): JSX.Element {
               </div>
             </div>
             <div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[58px] mx-auto my-4">
-              <p className="top-0 text-xl text-white text-center">
+              <div className="top-0 text-xl text-white text-center">
                 <p className="text-white text-md">
                   Connect your in-game credentials to the{" "}
                   <span className="text-orange">Solana</span> network
                 </p>
-              </p>
+              </div>
             </div>
             <div className="bg-white rounded-lg w-[300px] mx-auto py-5">
               <h2 className="text-center text-md">
