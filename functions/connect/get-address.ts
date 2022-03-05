@@ -6,7 +6,7 @@ export async function getAddress(uid: string) {
             headers: { Authorization: `Bearer ${process.env.AUTH_TOKEN}` }
         };
         try {
-            const res = await axios.get("http://localhost:8080/bitmon/address/" + uid, config);
+            const res = await axios.get("https://api.bitmon.io/bitmon/address/" + uid, config);
             if (res.data.success) resolve(res.data.address);
             reject();
         } catch (e) {
