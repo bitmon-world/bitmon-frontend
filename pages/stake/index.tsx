@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { createConnectionConfig } from "@nfteyez/sol-rayz";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { clusterApiUrl } from "@solana/web3.js";
+import { clusterApiUrl, PublicKey } from "@solana/web3.js";
 import { useCallback, useEffect, useState } from "react";
 import { Loader } from "../../components/Loader";
 import { ConnectWalletWarning } from "../../components/ConnectWalletWarning";
@@ -10,6 +10,9 @@ import { MetadataData } from "@metaplex-foundation/mpl-token-metadata";
 import { TrainerImage } from "../../components/TrainerImage";
 import { ButtonBlue } from "../../components/Button";
 import { getStakingInfo } from "../../functions/staking/get-staking-info";
+import { toast } from "react-hot-toast";
+import stakeNft from "../../functions/staking/stake-nft";
+import { useAnchorAccountCache } from "../../context/anchor-account-context";
 
 export default function Stake(): JSX.Element {
   enum View {
@@ -20,6 +23,8 @@ export default function Stake(): JSX.Element {
   const url =
     process.env.NEXT_PUBLIC_SOLANA_RPC || clusterApiUrl("mainnet-beta");
   const connect = createConnectionConfig(url);
+
+  const anchorAccountCache = useAnchorAccountCache();
 
   const wallet = useWallet();
 
@@ -273,7 +278,20 @@ export default function Stake(): JSX.Element {
                           <div className="mt-2">
                             <ButtonBlue
                               text="Stake"
-                              onClick={() => console.log("stake")}
+                              onClick={async () => {
+                                await toast.promise(
+                                  stakeNft(
+                                    anchorAccountCache,
+                                    wallet.publicKey,
+                                    new PublicKey(t.mint)
+                                  ),
+                                  {
+                                    loading: <b>Staking</b>,
+                                    success: <b>Success</b>,
+                                    error: <b>Stake failed, try again</b>,
+                                  }
+                                );
+                              }}
                             />
                           </div>
                         </div>
