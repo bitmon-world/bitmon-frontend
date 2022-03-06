@@ -9,6 +9,7 @@ import { fetchTrainers } from "../../functions/fetch-trainers";
 import { MetadataData } from "@metaplex-foundation/mpl-token-metadata";
 import { TrainerImage } from "../../components/TrainerImage";
 import { ButtonBlue } from "../../components/Button";
+import { getStakingInfo } from "../../functions/get-staking-info";
 
 export default function Stake(): JSX.Element {
   enum View {
@@ -45,6 +46,21 @@ export default function Stake(): JSX.Element {
   }, [wallet]);
 
   const [view, setView] = useState(View.UNSTAKED);
+
+  const [stakingInfo, setStakingInfo] = useState<{
+    users_staking: number;
+    trainers_staked: number;
+    tvl: number;
+  } | null>(null);
+
+  const fetch_info = useCallback(async () => {
+    const info = await getStakingInfo();
+    console.log(info);
+    setStakingInfo(info);
+  }, []);
+  useEffect(() => {
+    fetch_info();
+  }, [fetch_info]);
 
   return (
     <div className="relative z-10 mx-4 h-full pb-10">
@@ -95,7 +111,21 @@ export default function Stake(): JSX.Element {
                   </h1>
                 </div>
               </div>
-              <div className="flex flex-row items-center justify-center mx-auto mt-2">
+              {stakingInfo ? (
+                <div className="flex flex-row space-x-4 items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[100px] mx-auto text-white w-full">
+                  <div className="text-center">
+                    <p className="font-bold text-lg">Staked Trainers</p>
+                    <p className="text-sm">{stakingInfo.trainers_staked}</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="font-bold text-lg">Users Staking</p>
+                    <p className="text-sm">{stakingInfo.users_staking}</p>
+                  </div>
+                </div>
+              ) : (
+                <Loader />
+              )}
+              <div className="flex flex-row items-center justify-center mx-auto mt-8">
                 {view === View.STAKED ? (
                   <>
                     <div
