@@ -1,7 +1,7 @@
 import { Connection, PublicKey } from "@solana/web3.js";
 import * as SPLToken from "@solana/spl-token";
 import BN from "bn.js";
-import { PROGRAM_NFT_STAKING } from "../constants";
+import { NFT_STAKING_POOL } from "../constants";
 import { fetchTrainers } from "./fetch-trainers";
 
 export async function isMintOwner(
@@ -28,7 +28,7 @@ export async function isMintStaked(
   mint: string | string[],
   connection: Connection
 ): Promise<boolean> {
-  const data = await connection.getTokenAccountsByOwner(PROGRAM_NFT_STAKING, {
+  const data = await connection.getTokenAccountsByOwner(NFT_STAKING_POOL, {
     mint: new PublicKey(mint),
   });
   if (data.value.length === 0) return false;

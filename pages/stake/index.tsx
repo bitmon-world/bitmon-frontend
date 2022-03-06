@@ -9,7 +9,7 @@ import { fetchTrainers } from "../../functions/fetch-trainers";
 import { MetadataData } from "@metaplex-foundation/mpl-token-metadata";
 import { TrainerImage } from "../../components/TrainerImage";
 import { ButtonBlue } from "../../components/Button";
-import { getStakingInfo } from "../../functions/get-staking-info";
+import { getStakingInfo } from "../../functions/staking/get-staking-info";
 
 export default function Stake(): JSX.Element {
   enum View {

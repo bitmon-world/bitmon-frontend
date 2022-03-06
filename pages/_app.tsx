@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { AppProps } from "next/app";
 import { Fragment } from "react";
 import Head from "next/head";
@@ -11,6 +11,10 @@ import dynamic from "next/dynamic";
 require("@solana/wallet-adapter-react-ui/styles.css");
 import "../styles/index.css";
 import initAuth from "../functions/init-auth";
+import AnchorAccountCacheProvider from "../context/anchor-account-context";
+import { Program, Provider } from "@project-serum/anchor";
+import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
+import { getStakingProgram } from "../functions/staking/get-program";
 
 const WalletConnectionProvider = dynamic<{ children: ReactNode }>(
   () =>
@@ -21,6 +25,36 @@ const WalletConnectionProvider = dynamic<{ children: ReactNode }>(
     ssr: false,
   }
 );
+
+const AccountsCacheProvidersSetup = ({ children }: { children: ReactNode }) => {
+  const { connection } = useConnection();
+  const wallet = useAnchorWallet();
+  const [nftStakingProgram, setNftStakingProgram] = useState<
+    Program | undefined
+  >();
+
+  useEffect(() => {
+    if (!connection) {
+      return;
+    }
+    (async function () {
+      // @ts-ignore - calling provider without wallet is used to instantiate connection
+      const provider = new Provider(connection, wallet, {});
+      const nftStakingProgram = await getStakingProgram(provider);
+      setNftStakingProgram(nftStakingProgram);
+    })();
+  }, [connection, wallet]);
+
+  if (!nftStakingProgram) {
+    return <>{children}</>;
+  }
+
+  return (
+    <AnchorAccountCacheProvider nftStakingProgram={nftStakingProgram}>
+      {children}
+    </AnchorAccountCacheProvider>
+  );
+};
 
 initAuth();
 
@@ -118,9 +152,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <WalletConnectionProvider>
         <WalletModalProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <AccountsCacheProvidersSetup>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </AccountsCacheProvidersSetup>
         </WalletModalProvider>
       </WalletConnectionProvider>
     </Fragment>
