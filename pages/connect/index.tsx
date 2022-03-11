@@ -43,34 +43,6 @@ export function Home(): JSX.Element {
                 Select the game you want to connect
               </h2>
               <div className="my-4">
-                <Link href="/connect/bitmon" passHref={false}>
-                  <div
-                    className={
-                      "w-40 mx-auto rounded-full border-2 shadow shadow-blue bg-blue border-blue"
-                    }
-                  >
-                    <button
-                      className={
-                        "py-1 px-6 text-white text-xl uppercase border-2 border-black rounded-full relative w-full"
-                      }
-                    >
-                      <div className="flex flex-row items-center justify-center">
-                        <div>
-                          <h1>Bitmon</h1>
-                        </div>
-                        <div className="absolute top-0 right-0 opacity-10">
-                          <Image
-                            src="/icons/bitmon-icon-white.svg"
-                            height="40"
-                            width="40"
-                          />
-                        </div>
-                      </div>
-                    </button>
-                  </div>
-                </Link>
-              </div>
-              <div className="my-4">
                 <Link href="/connect/minecraft" passHref={false}>
                   <div
                     className={
