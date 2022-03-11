@@ -73,9 +73,9 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
             <div className="block px-4 py-2 text-sm uppercase">
               <Link href="https://stake.bitmon.io" passHref>
                 <a
-                    href="https://stake.bitmon.io"
-                    target="_blank"
-                    rel="noreferrer"
+                  href="https://stake.bitmon.io"
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   Stake
                 </a>
