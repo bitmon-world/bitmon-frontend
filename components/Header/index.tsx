@@ -70,13 +70,17 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                 </Link>
               </div>
             </Menu.Item>
-            <Menu.Item>
-              <div className="block px-4 py-2 text-sm uppercase">
-                <Link href="/stake" passHref>
+            <div className="block px-4 py-2 text-sm uppercase">
+              <Link href="https://stake.bitmon.io" passHref>
+                <a
+                    href="https://stake.bitmon.io"
+                    target="_blank"
+                    rel="noreferrer"
+                >
                   Stake
-                </Link>
-              </div>
-            </Menu.Item>
+                </a>
+              </Link>
+            </div>
             <div className="block px-4 py-2 text-sm uppercase">
               <Link href="https://magiceden.io/creators/bitmon_world" passHref>
                 <a
