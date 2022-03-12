@@ -4,17 +4,14 @@ import { Fragment } from "react";
 import Head from "next/head";
 import Layout from "../layout/Main";
 import ReactGA from "react-ga4";
-
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import dynamic from "next/dynamic";
-
-require("@solana/wallet-adapter-react-ui/styles.css");
-import "../styles/index.css";
-import initAuth from "../functions/init-auth";
 import AnchorAccountCacheProvider from "../context/anchor-account-context";
 import { Program, Provider } from "@project-serum/anchor";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { getStakingProgram } from "../functions/staking/get-program";
+require("@solana/wallet-adapter-react-ui/styles.css");
+import "../styles/index.css";
 
 const WalletConnectionProvider = dynamic<{ children: ReactNode }>(
   () =>
@@ -55,8 +52,6 @@ const AccountsCacheProvidersSetup = ({ children }: { children: ReactNode }) => {
     </AnchorAccountCacheProvider>
   );
 };
-
-initAuth();
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
