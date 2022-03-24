@@ -1,4 +1,5 @@
 import axios from "axios";
+import { MINECRAFT_API_URL } from "../../constants";
 
 export async function updateDb(
   signature: string,
@@ -8,7 +9,7 @@ export async function updateDb(
 ): Promise<boolean> {
   return new Promise(async (resolve, reject) => {
     try {
-      const res = await axios.post("https://api.bitmon.io/minecraft/connect", {
+      const res = await axios.post(MINECRAFT_API_URL + "/connect", {
         signature,
         collection,
         username,

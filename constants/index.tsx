@@ -116,3 +116,4 @@ export const HAIR_COLOR: { [k: number]: string } = {
 };
 
 export const API_URL = "https://api.bitmon.io";
+export const MINECRAFT_API_URL = "https://minecraft-api.bitmon.io";
