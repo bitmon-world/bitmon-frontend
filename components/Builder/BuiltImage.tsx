@@ -9,10 +9,10 @@ export interface TrainerAttributes {
   eyebrow: string | null;
   nose: string | null;
   hair: string | null;
-  "back-hair": string | null;
+  back_hair: string | null;
   beard: string | null;
   accessory: string | null;
-  "face-accessory": string | null;
+  face_accessory: string | null;
   clothes: string | null;
   background: string | null;
   eye_color: string | null;
@@ -182,14 +182,12 @@ export const TrainerBuiltImage: FC<{ attributes: TrainerAttributes }> = ({
           ) : (
             <div />
           )}
-          {attributes["face-accessory"] ? (
+          {attributes.face_accessory ? (
             <div className="rounded-lg h-[300px] w-[300px] z-10 absolute top-0">
               <Image
                 className="rounded-lg"
                 src={
-                  "/traits/face-accessory/" +
-                  attributes["face-accessory"] +
-                  ".png"
+                  "/traits/face-accessory/" + attributes.face_accessory + ".png"
                 }
                 width={300}
                 height={300}
@@ -216,7 +214,7 @@ export const TrainerBuiltImage: FC<{ attributes: TrainerAttributes }> = ({
           ) : (
             <div />
           )}
-          {attributes["back-hair"] ? (
+          {attributes.back_hair ? (
             <div className="rounded-lg h-[300px] w-[300px] z-0 absolute top-0">
               <Image
                 className="rounded-lg"
@@ -224,7 +222,7 @@ export const TrainerBuiltImage: FC<{ attributes: TrainerAttributes }> = ({
                   "/traits/back-hair/" +
                   (attributes.back_hair_color || "1") +
                   "/" +
-                  attributes["back-hair"] +
+                  attributes.back_hair +
                   ".png"
                 }
                 width={300}

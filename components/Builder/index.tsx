@@ -71,7 +71,7 @@ export const TrainerBuilder: FC<{
         1,
         ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.HAIR]
       ).toString(),
-      "back-hair": randomIntFromInterval(
+      back_hair: randomIntFromInterval(
         1,
         ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.BACK_HAIR]
       ).toString(),
@@ -95,7 +95,7 @@ export const TrainerBuilder: FC<{
         1,
         ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.ACCESSORY]
       ).toString(),
-      "face-accessory": randomIntFromInterval(
+      face_accessory: randomIntFromInterval(
         1,
         ATTRIBUTES_AMOUNT[ATTRIBUTES_INDEX.FACE_ACCESSORY]
       ).toString(),
@@ -1244,8 +1244,8 @@ export const TrainerBuilder: FC<{
                       setAttributes({
                         body_type: attributes.body_type,
                         accessory: null,
-                        "face-accessory": null,
-                        "back-hair": null,
+                        face_accessory: null,
+                        back_hair: null,
                         back_hair_color: null,
                         background: null,
                         clothes: null,
