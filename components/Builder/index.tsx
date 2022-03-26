@@ -163,14 +163,9 @@ export const TrainerBuilder: FC<{
         label: "UploadAttributes",
         value: response.success ? 1 : 0,
       });
-      const tx = await wallet.signTransaction(response.data);
-      const broadcast = await sendSignedTransaction({
-        signedTransaction: tx,
-        connection: connect,
-      });
       setFinishUpload({
         finished: true,
-        success: broadcast.txid !== "" && broadcast.slot !== 0,
+        success: response.success,
       });
       setUploading(false);
     } catch (_) {

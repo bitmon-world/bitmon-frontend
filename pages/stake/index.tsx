@@ -60,7 +60,6 @@ export default function Stake(): JSX.Element {
 
   const fetch_info = useCallback(async () => {
     const info = await getStakingInfo();
-    console.log(info);
     setStakingInfo(info);
   }, []);
   useEffect(() => {

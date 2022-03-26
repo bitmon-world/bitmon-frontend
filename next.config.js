@@ -19,9 +19,6 @@ const nextConfig = {
     dest: "public",
     runtimeCaching,
   },
-  images: {
-    domains: ["arweave.net", "ipfs.io"],
-  },
 };
 
 module.exports = withPWA(nextConfig);

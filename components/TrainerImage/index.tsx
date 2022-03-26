@@ -38,7 +38,7 @@ export const TrainerImage: FC<{ uri: string; mint: string; link: boolean }> = ({
           <div className="flex items-center justify-center border-4 border-white rounded-lg cursor-pointer hover:drop-shadow-lg hover:shadow-black">
             <Image
               className={"rounded-lg"}
-              src={image}
+              src={"/api/img?imageUrl=" + image}
               width="325"
               height="325"
               alt={"Bitmon Trainer"}
@@ -49,7 +49,7 @@ export const TrainerImage: FC<{ uri: string; mint: string; link: boolean }> = ({
         <div className="flex items-center justify-center border-4 border-white rounded-lg">
           <Image
             className={"rounded-lg"}
-            src={image}
+            src={"/api/img?imageUrl=" + image}
             width="325"
             height="325"
             alt={"Bitmon Trainer"}
