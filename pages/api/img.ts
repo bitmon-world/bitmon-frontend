@@ -5,5 +5,6 @@ export default withImageProxy({
     /^https?:\/\/(.*).ipfs.nftstorage.link/,
     /^https?:\/\/arweave.net.*/,
     /^https?:\/\/ipfs.io.*/,
+    /^https?:\/\/trainers-images.bitmon.io.*/,
   ],
 });
