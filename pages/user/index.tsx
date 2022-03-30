@@ -11,8 +11,21 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { shortenString } from "../../functions/format";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import axios from "axios";
+import {
+  clusterApiUrl,
+  Connection,
+  LAMPORTS_PER_SOL,
+  PublicKey,
+} from "@solana/web3.js";
+import { AccountLayout, TOKEN_PROGRAM_ID } from "@solana/spl-token";
+import BN from "bn.js";
 
 export default function User(): JSX.Element {
+  const url =
+    process.env.NEXT_PUBLIC_SOLANA_RPC || clusterApiUrl("mainnet-beta");
+
+  const connection = new Connection(url);
+
   const logged = isLogged();
   const router = useRouter();
 
@@ -26,6 +39,34 @@ export default function User(): JSX.Element {
 
   const wallet = useWallet();
   const modal = useWalletModal();
+
+  const [tokens, setTokens] = useState(0);
+
+  const fetch_tokens = useCallback(async () => {
+    const tokenAccounts = await connection.getTokenAccountsByOwner(
+      wallet.publicKey,
+      {
+        mint: new PublicKey("EGiWZhNk3vUNJr35MbL2tY5YD6D81VVZghR2LgEFyXZh"),
+        programId: TOKEN_PROGRAM_ID,
+      }
+    );
+    if (tokenAccounts.value.length === 0) {
+      setTokens(0);
+    } else {
+      const accountInfo = AccountLayout.decode(
+        tokenAccounts.value[0].account.data
+      );
+      setTokens(
+        Number((accountInfo.amount * BigInt(100)) / BigInt(LAMPORTS_PER_SOL)) /
+          100
+      );
+    }
+  }, [connection, wallet]);
+
+  useEffect(() => {
+    if (!wallet.connected || !wallet.publicKey) return;
+    fetch_tokens();
+  }, [wallet]);
 
   const [user, setUser] = useState<{
     id: string;
@@ -123,6 +164,14 @@ export default function User(): JSX.Element {
                 </span>
               )}
             </h2>
+            {wallet.connected ? (
+              <>
+                <h2 className="text-center mt-3 mb-2 text-xl">$BIT Balance</h2>
+                <h2 className="text-center mb-3">
+                  <span className="text-red-800 text-lg">{tokens}</span>
+                </h2>
+              </>
+            ) : null}
             <h2 className="text-center mt-3 mb-2">Link or update address</h2>
             <div className="flex flex-row justify-center">{connect()}</div>
             {wallet.connected ? (
