@@ -68,7 +68,6 @@ export default function User(): JSX.Element {
           signature,
           publicKey,
         });
-        console.log(success);
         if (success.status !== 200 || !success.data.success) reject();
         resolve();
       } catch (e) {

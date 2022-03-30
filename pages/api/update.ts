@@ -2,7 +2,7 @@ import { sign } from "tweetnacl";
 import { setPlayFabUserAddress } from "../../functions/playfab/user";
 import { PublicKey } from "@solana/web3.js";
 
-export default async function APIuser(req, res) {
+export default async function APIupdate(req, res) {
   const { signature, uid, publicKey } = req.body;
 
   const valid = sign.detached.verify(
