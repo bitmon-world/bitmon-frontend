@@ -33,6 +33,7 @@
     "postcss": "8.4.7",
     "react": "17.0.2",
     "lodash": "4.17.21",
+    "tweetnacl": "1.0.3",
     "react-ga4": "1.4.1",
     "prop-types": "15.8.1",
     "merge-images": "2.0.0",

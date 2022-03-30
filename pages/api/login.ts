@@ -4,10 +4,10 @@ export default async function APIlogin(req, res) {
   const email = req.body.email;
   const password = req.body.password;
 
-  const token = await playFabLogin(email, password, process.env.TITLE_ID);
-  if (token) {
+  const userdata = await playFabLogin(email, password, process.env.TITLE_ID);
+  if (userdata) {
     res.status(200);
-    res.json({ success: true, token });
+    res.json({ success: true, userdata });
     return;
   } else {
     res.status(200);

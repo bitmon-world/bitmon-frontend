@@ -18,7 +18,7 @@ export function Login(): JSX.Element {
     return new Promise(async (resolve, reject) => {
       const res = await axios.post("/api/login", { email, password });
       if (res.data.success) {
-        dispatch(login(res.data.token));
+        dispatch(login(res.data.userdata));
         resolve();
         await router.push("/user");
       }
@@ -71,7 +71,7 @@ export function Login(): JSX.Element {
                 </div>
               </div>
               <div className="flex flex-row items-center justify-center my-2">
-                <Link href="/register" passHref>
+                <Link href="/auth/register" passHref>
                   <a className="text-blue">Create a new account</a>
                 </Link>
               </div>

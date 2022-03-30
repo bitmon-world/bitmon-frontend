@@ -4,7 +4,7 @@ export async function playFabLogin(
   email: string,
   password: string,
   titleID: string
-): Promise<string | null> {
+): Promise<{ token: string; id: string } | null> {
   try {
     const req = await axios.post(
       "https://" + titleID + ".playfabapi.com/Client/LoginWithEmailAddress",
@@ -15,7 +15,7 @@ export async function playFabLogin(
       }
     );
     if (req.status !== 200) return null;
-    return req.data.data.SessionTicket;
+    return { token: req.data.data.SessionTicket, id: req.data.data.PlayFabId };
   } catch (e) {
     return null;
   }
