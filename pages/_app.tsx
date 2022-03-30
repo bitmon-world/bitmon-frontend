@@ -12,6 +12,9 @@ import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { getStakingProgram } from "../functions/staking/get-program";
 require("@solana/wallet-adapter-react-ui/styles.css");
 import "../styles/index.css";
+import { PersistGate } from "redux-persist/integration/react";
+import { Provider as ReduxProvider } from "react-redux";
+import store, { persistor } from "../state";
 
 const WalletConnectionProvider = dynamic<{ children: ReactNode }>(
   () =>
@@ -148,9 +151,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       <WalletConnectionProvider>
         <WalletModalProvider>
           <AccountsCacheProvidersSetup>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
+            <ReduxProvider store={store}>
+              <PersistGate loading={"loading"} persistor={persistor}>
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </PersistGate>
+            </ReduxProvider>
           </AccountsCacheProvidersSetup>
         </WalletModalProvider>
       </WalletConnectionProvider>
