@@ -1,13 +1,13 @@
 import axios from "axios";
 
-async function login(
+export async function playFabLogin(
   email: string,
   password: string,
   titleID: string
 ): Promise<string | null> {
   try {
     const req = await axios.post(
-      "https://" + titleID + "playfabapi.com/Client/LoginWithEmailAddress",
+      "https://" + titleID + ".playfabapi.com/Client/LoginWithEmailAddress",
       {
         Email: email,
         Password: password,
@@ -15,7 +15,7 @@ async function login(
       }
     );
     if (req.status !== 200) return null;
-    return req.data.SessionTicket;
+    return req.data.data.SessionTicket;
   } catch (e) {
     return null;
   }

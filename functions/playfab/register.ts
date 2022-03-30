@@ -1,22 +1,22 @@
 import axios from "axios";
 
-async function register(
+export async function playFabRegister(
   email: string,
   password: string,
   titleID: string
-): Promise<string | null> {
+): Promise<boolean> {
   try {
     const req = await axios.post(
-      "https://" + titleID + "playfabapi.com/Client/RegisterPlayFabUser",
+      "https://" + titleID + ".playfabapi.com/Client/RegisterPlayFabUser",
       {
         Email: email,
         Password: password,
         TitleId: titleID,
+        RequireBothUsernameAndEmail: false,
       }
     );
-    if (req.status !== 200) return null;
-    return req.data.SessionTicket;
+    return req.status === 200;
   } catch (e) {
-    return null;
+    return false;
   }
 }

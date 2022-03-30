@@ -15,7 +15,6 @@ import "../styles/index.css";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider as ReduxProvider } from "react-redux";
 import store, { persistor } from "../state";
-import UserUpdater from "../state/user/updater";
 
 const WalletConnectionProvider = dynamic<{ children: ReactNode }>(
   () =>
@@ -154,9 +153,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           <AccountsCacheProvidersSetup>
             <ReduxProvider store={store}>
               <PersistGate loading={"loading"} persistor={persistor}>
-                <>
-                  <UserUpdater />
-                </>
                 <Layout>
                   <Component {...pageProps} />
                 </Layout>

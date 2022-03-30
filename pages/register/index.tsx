@@ -7,20 +7,18 @@ import { login } from "../../state/user/actions";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-export function Login(): JSX.Element {
+export function Register(): JSX.Element {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const dispatch = useDispatch();
   const router = useRouter();
 
-  async function loginAPI(email, password): Promise<void> {
+  async function registerAPI(email, password): Promise<void> {
     return new Promise(async (resolve, reject) => {
-      const res = await axios.post("/api/login", { email, password });
+      const res = await axios.post("/api/register", { email, password });
       if (res.data.success) {
-        dispatch(login(res.data.token));
         resolve();
-        await router.push("/user");
+        await router.push("/login");
       }
       reject();
     });
@@ -41,7 +39,7 @@ export function Login(): JSX.Element {
                 />
               </div>
               <div className="my-4">
-                <h1 className="text-3xl">Login</h1>
+                <h1 className="text-3xl">Create account</h1>
               </div>
               <div className="hidden md:inline-flex mr-10">
                 <Image
@@ -70,11 +68,6 @@ export function Login(): JSX.Element {
                   />
                 </div>
               </div>
-              <div className="flex flex-row items-center justify-center my-2">
-                <Link href="/register" passHref>
-                  <a className="text-blue">Create a new account</a>
-                </Link>
-              </div>
               <div className="my-8">
                 <div
                   className={
@@ -86,20 +79,16 @@ export function Login(): JSX.Element {
                       "py-1 px-6 text-white text-xl uppercase border-2 border-black rounded-full relative w-full"
                     }
                     onClick={async () =>
-                      await toast.promise(loginAPI(email, password), {
-                        loading: <b>Sign in</b>,
+                      await toast.promise(registerAPI(email, password), {
+                        loading: <b>Sign up</b>,
                         success: <b>Success</b>,
-                        error: (
-                          <b>
-                            Login failed, try again with a different password
-                          </b>
-                        ),
+                        error: <b>Sign up failed.</b>,
                       })
                     }
                   >
                     <div className="flex flex-row items-center justify-center">
                       <div>
-                        <h1>Sign in</h1>
+                        <h1>Sign up</h1>
                       </div>
                       <div className="absolute top-0 right-0 opacity-10">
                         <Image
@@ -120,4 +109,4 @@ export function Login(): JSX.Element {
   );
 }
 
-export default Login;
+export default Register;
