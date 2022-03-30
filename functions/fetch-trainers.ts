@@ -1,15 +1,15 @@
 import { Connection } from "@solana/web3.js";
 import axios from "axios";
-import { API_URL } from "../constants";
 import { getMintMetadata } from "./metadata";
 import { MetadataData } from "@metaplex-foundation/mpl-token-metadata";
 import { chunk } from "lodash";
+import { TRAINERS_API_URL } from "../constants";
 
 export async function fetchTrainers(
   address: string,
   connect: Connection
 ): Promise<{ staked: MetadataData[]; unstaked: MetadataData[] }> {
-  const res = await axios.get(API_URL + "/trainers/mints/" + address);
+  const res = await axios.get(TRAINERS_API_URL + "/mints/" + address);
   return {
     staked: await fetchMetadata(res.data.mints.staked, connect),
     unstaked: await fetchMetadata(res.data.mints.unstaked, connect),

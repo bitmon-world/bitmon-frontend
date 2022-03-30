@@ -7,7 +7,7 @@ export async function getStakingInfo(): Promise<{
 }> {
   return new Promise(async (resolve, reject) => {
     try {
-      const res = await axios.get("https://api.bitmon.io/trainers/staked");
+      const res = await axios.get("https://trainers-api.bitmon.io/staked");
       if (res.data.success)
         resolve({
           users_staking: res.data.users_staking,
