@@ -4,6 +4,7 @@ import { PublicKey } from "@solana/web3.js";
 import axios from "axios";
 
 export default async function APIupdate(req, res) {
+
   const { signature, uid, publicKey } = req.body;
 
   const valid = sign.detached.verify(
@@ -21,7 +22,7 @@ export default async function APIupdate(req, res) {
   const address = new PublicKey(Buffer.from(publicKey, "hex")).toBase58();
 
   try {
-    const response = await axios.post("https://bitmon-api.bitmon.io/user", {
+    const response = await axios.post("https://bitmons-api.bitmon.io/user", {
       uid,
       address,
     });
