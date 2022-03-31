@@ -1,6 +1,7 @@
 import { sign } from "tweetnacl";
 import { setPlayFabUserAddress } from "../../functions/playfab/user";
 import { PublicKey } from "@solana/web3.js";
+import axios from "axios";
 
 export default async function APIupdate(req, res) {
   const { signature, uid, publicKey } = req.body;
@@ -17,14 +18,32 @@ export default async function APIupdate(req, res) {
     return;
   }
 
-  const success = await setPlayFabUserAddress(
-    process.env.LOGIN_KEY,
-    process.env.TITLE_ID,
-    uid,
-    new PublicKey(Buffer.from(publicKey, "hex")).toBase58()
-  );
+  const address = new PublicKey(Buffer.from(publicKey, "hex")).toBase58();
 
-  res.status(200);
-  res.json({ success });
-  return;
+  try {
+    const response = await axios.post("https://bitmon-api.bitmon.io/user", {
+      uid,
+      address,
+    });
+    if (!response.data.success) {
+      res.status(200);
+      res.json({ success: false });
+      return;
+    }
+
+    const success = await setPlayFabUserAddress(
+      process.env.LOGIN_KEY,
+      process.env.TITLE_ID,
+      uid,
+      address
+    );
+
+    res.status(200);
+    res.json({ success: success });
+    return;
+  } catch (e) {
+    res.status(200);
+    res.json({ success: false });
+    return;
+  }
 }
