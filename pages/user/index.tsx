@@ -71,13 +71,19 @@ export default function User(): JSX.Element {
   const [user, setUser] = useState<{
     id: string;
     address: string | null;
+    bit: number;
   } | null>();
 
   const userInfo = useUserInformation();
 
   const fetch_user = useCallback(async () => {
     const data = await axios.post("/api/user", { uid: userInfo.id });
-    setUser({ id: userInfo.id, address: data.data.address });
+    const bit = await axios.post("/api/inventory", { uid: userInfo.id });
+    setUser({
+      id: userInfo.id,
+      address: data.data.address,
+      bit: bit.data.amount,
+    });
     setLoading(false);
   }, [userInfo]);
 
@@ -166,12 +172,20 @@ export default function User(): JSX.Element {
             </h2>
             {wallet.connected ? (
               <>
-                <h2 className="text-center mt-3 mb-2 text-xl">$BIT Balance</h2>
+                <h2 className="text-center mt-3 mb-2 text-md">
+                  On-Chain $BIT Balance
+                </h2>
                 <h2 className="text-center mb-3">
                   <span className="text-red-800 text-lg">{tokens}</span>
                 </h2>
               </>
             ) : null}
+            <h2 className="text-center mt-3 mb-2 text-md">
+              In-Game $BIT Balance
+            </h2>
+            <h2 className="text-center mb-3">
+              <span className="text-red-800 text-lg">{user.bit}</span>
+            </h2>
             <h2 className="text-center mt-3 mb-2">Link or update address</h2>
             <div className="flex flex-row justify-center">{connect()}</div>
             {wallet.connected ? (
@@ -197,6 +211,7 @@ export default function User(): JSX.Element {
                         setUser({
                           id: user.id,
                           address: wallet.publicKey.toString(),
+                          bit: user.bit,
                         })
                       );
                   }}

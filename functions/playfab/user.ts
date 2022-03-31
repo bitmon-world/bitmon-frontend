@@ -25,6 +25,30 @@ export async function getPlayFabUserAddress(
   }
 }
 
+export async function getPlayFabUserBit(
+  token: string,
+  titleID: string,
+  userID: string
+): Promise<number | null> {
+  try {
+    const req = await axios.post(
+      "https://" + titleID + ".playfabapi.com/Server/GetUserInventory",
+      {
+        PlayFabId: userID,
+      },
+      {
+        headers: {
+          "X-SecretKey": token,
+        },
+      }
+    );
+    if (req.status !== 200) return null;
+    return req.data.data.VirtualCurrency.BT;
+  } catch (e) {
+    return null;
+  }
+}
+
 export async function setPlayFabUserAddress(
   token: string,
   titleID: string,
