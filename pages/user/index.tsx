@@ -1,8 +1,13 @@
 import Image from "next/image";
-import { isLogged, useUserInformation } from "../../state/user/hooks";
+import { useUserInformation } from "../../state/user/hooks";
 import { useDispatch } from "react-redux";
 import { logout } from "../../state/user/actions";
-import { ButtonBlue, ButtonGreen, ButtonOrange } from "../../components/Button";
+import {
+  ButtonBlue,
+  ButtonBlueDisabled,
+  ButtonGreen,
+  ButtonOrange,
+} from "../../components/Button";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import { Loader } from "../../components/Loader";
@@ -19,6 +24,8 @@ import {
 } from "@solana/web3.js";
 import { AccountLayout, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import BN from "bn.js";
+import { createTransaction, parseURL } from "@solana/pay";
+import BigNumber from "bignumber.js";
 
 export default function User(): JSX.Element {
   const url =
@@ -26,7 +33,6 @@ export default function User(): JSX.Element {
 
   const connection = new Connection(url);
 
-  const logged = isLogged();
   const router = useRouter();
 
   const [loading, setLoading] = useState(true);
@@ -99,13 +105,13 @@ export default function User(): JSX.Element {
   }
 
   useEffect(() => {
-    if (!logged) {
+    if (!userInfo.login) {
       router.push("/auth/login");
       setLoading(false);
       return;
     }
     fetch_user();
-  }, [logged]);
+  }, [userInfo]);
 
   async function uploadSignature(uid, signature, publicKey) {
     return new Promise<void>(async (resolve, reject) => {
@@ -121,6 +127,32 @@ export default function User(): JSX.Element {
         reject();
       }
     });
+  }
+
+  const [amount, setAmount] = useState(0);
+
+  async function submitPayment(uid, tokens) {
+    const response = await axios.post("https://bitmons-api.bitmon.io/convert", {
+      uid,
+      amount: tokens,
+    });
+
+    const { recipient, amount, splToken, reference } = parseURL(
+      response.data.payment
+    );
+
+    const tx = await createTransaction(
+      connection,
+      wallet.publicKey,
+      recipient,
+      amount,
+      {
+        splToken,
+        reference,
+      }
+    );
+
+    await wallet.sendTransaction(tx, connection);
   }
 
   return (
@@ -221,6 +253,29 @@ export default function User(): JSX.Element {
             <div className="mt-5 w-[200px] mx-auto">
               <ButtonOrange text="Sign Out" onClick={() => logoutAPI()} />
             </div>
+            {wallet.connected ? (
+              <div className="mt-5">
+                <h2 className="text-center mt-3 mb-2">Convert $BIT</h2>
+                <div className="flex flex-row my-2 justify-between">
+                  <input
+                    className="w-[150px] mx-auto border-2 rounded-lg text-center text-sm p-1"
+                    type="number"
+                    onChange={(e) => setAmount(parseFloat(e.target.value))}
+                  />
+                </div>
+                <p className="text-blue text-center my-2">
+                  The process can take up to 10 minutes
+                </p>
+                {!amount || amount === 0 ? (
+                  <ButtonBlueDisabled text="Convert" />
+                ) : (
+                  <ButtonBlue
+                    text="Convert"
+                    onClick={() => submitPayment(user.id, amount)}
+                  />
+                )}
+              </div>
+            ) : null}
           </div>
         </>
       )}
