@@ -20,34 +20,14 @@ export default async function APIupdate(req, res) {
 
   const address = new PublicKey(Buffer.from(publicKey, "hex")).toBase58();
 
-  try {
-    const response = await axios.post(
-      "https://bitmons-api.bitmon.io/user",
-      {
-        uid,
-        address,
-      },
-      { headers: { Authorization: "Bearer " + process.env.API_KEY } }
-    );
-    if (!response.data.success) {
-      res.status(200);
-      res.json({ success: false });
-      return;
-    }
-
-    const success = await setPlayFabUserAddress(
+  const success = await setPlayFabUserAddress(
       process.env.LOGIN_KEY,
       process.env.TITLE_ID,
       uid,
       address
-    );
+  );
 
-    res.status(200);
-    res.json({ success: success });
-    return;
-  } catch (e) {
-    res.status(200);
-    res.json({ success: false });
-    return;
-  }
+  res.status(200);
+  res.json({ success: success });
+  return;
 }
