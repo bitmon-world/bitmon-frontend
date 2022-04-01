@@ -2,10 +2,7 @@ import Image from "next/image";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { useDispatch } from "react-redux";
-import { login } from "../../state/user/actions";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
 export function Register(): JSX.Element {
   const [email, setEmail] = useState<string>("");
@@ -18,7 +15,7 @@ export function Register(): JSX.Element {
       const res = await axios.post("/api/register", { email, password });
       if (res.data.success) {
         resolve();
-        await router.push("/login");
+        await router.push("/auth/login");
       }
       reject();
     });
