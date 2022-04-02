@@ -19,8 +19,7 @@ export async function isMintOwner(
     });
     if (data.value.length === 0) return false;
     const mintInfo = SPLToken.AccountLayout.decode(data.value[0].account.data);
-    const balance = SPLToken.u64.fromBuffer(mintInfo.amount);
-    return balance.gt(new BN(0));
+    return new BN(mintInfo.amount).gt(new BN(0));
   }
 }
 
@@ -33,6 +32,5 @@ export async function isMintStaked(
   });
   if (data.value.length === 0) return false;
   const mintInfo = SPLToken.AccountLayout.decode(data.value[0].account.data);
-  const balance = SPLToken.u64.fromBuffer(mintInfo.amount);
-  return balance.gt(new BN(0));
+  return new BN(mintInfo.amount).gt(new BN(0));
 }

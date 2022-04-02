@@ -21,10 +21,10 @@ export default async function APIupdate(req, res) {
   const address = new PublicKey(Buffer.from(publicKey, "hex")).toBase58();
 
   const success = await setPlayFabUserAddress(
-      process.env.LOGIN_KEY,
-      process.env.TITLE_ID,
-      uid,
-      address
+    process.env.LOGIN_KEY,
+    process.env.TITLE_ID,
+    uid,
+    address
   );
 
   res.status(200);
