@@ -25,6 +25,7 @@ import { getAuth } from "@firebase/auth";
 import { getApp } from "@firebase/app";
 import { doc, getDoc, getFirestore, setDoc } from "@firebase/firestore";
 import { sign } from "tweetnacl";
+import { sendSignedTransaction } from "../../functions/transaction";
 
 export default function User(): JSX.Element {
   const url =
@@ -164,7 +165,13 @@ export default function User(): JSX.Element {
       }
     );
 
-    await wallet.sendTransaction(tx, connection);
+    tx.feePayer = wallet.publicKey
+    tx.recentBlockhash = (
+      await connection.getLatestBlockhash("confirmed")
+    ).blockhash;
+
+    const signedTx = await wallet.signTransaction(tx);
+    await sendSignedTransaction({ signedTransaction: signedTx, connection });
   }
 
   return (
