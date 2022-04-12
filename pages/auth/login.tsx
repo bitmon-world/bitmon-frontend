@@ -2,27 +2,27 @@ import Image from "next/image";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { useDispatch } from "react-redux";
-import { login } from "../../state/user/actions";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import {getAuth, sendPasswordResetEmail, signInWithEmailAndPassword} from "@firebase/auth";
+import { getApp } from "@firebase/app";
 
 export function Login(): JSX.Element {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const dispatch = useDispatch();
   const router = useRouter();
 
   async function loginAPI(email, password): Promise<void> {
     return new Promise(async (resolve, reject) => {
-      const res = await axios.post("/api/login", { email, password });
-      if (res.data.success) {
-        dispatch(login(res.data.userdata));
-        resolve();
+      try {
+        const auth = getAuth(getApp("bitmon"));
+        await signInWithEmailAndPassword(auth, email, password);
         await router.push("/user");
+        resolve();
+      } catch (e) {
+        reject();
       }
-      reject();
     });
   }
 
@@ -75,6 +75,15 @@ export function Login(): JSX.Element {
                   <a className="text-blue">Create a new account</a>
                 </Link>
               </div>
+              <div className="flex flex-row items-center justify-center my-2">
+                  <button className="text-blue" onClick={async () => {
+                    await toast.promise(sendPasswordResetEmail(getAuth(getApp("bitmon")), email), {
+                      loading: <b>Sending password reset</b>,
+                      success: <b>Success</b>,
+                      error: <b>Failed. Make sure you written a valid email</b>,
+                    })
+                  }}>Forgot password</button>
+              </div>
               <div className="my-8">
                 <div
                   className={
@@ -89,11 +98,7 @@ export function Login(): JSX.Element {
                       await toast.promise(loginAPI(email, password), {
                         loading: <b>Sign in</b>,
                         success: <b>Success</b>,
-                        error: (
-                          <b>
-                            Login failed, try again with a different password
-                          </b>
-                        ),
+                        error: <b>Login failed.</b>,
                       })
                     }
                   >

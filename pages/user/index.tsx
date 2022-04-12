@@ -1,7 +1,4 @@
 import Image from "next/image";
-import { useUserInformation } from "../../state/user/hooks";
-import { useDispatch } from "react-redux";
-import { logout } from "../../state/user/actions";
 import {
   ButtonBlue,
   ButtonBlueDisabled,
@@ -23,9 +20,11 @@ import {
   PublicKey,
 } from "@solana/web3.js";
 import { AccountLayout, TOKEN_PROGRAM_ID } from "@solana/spl-token";
-import BN from "bn.js";
 import { createTransaction, parseURL } from "@solana/pay";
-import BigNumber from "bignumber.js";
+import { getAuth } from "@firebase/auth";
+import { getApp } from "@firebase/app";
+import { doc, getDoc, getFirestore, setDoc } from "@firebase/firestore";
+import { sign } from "tweetnacl";
 
 export default function User(): JSX.Element {
   const url =
@@ -36,12 +35,6 @@ export default function User(): JSX.Element {
   const router = useRouter();
 
   const [loading, setLoading] = useState(true);
-
-  const dispatch = useDispatch();
-
-  function logoutAPI() {
-    dispatch(logout());
-  }
 
   const wallet = useWallet();
   const modal = useWalletModal();
@@ -80,18 +73,16 @@ export default function User(): JSX.Element {
     bit: number;
   } | null>();
 
-  const userInfo = useUserInformation();
-
-  const fetch_user = useCallback(async () => {
-    const data = await axios.post("/api/user", { uid: userInfo.id });
-    const bit = await axios.post("/api/inventory", { uid: userInfo.id });
+  const fetch_user = useCallback(async (user) => {
+    const db = getFirestore(getApp("bitmon"));
+    const data = (await getDoc(doc(db, "/users/" + user.uid))).data();
     setUser({
-      id: userInfo.id,
-      address: data.data.address,
-      bit: bit.data.amount,
+      id: user.uid,
+      address: data.address,
+      bit: data.bit,
     });
     setLoading(false);
-  }, [userInfo]);
+  }, []);
 
   function connect(): JSX.Element {
     return wallet.connected ? (
@@ -105,23 +96,36 @@ export default function User(): JSX.Element {
   }
 
   useEffect(() => {
-    if (!userInfo.login) {
+    const user = getAuth(getApp("bitmon")).currentUser;
+    if (!user) {
       router.push("/auth/login");
-      setLoading(false);
       return;
     }
-    fetch_user();
-  }, [userInfo]);
+    fetch_user(user);
+  }, []);
 
   async function uploadSignature(uid, signature, publicKey) {
     return new Promise<void>(async (resolve, reject) => {
       try {
-        const success = await axios.post("/api/update", {
-          uid,
-          signature,
-          publicKey,
-        });
-        if (success.status !== 200 || !success.data.success) reject();
+        const valid = sign.detached.verify(
+          Buffer.from(uid),
+          Buffer.from(signature, "hex"),
+          Buffer.from(publicKey, "hex")
+        );
+        if (!valid) {
+          reject();
+          return;
+        }
+        const address = new PublicKey(Buffer.from(publicKey, "hex")).toBase58();
+        const db = getFirestore(getApp("bitmon"));
+        const oldData = (await getDoc(doc(db, "/users/" + uid))).data();
+        if (!oldData) {
+          const data = { address, bit: 0 };
+          await setDoc(doc(db, "/users/" + uid), data);
+        } else {
+          oldData.address = address;
+          await setDoc(doc(db, "/users/" + uid), oldData);
+        }
         resolve();
       } catch (e) {
         reject();
@@ -251,7 +255,13 @@ export default function User(): JSX.Element {
               </div>
             ) : null}
             <div className="mt-5 w-[200px] mx-auto">
-              <ButtonOrange text="Sign Out" onClick={() => logoutAPI()} />
+              <ButtonOrange
+                text="Sign Out"
+                onClick={async () => {
+                  await getAuth(getApp("bitmon")).signOut();
+                  await router.push("/auth/login");
+                }}
+              />
             </div>
             {wallet.connected ? (
               <div className="mt-5">

@@ -3,6 +3,12 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+} from "@firebase/auth";
+import { getApp } from "@firebase/app";
 
 export function Register(): JSX.Element {
   const [email, setEmail] = useState<string>("");
@@ -11,14 +17,12 @@ export function Register(): JSX.Element {
   const router = useRouter();
 
   async function registerAPI(email, password): Promise<void> {
-    return new Promise(async (resolve, reject) => {
-      const res = await axios.post("/api/register", { email, password });
-      if (res.data.success) {
-        resolve();
-        await router.push("/auth/login");
-      }
-      reject();
-    });
+    const user = await createUserWithEmailAndPassword(
+      getAuth(getApp("bitmon")),
+      email,
+      password
+    );
+    await router.push("/auth/login");
   }
 
   return (

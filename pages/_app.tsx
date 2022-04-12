@@ -10,11 +10,10 @@ import AnchorAccountCacheProvider from "../context/anchor-account-context";
 import { Program, Provider } from "@project-serum/anchor";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { getStakingProgram } from "../functions/staking/get-program";
-require("@solana/wallet-adapter-react-ui/styles.css");
 import "../styles/index.css";
-import { PersistGate } from "redux-persist/integration/react";
-import { Provider as ReduxProvider } from "react-redux";
-import store, { persistor } from "../state";
+import { initializeApp } from "@firebase/app";
+
+require("@solana/wallet-adapter-react-ui/styles.css");
 
 const WalletConnectionProvider = dynamic<{ children: ReactNode }>(
   () =>
@@ -56,12 +55,24 @@ const AccountsCacheProvidersSetup = ({ children }: { children: ReactNode }) => {
   );
 };
 
+const config = {
+  apiKey: "AIzaSyB1lNWzTn1R1O7EcvZEH6HQNThKm66ZQVA",
+  authDomain: "bitmon-world.firebaseapp.com",
+  projectId: "bitmon-world",
+  storageBucket: "bitmon-world.appspot.com",
+  messagingSenderId: "252091064896",
+  appId: "1:252091064896:web:7c77efe929f780bac975a5",
+  measurementId: "G-7V6K6KY5VD",
+};
+
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if (process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS) {
       ReactGA.initialize(process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS);
     }
   }, []);
+
+  initializeApp(config, "bitmon");
 
   return (
     <Fragment>
@@ -151,13 +162,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <WalletConnectionProvider>
         <WalletModalProvider>
           <AccountsCacheProvidersSetup>
-            <ReduxProvider store={store}>
-              <PersistGate loading={"loading"} persistor={persistor}>
-                <Layout>
-                  <Component {...pageProps} />
-                </Layout>
-              </PersistGate>
-            </ReduxProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
           </AccountsCacheProvidersSetup>
         </WalletModalProvider>
       </WalletConnectionProvider>
