@@ -291,14 +291,15 @@ export default function User(): JSX.Element {
                 <p className="text-blue text-center my-2">
                   The process can take up to 10 minutes
                 </p>
-                {!amount || amount === 0 ? (
+                {/*{!amount || amount === 0 ? (
                   <ButtonBlueDisabled text="Convert" />
                 ) : (
                   <ButtonBlue
                     text="Convert"
                     onClick={() => submitPayment(user.id, amount)}
                   />
-                )}
+                )}*/}
+                <ButtonBlueDisabled text="Convert" />
               </div>
             ) : null}
           </div>
