@@ -76,11 +76,19 @@ export default function User(): JSX.Element {
   const fetch_user = useCallback(async (user) => {
     const db = getFirestore(getApp("bitmon"));
     const data = (await getDoc(doc(db, "/users/" + user.uid))).data();
-    setUser({
-      id: user.uid,
-      address: data.address,
-      bit: data.bit,
-    });
+    if (data) {
+      setUser({
+        id: user.uid,
+        address: data.address,
+        bit: data.bit,
+      });
+    } else {
+      setUser({
+        id: user.uid,
+        address: "",
+        bit: 0,
+      });
+    }
     setLoading(false);
   }, []);
 

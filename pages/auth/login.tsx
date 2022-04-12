@@ -4,7 +4,11 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import {getAuth, sendPasswordResetEmail, signInWithEmailAndPassword} from "@firebase/auth";
+import {
+  getAuth,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "@firebase/auth";
 import { getApp } from "@firebase/app";
 
 export function Login(): JSX.Element {
@@ -76,13 +80,23 @@ export function Login(): JSX.Element {
                 </Link>
               </div>
               <div className="flex flex-row items-center justify-center my-2">
-                  <button className="text-blue" onClick={async () => {
-                    await toast.promise(sendPasswordResetEmail(getAuth(getApp("bitmon")), email), {
-                      loading: <b>Sending password reset</b>,
-                      success: <b>Success</b>,
-                      error: <b>Failed. Make sure you written a valid email</b>,
-                    })
-                  }}>Forgot password</button>
+                <button
+                  className="text-blue"
+                  onClick={async () => {
+                    await toast.promise(
+                      sendPasswordResetEmail(getAuth(getApp("bitmon")), email),
+                      {
+                        loading: <b>Sending password reset</b>,
+                        success: <b>Success</b>,
+                        error: (
+                          <b>Failed. Make sure you written a valid email</b>
+                        ),
+                      }
+                    );
+                  }}
+                >
+                  Forgot password
+                </button>
               </div>
               <div className="my-8">
                 <div
