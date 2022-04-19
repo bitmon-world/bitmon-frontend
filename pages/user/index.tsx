@@ -21,7 +21,7 @@ import {
 } from "@solana/web3.js";
 import { AccountLayout, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { createTransaction, parseURL } from "@solana/pay";
-import { getAuth } from "@firebase/auth";
+import { getAuth, sendEmailVerification } from "@firebase/auth";
 import { getApp } from "@firebase/app";
 import { doc, getDoc, getFirestore, setDoc } from "@firebase/firestore";
 import { sign } from "tweetnacl";
@@ -72,6 +72,7 @@ export default function User(): JSX.Element {
     id: string;
     address: string | null;
     bit: number;
+    verified: boolean;
   } | null>();
 
   const fetch_user = useCallback(async (user) => {
@@ -82,12 +83,14 @@ export default function User(): JSX.Element {
         id: user.uid,
         address: data.address,
         bit: data.bit,
+        verified: user.emailVerified,
       });
     } else {
       setUser({
         id: user.uid,
         address: "",
         bit: 0,
+        verified: false,
       });
     }
     setLoading(false);
@@ -165,7 +168,7 @@ export default function User(): JSX.Element {
       }
     );
 
-    tx.feePayer = wallet.publicKey
+    tx.feePayer = wallet.publicKey;
     tx.recentBlockhash = (
       await connection.getLatestBlockhash("confirmed")
     ).blockhash;
@@ -209,6 +212,25 @@ export default function User(): JSX.Element {
             <h2 className="text-sm text-center my-2">
               <span className="text-red-800 text-xs">{user.id}</span>
             </h2>
+            {!user.verified ? (
+              <div className="mt-5">
+                <ButtonBlue
+                  text="Verify Email"
+                  onClick={async () => {
+                    await toast.promise(
+                      sendEmailVerification(
+                        getAuth(getApp("bitmon")).currentUser
+                      ),
+                      {
+                        loading: <b>Sending verification email</b>,
+                        success: <b>Success</b>,
+                        error: <b>Try again</b>,
+                      }
+                    );
+                  }}
+                />
+              </div>
+            ) : null}
             <h2 className="text-center mt-3">Your linked address is</h2>
             <h2 className="text-center mb-3">
               {user.address ? (
@@ -263,6 +285,7 @@ export default function User(): JSX.Element {
                           id: user.id,
                           address: wallet.publicKey.toString(),
                           bit: user.bit,
+                          verified: user.verified,
                         })
                       );
                   }}

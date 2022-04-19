@@ -13,7 +13,11 @@ const navigation = [
   { name: "whitepaper", href: "/#whitepaper" },
   { name: "roadmap", href: "/#roadmap" },
   { name: "games", href: "/connect" },
-  { name: "marketplace", href: "https://magiceden.io/creators/bitmon_world", target:"_blank" },
+  {
+    name: "marketplace",
+    href: "https://magiceden.io/creators/bitmon_world",
+    target: "_blank",
+  },
   { name: "stake", href: "https://stake.bitmon.io/" },
 ];
 
