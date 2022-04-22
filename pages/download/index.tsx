@@ -47,7 +47,7 @@ export default function Creator(): JSX.Element {
         </div>
         <div>
           <Image
-            src="/img/trainer-creator.png"
+            src="/img/download.png"
             width="200"
             height="85"
             alt="Bitmon Separator"
