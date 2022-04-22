@@ -19,6 +19,7 @@ const navigation = [
     href: "https://magiceden.io/creators/bitmon_world",
     target: "_blank",
   },
+  { name: "download", href: "/download" },
   { name: "stake", href: "https://stake.bitmon.io/" },
 ];
 
