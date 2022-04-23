@@ -118,7 +118,7 @@ export default function User(): JSX.Element {
   async function uploadSignature(uid, signature, publicKey) {
     return new Promise<void>(async (resolve, reject) => {
       try {
-        const resp = await axios.post("http://bitmons-api.bitmon.io/connect", {
+        const resp = await axios.post("https://bitmons-api.bitmon.io/connect", {
           user: uid,
           signature,
           public_key: publicKey,
