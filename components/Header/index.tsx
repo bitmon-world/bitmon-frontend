@@ -13,7 +13,10 @@ const navigation = [
   { name: "whitepaper", href: "/#whitepaper" },
   { name: "roadmap", href: "/#roadmap" },
   { name: "games", href: "/connect" },
-  { name: "wiki", href: "https://bitmon.fandom.com/wiki/Bitmon_Adventures_Wiki" },
+  {
+    name: "wiki",
+    href: "https://bitmon.fandom.com/wiki/Bitmon_Adventures_Wiki",
+  },
   {
     name: "marketplace",
     href: "https://magiceden.io/creators/bitmon_world",
