@@ -23,7 +23,6 @@ import { AccountLayout, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { createTransaction, parseURL } from "@solana/pay";
 import { getAuth, sendEmailVerification } from "@firebase/auth";
 import { getApp } from "@firebase/app";
-import { doc, getDoc, getFirestore } from "@firebase/firestore";
 import { sendSignedTransaction } from "../../functions/transaction";
 
 export default function User(): JSX.Element {
@@ -75,13 +74,13 @@ export default function User(): JSX.Element {
   } | null>();
 
   const fetch_user = useCallback(async (user) => {
-    const db = getFirestore(getApp("bitmon"));
-    const data = (await getDoc(doc(db, "/users/" + user.uid))).data();
+    const data = (await axios.get("https://bitmons-api.bitmon.io/user/" + user.uid)).data;
+    console.log(data)
     if (data) {
       setUser({
         id: user.uid,
-        address: data.address,
-        bit: data.bit,
+        address: data.info.address,
+        bit: data.info.bit,
         verified: user.emailVerified,
       });
     } else {
