@@ -74,21 +74,31 @@ export default function User(): JSX.Element {
   } | null>();
 
   const fetch_user = useCallback(async (user) => {
-    const data = (await axios.get("https://bitmons-api.bitmon.io/user/" + user.uid)).data;
-    console.log(data)
-    if (data) {
-      setUser({
-        id: user.uid,
-        address: data.info.address,
-        bit: data.info.bit,
-        verified: user.emailVerified,
-      });
-    } else {
+    try {
+      const data = (
+        await axios.get("https://bitmons-api.bitmon.io/user/" + user.uid)
+      ).data;
+      if (data) {
+        setUser({
+          id: user.uid,
+          address: data.info.address,
+          bit: data.info.bit,
+          verified: user.emailVerified,
+        });
+      } else {
+        setUser({
+          id: user.uid,
+          address: "",
+          bit: 0,
+          verified: user.emailVerified,
+        });
+      }
+    } catch (e) {
       setUser({
         id: user.uid,
         address: "",
         bit: 0,
-        verified: false,
+        verified: user.emailVerified,
       });
     }
     setLoading(false);
