@@ -1,7 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ButtonGreen, ButtonOrange, ButtonRed } from "../Button";
 
 export const Landing = () => {
+  
+  function btnRed(): JSX.Element {
+    return  (
+      <ButtonRed
+        text="PLAY NOW"
+        onClick= {() => {
+          window.location.href='/download';
+          }}
+      />
+    )
+  }
   return (
     <div className="absolute w-full top-0">
       <div className="landing-background pb-20">
@@ -31,6 +43,10 @@ export const Landing = () => {
         <div className="flex flex-row justify-center mx-4">
           <Image src="/img/bitmon.png" width="500" height="219" />
         </div>
+        <div className="flex flex-row justify-center mx-4">
+              <div className="hidden md:block">{btnRed()}</div>
+        </div>
+        <br></br>
         <div className="text-white text-center text-2xl pb-20 mx-4">
           <h1>
             The first decentralized videogame created by the people, for the

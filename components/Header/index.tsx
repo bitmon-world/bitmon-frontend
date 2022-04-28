@@ -3,7 +3,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ButtonGreen, ButtonOrange } from "../Button";
+import { ButtonGreen, ButtonOrange, ButtonRed } from "../Button";
 import { shortenString } from "../../functions/format";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { classNames } from "../../functions/classnames";
@@ -25,6 +25,16 @@ const navigation = [
 ];
 
 export const Header: FC<{ background: boolean }> = ({ background }) => {
+  function btnRed(): JSX.Element {
+    return  (
+      <ButtonRed
+        text="PLAY NOW"
+        onClick= {() => {
+          window.location.href='/download';
+          }}
+      />
+    )
+  }
   function socials(): JSX.Element {
     return (
       <div className="flex flex-row justify-center md:mr-3 gap-x-2 mt-2">
@@ -242,6 +252,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <div className="hidden md:block">{socials()}</div>
                 <div className="hidden md:block">{connect()}</div>
+                <div className="hidden md:block">{btnRed()}</div>
               </div>
             </div>
           </div>

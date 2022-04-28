@@ -71,6 +71,13 @@ export default function Creator(): JSX.Element {
                 </p>
               </div>
         </div>
+      <div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[88px] mx-auto my-4">
+        <div className="top-0 text-xl text-white text-center">
+                <p className="text-white text-md">
+                  You will need a <a href="https://magiceden.io/marketplace/bitmon_creatures" className="text-orange">creature</a> and a <a href="https://magiceden.io/marketplace/bitmon_adventures"  className="text-orange">trainer</a> to play the game 
+                </p>
+              </div>
+      </div>
         <div className="flexArea" > 
             <div className=" mx-auto py-5 flex-item">
                 <div className="my-4">
