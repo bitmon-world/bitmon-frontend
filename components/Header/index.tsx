@@ -12,6 +12,7 @@ const navigation = [
   { name: "about", href: " /#about" },
   { name: "whitepaper", href: "/#whitepaper" },
   { name: "roadmap", href: "/#roadmap" },
+
   { name: "wiki", href: "https://bitmon.fandom.com/wiki/Bitmon_Adventures_Wiki" },
   {
     name: "marketplace",

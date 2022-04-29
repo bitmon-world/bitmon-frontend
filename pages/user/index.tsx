@@ -23,8 +23,6 @@ import { AccountLayout, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { createTransaction, parseURL } from "@solana/pay";
 import { getAuth, sendEmailVerification } from "@firebase/auth";
 import { getApp } from "@firebase/app";
-import { doc, getDoc, getFirestore, setDoc } from "@firebase/firestore";
-import { sign } from "tweetnacl";
 import { sendSignedTransaction } from "../../functions/transaction";
 
 export default function User(): JSX.Element {
@@ -76,21 +74,31 @@ export default function User(): JSX.Element {
   } | null>();
 
   const fetch_user = useCallback(async (user) => {
-    const db = getFirestore(getApp("bitmon"));
-    const data = (await getDoc(doc(db, "/users/" + user.uid))).data();
-    if (data) {
-      setUser({
-        id: user.uid,
-        address: data.address,
-        bit: data.bit,
-        verified: user.emailVerified,
-      });
-    } else {
+    try {
+      const data = (
+        await axios.get("https://bitmons-api.bitmon.io/user/" + user.uid)
+      ).data;
+      if (data) {
+        setUser({
+          id: user.uid,
+          address: data.info.address,
+          bit: data.info.bit,
+          verified: user.emailVerified,
+        });
+      } else {
+        setUser({
+          id: user.uid,
+          address: "",
+          bit: 0,
+          verified: user.emailVerified,
+        });
+      }
+    } catch (e) {
       setUser({
         id: user.uid,
         address: "",
         bit: 0,
-        verified: false,
+        verified: user.emailVerified,
       });
     }
     setLoading(false);
@@ -119,26 +127,15 @@ export default function User(): JSX.Element {
   async function uploadSignature(uid, signature, publicKey) {
     return new Promise<void>(async (resolve, reject) => {
       try {
-        const valid = sign.detached.verify(
-          Buffer.from(uid),
-          Buffer.from(signature, "hex"),
-          Buffer.from(publicKey, "hex")
-        );
-        if (!valid) {
-          reject();
-          return;
+        const resp = await axios.post("https://bitmons-api.bitmon.io/connect", {
+          user: uid,
+          signature,
+          public_key: publicKey,
+        });
+        if (resp.data.success) {
+          resolve();
         }
-        const address = new PublicKey(Buffer.from(publicKey, "hex")).toBase58();
-        const db = getFirestore(getApp("bitmon"));
-        const oldData = (await getDoc(doc(db, "/users/" + uid))).data();
-        if (!oldData) {
-          const data = { address, bit: 0 };
-          await setDoc(doc(db, "/users/" + uid), data);
-        } else {
-          oldData.address = address;
-          await setDoc(doc(db, "/users/" + uid), oldData);
-        }
-        resolve();
+        reject();
       } catch (e) {
         reject();
       }
