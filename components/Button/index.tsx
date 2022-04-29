@@ -133,3 +133,33 @@ export const ButtonOrangeDisabled: FC<{
     </div>
   );
 };
+
+export const ButtonRed: FC<{
+  text: string;
+  onClick: () => void;
+}> = ({ text, onClick }) => {
+  return (
+    <div
+      className={
+        "w-42 mx-auto rounded-full border-2 shadow shadow-black bg-orange border-red"
+      }
+    >
+      {/* <a href="https://a.com" target="_blank" data-inline="true" className="py-1 px-4 text-white text-md uppercase border-2 border-black rounded-full relative w-full"> */}
+   
+      <button
+        className="py-1 px-4 text-white text-md uppercase border-2 border-black rounded-full relative w-full"
+        onClick={() => onClick()}
+      >
+        <div className="flex flex-row items-center justify-center">
+          <div>
+            <h1>{text}</h1>
+          </div>
+          <div className="absolute top-0 right-0 opacity-10">
+            <Image src="/icons/bitmon-icon-white.svg" height="40" width="40" />
+          </div>
+        </div>
+      </button>
+      {/* </a> */}
+    </div>
+  );
+};

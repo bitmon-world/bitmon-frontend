@@ -3,7 +3,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ButtonGreen, ButtonOrange } from "../Button";
+import { ButtonGreen, ButtonOrange, ButtonRed } from "../Button";
 import { shortenString } from "../../functions/format";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { classNames } from "../../functions/classnames";
@@ -12,23 +12,34 @@ const navigation = [
   { name: "about", href: " /#about" },
   { name: "whitepaper", href: "/#whitepaper" },
   { name: "roadmap", href: "/#roadmap" },
-  { name: "games", href: "/connect" },
-  {
-    name: "wiki",
-    href: "https://bitmon.fandom.com/wiki/Bitmon_Adventures_Wiki",
-  },
+
+  { name: "wiki", href: "https://bitmon.fandom.com/wiki/Bitmon_Adventures_Wiki" },
   {
     name: "marketplace",
     href: "https://magiceden.io/creators/bitmon_world",
     target: "_blank",
   },
+
   { name: "stake", href: "https://stake.bitmon.io/" },
+  { name: "user", href: "/user" },
+  { name: "download", href: "/download" },
 ];
 
 export const Header: FC<{ background: boolean }> = ({ background }) => {
+  function btnRed(): JSX.Element {
+    return  (
+      <ButtonRed
+        text="PLAY NOW"
+        onClick= {() => {
+          window.location.href='/download';
+          }}
+      />
+    )
+  }
   function socials(): JSX.Element {
     return (
       <div className="flex flex-row justify-center md:mr-3 gap-x-2 mt-2">
+        
         <a href="https://discord.gg/bitmon" target="_blank" rel="noreferrer">
           <Image
             src="/icons/discord.svg"
@@ -47,6 +58,14 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
             width="35"
             height="35"
             alt="Bitmon Twitter"
+          />
+        </a>
+        <a href="https://discord.gg/bitmon" target="_blank" rel="noreferrer">
+          <Image
+            src="/icons/reddit.svg"
+            width="35"
+            height="35"
+            alt="Bitmon Reddit"
           />
         </a>
       </div>
@@ -227,13 +246,14 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                         </div>
                       </Link>
                     ))}
-                    {trainers()}
+                    {/*trainers()*/}
                   </div>
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <div className="hidden md:block">{socials()}</div>
                 <div className="hidden md:block">{connect()}</div>
+                <div className="hidden md:block">{btnRed()}</div>
               </div>
             </div>
           </div>
@@ -250,9 +270,11 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                   {item.name}
                 </Disclosure.Button>
               ))}
-              {trainers()}
+          
               {socials()}
+              {/*trainers()*/}
               {connect()}
+       
             </div>
           </Disclosure.Panel>
         </>
