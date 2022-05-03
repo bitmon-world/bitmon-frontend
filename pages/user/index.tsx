@@ -206,6 +206,43 @@ export default function User(): JSX.Element {
           </div>
           <div className="bg-white rounded-lg w-[300px] mx-auto py-5 my-10">
             <h2 className="text-center text-md">Welcome to Bitmon</h2>
+            {wallet.connected ? (
+              <div className="mt-5">
+                <h2 className="text-center mt-3 mb-2">Convert $BIT</h2>
+                <div className="flex flex-row my-2 justify-between">
+                  <input
+                    className="w-[150px] mx-auto border-2 rounded-lg text-center text-sm p-1"
+                    type="number"
+                    onChange={(e) => setAmount(parseFloat(e.target.value))}
+                  />
+                </div>
+               
+                {!amount || amount === 0 ? (
+                  <ButtonBlueDisabled text="Convert" />
+                ) : (
+                  <ButtonBlue
+                    text="Convert"
+                    onClick={() => submitPayment(user.id, amount)}
+                  />
+                )}
+                 <p className="text-orange text-center my-2 italic">
+                  The process can take up to 10 minutes
+                </p>
+                <p className="text-blue text-center my-2 italic">
+                  Your in-wallet $BIT is worth 10x in-game. 
+                </p>
+                <p className="text-blue text-center my-2 italic">
+                  (Ex. 2 in-wallet $BIT = 20 in-game $BIT)
+                </p>
+              </div>
+            ) : null}
+            <div className="mt-5 w-[200px] mx-auto">
+            
+            <ButtonGreenBig
+                  text="Buy $BIT"
+                  onClick={async () => window.open("https://raydium.io/swap/?inputCurrency=sol&outputCurrency=EGiWZhNk3vUNJr35MbL2tY5YD6D81VVZghR2LgEFyXZh&inputAmount=0&outputAmount=0&fixed=out", "_blank")}
+                />
+            </div>
             <h2 className="text-center mt-3">Your user ID is</h2>
             <h2 className="text-sm text-center my-2">
               <span className="text-red-800 text-xs">{user.id}</span>
@@ -299,43 +336,7 @@ export default function User(): JSX.Element {
                 }}
               />
             </div>
-            <div className="mt-5 w-[200px] mx-auto">
-            
-            <ButtonGreenBig
-                  text="Buy $BIT"
-                  onClick={async () => window.open("https://raydium.io/swap/?inputCurrency=sol&outputCurrency=EGiWZhNk3vUNJr35MbL2tY5YD6D81VVZghR2LgEFyXZh&inputAmount=0&outputAmount=0&fixed=out", "_blank")}
-                />
-            </div>
-            {wallet.connected ? (
-              <div className="mt-5">
-                <h2 className="text-center mt-3 mb-2">Convert $BIT</h2>
-                <div className="flex flex-row my-2 justify-between">
-                  <input
-                    className="w-[150px] mx-auto border-2 rounded-lg text-center text-sm p-1"
-                    type="number"
-                    onChange={(e) => setAmount(parseFloat(e.target.value))}
-                  />
-                </div>
-               
-                {!amount || amount === 0 ? (
-                  <ButtonBlueDisabled text="Convert" />
-                ) : (
-                  <ButtonBlue
-                    text="Convert"
-                    onClick={() => submitPayment(user.id, amount)}
-                  />
-                )}
-                 <p className="text-orange text-center my-2 italic">
-                  The process can take up to 10 minutes
-                </p>
-                <p className="text-blue text-center my-2 italic">
-                  Your in-wallet $BIT is worth 10x in-game. 
-                </p>
-                <p className="text-blue text-center my-2 italic">
-                  (Ex. 2 in-wallet $BIT = 20 in-game $BIT)
-                </p>
-              </div>
-            ) : null}
+ 
           </div>
         </>
       )}
