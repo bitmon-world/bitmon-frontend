@@ -157,13 +157,11 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
       <Menu as="div" className="relative ">
         <div>
         <Menu.Button className="text-sm mx-0.5 px-2 py-2 text-white inline-flex w-full justify-center rounded-md bg-black bg-opacity-5 hover:bg-opacity-30">
-            {/* <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey uppercase"> */}
               $BIT TOKEN
               <ChevronDownIcon
               className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100"
               aria-hidden="true"
               />
-            {/* </div> */}
           </Menu.Button>
         </div>
         <Transition
@@ -178,7 +176,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
           <Menu.Items className="origin-top-right md:absolute left-0 md:right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
             <Menu.Item>
               <div className="block px-4 py-2 text-sm uppercase">
-                <Link href="/creator" passHref>
+                <Link href="https://www.coingecko.com/es/monedas/bitmon" passHref>
                   What is $BIT?
                 </Link>
               </div>
@@ -213,6 +211,17 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                   rel="noreferrer"
                 >
                   Tokenomics
+                </a>
+              </Link>
+            </div>
+            <div className="block px-4 py-2 text-sm">
+              <Link href="https://www.coingecko.com/es/monedas/bitmon" passHref>
+                <a
+                  href="https://www.coingecko.com/es/monedas/bitmon"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  CoinGecko
                 </a>
               </Link>
             </div>
