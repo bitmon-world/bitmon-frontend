@@ -7,25 +7,20 @@ import { ButtonGreen, ButtonOrange, ButtonRed } from "../Button";
 import { shortenString } from "../../functions/format";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { classNames } from "../../functions/classnames";
+import { ChevronDownIcon } from '@heroicons/react/solid'
 
 const navigation = [
-  { name: "$BIT Token", href: "https://raydium.io/swap/?inputCurrency=sol&outputCurrency=EGiWZhNk3vUNJr35MbL2tY5YD6D81VVZghR2LgEFyXZh&inputAmount=0&outputAmount=0&fixed=out" },
   { name: "litepaper", href: "/#litepaper" },
-  { name: "roadmap", href: "/#roadmap" },
-  { name: "wiki", href: "https://bitmon.fandom.com/wiki/Bitmon_Adventures_Wiki" },
-  {
-    name: "marketplace",
-    href: "https://magiceden.io/creators/bitmon_world",
-    target: "_blank",
-  },
-
-  { name: "stake", href: "https://stake.bitmon.io/" },
-  { name: "my user", href: "/user" },
- 
-
+  { name: "roadmap",   href: "/#roadmap" },
+  { name: "wiki",      href: "https://bitmon.fandom.com/wiki/Bitmon_Adventures_Wiki" },
+  { name: "market",    href: "https://magiceden.io/creators/bitmon_world", target: "_blank"},
+  { name: "stake",     href: "https://stake.bitmon.io/" },
+  { name: "my user",   href: "/user" },
+  { name: "creator",   href: "/creator" }
 ];
 
 export const Header: FC<{ background: boolean }> = ({ background }) => {
+
   function btnRed(): JSX.Element {
     return  (
       <ButtonRed
@@ -36,6 +31,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
       />
     )
   }
+
   function socials(): JSX.Element {
     return (
       <div className="flex flex-row justify-center md:mr-3 gap-x-2 mt-2">
@@ -117,7 +113,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Marketplace
+                  Market
                 </a>
               </Link>
             </div>
@@ -154,6 +150,65 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                 </a>
               )}
             </Menu.Item>
+          </Menu.Items>
+        </Transition>
+      </Menu>
+    );
+  }
+
+  function bitToken(): JSX.Element {
+    return (
+      <Menu as="div" className="relative inline-block">
+        <div>
+        <Menu.Button className="text-sm mx-0.5 px-2 py-2 text-white inline-flex w-full justify-center rounded-md bg-black bg-opacity-10 hover:bg-opacity-30">
+            {/* <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey uppercase"> */}
+              $BIT TOKEN
+              <ChevronDownIcon
+              className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100"
+              aria-hidden="true"
+              />
+            {/* </div> */}
+          </Menu.Button>
+        </div>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Menu.Items className="origin-top-right md:absolute left-0 md:right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Menu.Item>
+              <div className="block px-4 py-2 text-sm uppercase">
+                <Link href="/creator" passHref>
+                  What is $BIT?
+                </Link>
+              </div>
+            </Menu.Item>
+            <div className="block px-4 py-2 text-sm uppercase">
+              <Link href="https://raydium.io/swap/?inputCurrency=sol&outputCurrency=EGiWZhNk3vUNJr35MbL2tY5YD6D81VVZghR2LgEFyXZh&inputAmount=0&outputAmount=0&fixed=out" passHref>
+                <a
+                  href="https://raydium.io/swap/?inputCurrency=sol&outputCurrency=EGiWZhNk3vUNJr35MbL2tY5YD6D81VVZghR2LgEFyXZh&inputAmount=0&outputAmount=0&fixed=out"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Buy $BIT
+                </a>
+              </Link>
+            </div>
+            <div className="block px-4 py-2 text-sm uppercase">
+              <Link href="https://magiceden.io/creators/bitmon_world" passHref>
+                <a
+                  href="https://magiceden.io/creators/bitmon_world"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Tokenomics
+                </a>
+              </Link>
+            </div>
           </Menu.Items>
         </Transition>
       </Menu>
@@ -239,6 +294,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex flex-row justify-end uppercase text-lg items-center">
+                    {/* {bitToken()} */}
                     {navigation.map((item) => (
                       <Link key={item.name} href={item.href}>
                         <div className="text-sm mx-1.5 py-1 text-white cursor-pointer hover:text-grey">
@@ -246,7 +302,8 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                         </div>
                       </Link>
                     ))}
-                    {/*trainers()*/}
+                    {bitToken()}
+
                   </div>
                 </div>
               </div>
@@ -270,9 +327,8 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                   {item.name}
                 </Disclosure.Button>
               ))}
-          
+              {trainers()}
               {socials()}
-              {/*trainers()*/}
               {connect()}
        
             </div>
