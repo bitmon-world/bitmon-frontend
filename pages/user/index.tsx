@@ -4,6 +4,7 @@ import {
   ButtonBlueDisabled,
   ButtonGreen,
   ButtonOrange,
+  ButtonGreenBig
 } from "../../components/Button";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
@@ -298,6 +299,13 @@ export default function User(): JSX.Element {
                 }}
               />
             </div>
+            <div className="mt-5 w-[200px] mx-auto">
+            
+            <ButtonBlue
+                  text="Buy $BIT"
+                  onClick={async () => window.open("https://raydium.io/swap/?inputCurrency=sol&outputCurrency=EGiWZhNk3vUNJr35MbL2tY5YD6D81VVZghR2LgEFyXZh&inputAmount=0&outputAmount=0&fixed=out", "_blank")}
+                />
+            </div>
             {wallet.connected ? (
               <div className="mt-5">
                 <h2 className="text-center mt-3 mb-2">Convert $BIT</h2>
@@ -308,17 +316,24 @@ export default function User(): JSX.Element {
                     onChange={(e) => setAmount(parseFloat(e.target.value))}
                   />
                 </div>
-                <p className="text-blue text-center my-2">
-                  The process can take up to 10 minutes
-                </p>
+               
                 {!amount || amount === 0 ? (
                   <ButtonBlueDisabled text="Convert" />
                 ) : (
-                  <ButtonBlue
+                  <ButtonGreenBig
                     text="Convert"
                     onClick={() => submitPayment(user.id, amount)}
                   />
                 )}
+                 <p className="text-orange text-center my-2 italic">
+                  The process can take up to 10 minutes
+                </p>
+                <p className="text-blue text-center my-2 italic">
+                  Your in-wallet $BIT is worth 10x in-game. 
+                </p>
+                <p className="text-blue text-center my-2 italic">
+                  (Ex. 2 in-wallet $BIT = 20 in-game $BIT)
+                </p>
               </div>
             ) : null}
           </div>

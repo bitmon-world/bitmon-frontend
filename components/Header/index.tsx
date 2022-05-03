@@ -12,11 +12,11 @@ import { ChevronDownIcon } from '@heroicons/react/solid'
 const navigation = [
   { name: "litepaper", href: "/#litepaper" },
   { name: "roadmap",   href: "/#roadmap" },
-  { name: "wiki",      href: "https://bitmon.fandom.com/wiki/Bitmon_Adventures_Wiki" },
-  { name: "market",    href: "https://magiceden.io/creators/bitmon_world", target: "_blank"},
-  { name: "stake",     href: "https://stake.bitmon.io/" },
   { name: "my user",   href: "/user" },
-  { name: "creator",   href: "/creator" }
+  // { name: "wiki",      href: "https://bitmon.fandom.com/wiki/Bitmon_Adventures_Wiki" },
+  // { name: "market",    href: "https://magiceden.io/creators/bitmon_world", target: "_blank"},
+  // { name: "stake",     href: "https://stake.bitmon.io/" },
+  // { name: "creator",   href: "/creator" }
 ];
 
 export const Header: FC<{ background: boolean }> = ({ background }) => {
@@ -30,97 +30,6 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
           }}
       />
     )
-  }
-
-  function socials(): JSX.Element {
-    return (
-      <div className="flex flex-row justify-center md:mr-3 gap-x-2 mt-2">
-        
-        <a href="https://discord.gg/bitmon" target="_blank" rel="noreferrer">
-          <Image
-            src="/icons/discord.svg"
-            width="35"
-            height="35"
-            alt="Bitmon Discord"
-          />
-        </a>
-        <a
-          href="https://twitter.com/BitmonWorld"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <Image
-            src="/icons/twitter.svg"
-            width="35"
-            height="35"
-            alt="Bitmon Twitter"
-          />
-        </a>
-        <a href="https://discord.gg/bitmon" target="_blank" rel="noreferrer">
-          <Image
-            src="/icons/reddit.svg"
-            width="35"
-            height="35"
-            alt="Bitmon Reddit"
-          />
-        </a>
-      </div>
-    );
-  }
-
-  function trainers(): JSX.Element {
-    return (
-      <Menu as="div" className="relative">
-        <div>
-          <Menu.Button>
-            <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey uppercase">
-              <p>Trainers</p>
-            </div>
-          </Menu.Button>
-        </div>
-        <Transition
-          as={Fragment}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-        >
-          <Menu.Items className="origin-top-right md:absolute left-0 md:right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <Menu.Item>
-              <div className="block px-4 py-2 text-sm uppercase">
-                <Link href="/creator" passHref>
-                  Creator
-                </Link>
-              </div>
-            </Menu.Item>
-            <div className="block px-4 py-2 text-sm uppercase">
-              <Link href="https://stake.bitmon.io" passHref>
-                <a
-                  href="https://stake.bitmon.io"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Stake
-                </a>
-              </Link>
-            </div>
-            <div className="block px-4 py-2 text-sm uppercase">
-              <Link href="https://magiceden.io/creators/bitmon_world" passHref>
-                <a
-                  href="https://magiceden.io/creators/bitmon_world"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Market
-                </a>
-              </Link>
-            </div>
-          </Menu.Items>
-        </Transition>
-      </Menu>
-    );
   }
 
   function bitmons(): JSX.Element {
@@ -156,11 +65,98 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
     );
   }
 
+  function socials(): JSX.Element {
+    return (
+      <div className="flex flex-row justify-center md:mr-3 gap-x-2 mt-2">
+        
+        <a href="https://discord.gg/bitmon" target="_blank" rel="noreferrer">
+          <Image
+            src="/icons/discord.svg"
+            width="35"
+            height="35"
+            alt="Bitmon Discord"
+          />
+        </a>
+        <a
+          href="https://twitter.com/BitmonWorld"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Image
+            src="/icons/twitter.svg"
+            width="35"
+            height="35"
+            alt="Bitmon Twitter"
+          />
+        </a>
+        <a href="https://www.reddit.com/r/bitmon" target="_blank" rel="noreferrer">
+          <Image
+            src="/icons/reddit.svg"
+            width="35"
+            height="35"
+            alt="Bitmon Reddit"
+          />
+        </a>
+      </div>
+    );
+  }
+
+  function trainers(): JSX.Element {
+    return (
+      <Menu as="div" className="relative ">
+        <div>
+        <Menu.Button className="text-sm mx-0.5 px-2 py-2 text-white inline-flex w-full justify-center rounded-md bg-black bg-opacity-5 hover:bg-opacity-30 uppercase">
+              <p>Trainer</p>
+              <ChevronDownIcon
+              className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100"
+              aria-hidden="true"
+              />
+          </Menu.Button>
+        </div>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Menu.Items className="origin-top-right md:absolute left-0 md:right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Menu.Item>
+              <div className="block px-4 py-2 text-sm uppercase">
+                <Link href="/stake" passHref>
+                  Stake
+                </Link>
+              </div>
+            </Menu.Item>
+            <div className="block px-4 py-2 text-sm uppercase">
+              <Link href="/creator" passHref>
+                  Customize
+              </Link>
+            </div>
+            <div className="block px-4 py-2 text-sm uppercase">
+              <Link href="https://magiceden.io/creators/bitmon_world" passHref>
+                <a
+                  href="https://magiceden.io/creators/bitmon_world"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Market (Buy)
+                </a>
+              </Link>
+            </div>
+          </Menu.Items>
+        </Transition>
+      </Menu>
+    );
+  }
+
   function bitToken(): JSX.Element {
     return (
-      <Menu as="div" className="relative inline-block">
+      <Menu as="div" className="relative ">
         <div>
-        <Menu.Button className="text-sm mx-0.5 px-2 py-2 text-white inline-flex w-full justify-center rounded-md bg-black bg-opacity-10 hover:bg-opacity-30">
+        <Menu.Button className="text-sm mx-0.5 px-2 py-2 text-white inline-flex w-full justify-center rounded-md bg-black bg-opacity-5 hover:bg-opacity-30">
             {/* <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey uppercase"> */}
               $BIT TOKEN
               <ChevronDownIcon
@@ -199,6 +195,17 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
               </Link>
             </div>
             <div className="block px-4 py-2 text-sm uppercase">
+              <Link href="https://stake.bitmon.io/" passHref>
+                <a
+                  href="https://stake.bitmon.io/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Stake (Claim $BIT)
+                </a>
+              </Link>
+            </div>
+            <div className="block px-4 py-2 text-sm uppercase">
               <Link href="https://magiceden.io/creators/bitmon_world" passHref>
                 <a
                   href="https://magiceden.io/creators/bitmon_world"
@@ -206,6 +213,82 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                   rel="noreferrer"
                 >
                   Tokenomics
+                </a>
+              </Link>
+            </div>
+          </Menu.Items>
+        </Transition>
+      </Menu>
+    );
+  }
+
+  function community(): JSX.Element {
+    return (
+      <Menu as="div" className="relative ">
+        <div>
+        <Menu.Button className="text-sm mx-0.5 px-2 py-2 text-white inline-flex w-full justify-center rounded-md bg-black bg-opacity-5 hover:bg-opacity-30 uppercase">
+            {/* <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey uppercase"> */}
+              Community
+              <ChevronDownIcon
+              className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100"
+              aria-hidden="true"
+              />
+            {/* </div> */}
+          </Menu.Button>
+        </div>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Menu.Items className="origin-top-right md:absolute left-0 md:right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Menu.Item>
+              <div className="block px-4 py-2 text-sm uppercase">
+                <Link href="https://bitmon.fandom.com/wiki/Bitmon_Adventures_Wiki" passHref>
+                <a
+                  href="https://bitmon.fandom.com/wiki/Bitmon_Adventures_Wiki"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Wiki
+                </a>
+                </Link>
+              </div>
+            </Menu.Item>
+            <div className="block px-4 py-2 text-sm uppercase">
+              <Link href="https://twitter.com/BitmonWorld" passHref>
+                <a
+                  href="https://twitter.com/BitmonWorld"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Twitter
+                </a>
+              </Link>
+            </div>
+            <div className="block px-4 py-2 text-sm uppercase">
+              <Link href="https://discord.gg/bitmon" passHref>
+                <a
+                  href="https://discord.gg/bitmon"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Discord
+                </a>
+              </Link>
+            </div>
+            <div className="block px-4 py-2 text-sm uppercase">
+              <Link href="https://www.reddit.com/r/bitmon" passHref>
+                <a
+                  href="https://www.reddit.com/r/bitmon"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Reddit
                 </a>
               </Link>
             </div>
@@ -294,7 +377,9 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex flex-row justify-end uppercase text-lg items-center">
-                    {/* {bitToken()} */}
+                    {bitToken()}
+                    {trainers()}
+                    {community()}
                     {navigation.map((item) => (
                       <Link key={item.name} href={item.href}>
                         <div className="text-sm mx-1.5 py-1 text-white cursor-pointer hover:text-grey">
@@ -302,8 +387,6 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                         </div>
                       </Link>
                     ))}
-                    {bitToken()}
-
                   </div>
                 </div>
               </div>
@@ -327,10 +410,11 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                   {item.name}
                 </Disclosure.Button>
               ))}
+              {bitToken()}
               {trainers()}
+              {community()}
               {socials()}
               {connect()}
-       
             </div>
           </Disclosure.Panel>
         </>
