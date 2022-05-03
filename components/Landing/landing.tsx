@@ -101,7 +101,7 @@ export const Landing = () => {
           </div>
         </div>
       </div>
-      <div id="whitepaper" className="bg-purple relative pb-20">
+      <div id="litepaper" className="bg-purple relative pb-20">
         <div className="mx-8 md:mx-20 lg:mx-40 pt-32">
           <h1 className="text-orange text-xl">Unlock your</h1>
           <h1 className="text-4xl uppercase text-white">Trainer Potential</h1>
@@ -125,10 +125,10 @@ export const Landing = () => {
                 }
               >
                 <div className="py-1 px-6 text-white text-xl uppercase border-2 border-black rounded-full relative w-full">
-                  <Link href={"/pdf/whitepaper.pdf"} passHref>
+                  <Link href={"/pdf/litepaper.pdf"} passHref>
                     <div className="flex flex-row items-center justify-center">
                       <div>
-                        <h1>Whitepaper</h1>
+                        <h1>Litepaper</h1>
                       </div>
                       <div className="absolute top-0 right-0 opacity-10">
                         <Image

@@ -9,10 +9,9 @@ import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { classNames } from "../../functions/classnames";
 
 const navigation = [
-  { name: "about", href: " /#about" },
-  { name: "whitepaper", href: "/#whitepaper" },
+  { name: "$BIT Token", href: "https://raydium.io/swap/?inputCurrency=sol&outputCurrency=EGiWZhNk3vUNJr35MbL2tY5YD6D81VVZghR2LgEFyXZh&inputAmount=0&outputAmount=0&fixed=out" },
+  { name: "litepaper", href: "/#litepaper" },
   { name: "roadmap", href: "/#roadmap" },
-
   { name: "wiki", href: "https://bitmon.fandom.com/wiki/Bitmon_Adventures_Wiki" },
   {
     name: "marketplace",
@@ -21,8 +20,9 @@ const navigation = [
   },
 
   { name: "stake", href: "https://stake.bitmon.io/" },
-  { name: "user", href: "/user" },
-  { name: "download", href: "/download" },
+  { name: "my user", href: "/user" },
+ 
+
 ];
 
 export const Header: FC<{ background: boolean }> = ({ background }) => {
