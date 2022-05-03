@@ -301,7 +301,7 @@ export default function User(): JSX.Element {
             </div>
             <div className="mt-5 w-[200px] mx-auto">
             
-            <ButtonBlue
+            <ButtonGreenBig
                   text="Buy $BIT"
                   onClick={async () => window.open("https://raydium.io/swap/?inputCurrency=sol&outputCurrency=EGiWZhNk3vUNJr35MbL2tY5YD6D81VVZghR2LgEFyXZh&inputAmount=0&outputAmount=0&fixed=out", "_blank")}
                 />
@@ -320,7 +320,7 @@ export default function User(): JSX.Element {
                 {!amount || amount === 0 ? (
                   <ButtonBlueDisabled text="Convert" />
                 ) : (
-                  <ButtonGreenBig
+                  <ButtonBlue
                     text="Convert"
                     onClick={() => submitPayment(user.id, amount)}
                   />
