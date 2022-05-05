@@ -176,7 +176,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
           <Menu.Items className="origin-top-right md:absolute left-0 md:right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
             <Menu.Item>
               <div className="block px-4 py-2 text-sm uppercase">
-                <Link href="https://www.coingecko.com/es/monedas/bitmon" passHref>
+                <Link href="https://bitmon-adventures.gitbook.io/welcome-to-gitbook/" passHref>
                   What is $BIT?
                 </Link>
               </div>
@@ -204,9 +204,9 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
               </Link>
             </div>
             <div className="block px-4 py-2 text-sm uppercase">
-              <Link href="https://magiceden.io/creators/bitmon_world" passHref>
+              <Link href="https://bitmon-adventures.gitbook.io/welcome-to-gitbook/bit-tokenomics/emmisions" passHref>
                 <a
-                  href="https://magiceden.io/creators/bitmon_world"
+                  href="https://bitmon-adventures.gitbook.io/welcome-to-gitbook/bit-tokenomics/emmisions"
                   target="_blank"
                   rel="noreferrer"
                 >
