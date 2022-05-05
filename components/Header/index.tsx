@@ -125,7 +125,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
           <Menu.Items className="origin-top-right md:absolute left-0 md:right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
             <Menu.Item>
               <div className="block px-4 py-2 text-sm uppercase">
-                <Link href="/stake" passHref>
+                <Link href="https://stake.bitmon.io/" passHref>
                   Stake
                 </Link>
               </div>
