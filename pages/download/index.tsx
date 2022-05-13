@@ -74,7 +74,7 @@ export default function Creator(): JSX.Element {
       <div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[88px] mx-auto my-4">
         <div className="top-0 text-xl text-white text-center">
                 <p className="text-white text-md">
-                  You will need a <a href="https://magiceden.io/marketplace/bitmon_creatures" className="text-orange">Bitmon Creature</a> and a <a href="https://magiceden.io/marketplace/bitmon_adventures"  className="text-orange">Bitmon Trainer</a> to play the alpha version of the game. 
+                  You will need a <a href="https://magiceden.io/marketplace/bitmon_creatures" className="text-orange">Bitmon Creature</a> to play the alpha version of the game. 
                 </p>
               </div>
       </div>
