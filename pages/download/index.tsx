@@ -81,7 +81,7 @@ export default function Creator(): JSX.Element {
         <div className="flexArea" > 
             <div className=" mx-auto py-5 flex-item">
                 <div className="my-4">
-                    <a href="https://github.com/bitmon-world/bitmon-releases/releases/latest/download/Bitmon_windows.zip" target="_blank" data-inline="true">
+                    <a href="https://github.com/vibingstudio/vibing-launcher/releases/download/v0.1.1/Vibing.Launcher.Setup.0.1.1.exe" target="_blank" data-inline="true">
                         <div
                             className={
                                 "w-40 mx-auto rounded-full border-2 shadow shadow-blue bg-blue border-blue display:inline-block"
@@ -111,7 +111,7 @@ export default function Creator(): JSX.Element {
             </div>
             <div className="  mx-auto py-5 flex-row">
                 <div className="my-4">
-                    <a href="https://github.com/bitmon-world/bitmon-releases/releases/latest/download/Bitmon_macos.zip" target="_blank" data-inline="true">
+                    <a href="https://github.com/vibingstudio/vibing-launcher/releases/download/v0.1.1/Vibing.Launcher-0.1.1.dmg" target="_blank" data-inline="true">
                         <div
                             className={
                                 "w-40 mx-auto rounded-full border-2 shadow shadow-blue bg-blue border-blue"
