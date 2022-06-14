@@ -56,6 +56,10 @@ export function Login(): JSX.Element {
                 />
               </div>
             </div>
+            <div className="pt-2 text-center flex flex-row justify-center items-center gap-x-10">
+              <p className="text-l">Please create your account and <span className="text-orange">verify it</span> to be able to access the game.</p>
+            </div>
+            <br></br>
             <div className="bg-white rounded-lg w-[350px] mx-auto py-5">
               <div className="my-4">
                 <p className="text-center font-bold">Email</p>

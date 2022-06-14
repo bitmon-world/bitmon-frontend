@@ -57,7 +57,7 @@ export default function User(): JSX.Element {
       );
       setTokens(
         Number((accountInfo.amount * BigInt(100)) / BigInt(LAMPORTS_PER_SOL)) /
-          100
+        100
       );
     }
   }, [connection, wallet]);
@@ -183,161 +183,319 @@ export default function User(): JSX.Element {
         </div>
       ) : (
         <>
-          <div className="pt-14 text-center flex flex-row justify-center items-center gap-x-10">
-            <div className="hidden md:inline-flex ml-10">
-              <Image
-                src="/img/separator-right.svg"
-                width="250"
-                height="17"
-                alt="Bitmon Separator"
-              />
-            </div>
-            <div>
-              <h1 className="text-4xl uppercase">Welcome</h1>
-            </div>
-            <div className="hidden md:inline-flex mr-10">
-              <Image
-                src="/img/separator-left.svg"
-                width="250"
-                height="17"
-                alt="Bitmon Separator"
-              />
-            </div>
-          </div>
-          <div className="bg-white rounded-lg w-[300px] mx-auto py-5 my-10">
-            <h2 className="text-center text-md">Welcome to Bitmon</h2>
-            {wallet.connected ? (
-              <div className="mt-5">
-                <h2 className="text-center mt-3 mb-2">Convert $BIT</h2>
-                <div className="flex flex-row my-2 justify-between">
-                  <input
-                    className="w-[150px] mx-auto border-2 rounded-lg text-center text-sm p-1"
-                    type="number"
-                    onChange={(e) => setAmount(parseFloat(e.target.value))}
-                  />
-                </div>
-               
-                {!amount || amount === 0 ? (
-                  <ButtonBlueDisabled text="Convert" />
-                ) : (
-                  <ButtonBlue
-                    text="Convert"
-                    onClick={() => submitPayment(user.id, amount)}
-                  />
-                )}
-                 <p className="text-orange text-center my-2 italic">
-                  The process can take up to 10 minutes
-                </p>
-                <p className="text-blue text-center my-2 italic">
-                  Your in-wallet $BIT is worth 10x in-game. 
-                </p>
-                <p className="text-blue text-center my-2 italic">
-                  (Ex. 2 in-wallet $BIT = 20 in-game $BIT)
-                </p>
-              </div>
-            ) : null}
-            <div className="mt-5 w-[200px] mx-auto">
-            
-            <ButtonGreenBig
-                  text="Buy $BIT"
-                  onClick={async () => window.open("https://raydium.io/swap/?inputCurrency=sol&outputCurrency=EGiWZhNk3vUNJr35MbL2tY5YD6D81VVZghR2LgEFyXZh&inputAmount=0&outputAmount=0&fixed=out", "_blank")}
+          {/* DOWNLOAD */}
+          <>
+            <div className="pt-14 text-center flex flex-row justify-center items-center gap-x-10">
+              <div className="hidden md:inline-flex ml-10">
+                <Image
+                  src="/img/separator-right.svg"
+                  width="250"
+                  height="17"
+                  alt="Bitmon Separator"
                 />
+              </div>
+              <div>
+                <Image
+                  src="/img/download.png"
+                  width="200"
+                  height="85"
+                  alt="Bitmon Separator"
+                />
+              </div>
+              <div className="hidden md:inline-flex mr-10">
+                <Image
+                  src="/img/separator-left.svg"
+                  width="250"
+                  height="17"
+                  alt="Bitmon Separator"
+                />
+              </div>
             </div>
-            <h2 className="text-center mt-3">Your user ID is</h2>
-            <h2 className="text-sm text-center my-2">
-              <span className="text-red-800 text-xs">{user.id}</span>
-            </h2>
+            <div className="mt-6">
             {!user.verified ? (
-              <div className="mt-5">
-                <ButtonBlue
-                  text="Verify Email"
-                  onClick={async () => {
-                    await toast.promise(
-                      sendEmailVerification(
-                        getAuth(getApp("bitmon")).currentUser
-                      ),
-                      {
-                        loading: <b>Sending verification email</b>,
-                        success: <b>Success</b>,
-                        error: <b>Try again</b>,
-                      }
-                    );
-                  }}
-                />
-              </div>
-            ) : null}
-            <h2 className="text-center mt-3">Your linked address is</h2>
-            <h2 className="text-center mb-3">
-              {user.address ? (
-                <span className="text-red-800 text-xs">
-                  {shortenString(user.address, 24)}
-                </span>
-              ) : (
-                <span className="text-red-800 text-xs">
-                  You don't have a linked address
-                </span>
-              )}
-            </h2>
-            {wallet.connected ? (
-              <>
-                <h2 className="text-center mt-3 mb-2 text-md">
-                  On-Chain $BIT Balance
-                </h2>
-                <h2 className="text-center mb-3">
-                  <span className="text-red-800 text-lg">{tokens}</span>
-                </h2>
-              </>
-            ) : null}
-            <h2 className="text-center mt-3 mb-2 text-md">
-              In-Game $BIT Balance
-            </h2>
-            <h2 className="text-center mb-3">
-              <span className="text-red-800 text-lg">{user.bit}</span>
-            </h2>
-            <h2 className="text-center mt-3 mb-2">Link or update address</h2>
-            <div className="flex flex-row justify-center">{connect()}</div>
-            {wallet.connected ? (
-              <div className="mt-5">
-                <ButtonBlue
-                  text="Update"
-                  onClick={async () => {
-                    const sig = await wallet.signMessage(Buffer.from(user.id));
-                    toast
-                      .promise(
-                        uploadSignature(
-                          user.id,
-                          Buffer.from(sig).toString("hex"),
-                          wallet.publicKey.toBuffer().toString("hex")
+                <div className="mt-5">
+                  <p className="text-orange text-center mt-3 mb-2 italic text-lg">
+                    <b>You are not verified yet, click verify and check your mail.</b>
+                  </p>
+                  <ButtonBlue
+                    text="Verify Email"
+                    onClick={async () => {
+                      await toast.promise(
+                        sendEmailVerification(
+                          getAuth(getApp("bitmon")).currentUser
                         ),
                         {
-                          loading: <b>Updating address</b>,
+                          loading: <b>Sending verification email</b>,
                           success: <b>Success</b>,
                           error: <b>Try again</b>,
                         }
-                      )
-                      .then(() =>
-                        setUser({
-                          id: user.id,
-                          address: wallet.publicKey.toString(),
-                          bit: user.bit,
-                          verified: user.verified,
-                        })
                       );
+                    }}
+                  />
+                </div>
+              ) : null}
+              <div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[88px] mx-auto my-4">
+                <div className="top-0 text-xl text-white text-center">
+                  <p>
+
+                  </p>
+                  <p className="text-white text-md">
+                    You will need a <a href="https://magiceden.io/marketplace/bitmon_creatures" className="text-orange">Bitmon Creature</a> to play the alpha version of the game.
+                  </p>
+                </div>
+              </div>
+              <div className="flexArea">
+                <div className=" mx-auto py-5 flex-item">
+                  <div className="my-4">
+                    <a href="https://magiceden.io/marketplace/bitmon_creatures" target="_blank" data-inline="true">
+                      <div
+                        className={
+                          "w-60 mx-auto rounded-full border-2 shadow shadow-green bg-green border-green display:inline-block"
+                        }
+                      >
+                        <button
+                          className={
+                            "py-1 px-6 text-white text-xl uppercase border-2 border-black rounded-full relative w-full"
+                          }
+                        >
+                          <div className="flex flex-row items-center justify-center">
+                            <div>
+                              <h1>Buy a Bitmon Creature</h1>
+                            </div>
+                            <div className="absolute top-0 right-0 opacity-10">
+                              <Image
+                                src="/icons/bitmon-icon-white.svg"
+                                height="40"
+                                width="40"
+                              />
+                            </div>
+                          </div>
+                        </button>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[73px] mx-auto my-4">
+                <div className="top-0 text-xl text-white text-center">
+                  <p className="text-white text-md">
+                    Get the alpha version of the {" "}
+                    <span className="text-orange">Bitmon Adventures</span> game
+                  </p>
+                </div>
+              </div>
+              <div className="flexArea">
+                {/* btn 1 */}
+                <div className=" mx-auto py-5 flex-item">
+                  <div className="my-4">
+                    <a href="https://github.com/vibingstudio/vibing-launcher/releases/download/v0.1.1/Vibing.Launcher.Setup.0.1.1.exe" target="_blank" data-inline="true">
+                      <div
+                        className={
+                          "w-40 mx-auto rounded-full border-2 shadow shadow-blue bg-blue border-blue display:inline-block"
+                        }
+                      >
+                        <button
+                          className={
+                            "py-1 px-6 text-white text-xl uppercase border-2 border-black rounded-full relative w-full"
+                          }
+                        >
+                          <div className="flex flex-row items-center justify-center">
+                            <div>
+                              <h1>Microsoft</h1>
+                            </div>
+                            <div className="absolute top-0 right-0 opacity-10">
+                              <Image
+                                src="/icons/bitmon-icon-white.svg"
+                                height="40"
+                                width="40"
+                              />
+                            </div>
+                          </div>
+                        </button>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                {/* btn 2 */}
+                <div className="  mx-auto py-5 flex-row">
+                  <div className="my-4">
+                    <a href="https://github.com/vibingstudio/vibing-launcher/releases/download/v0.1.1/Vibing.Launcher-0.1.1.dmg" target="_blank" data-inline="true">
+                      <div
+                        className={
+                          "w-40 mx-auto rounded-full border-2 shadow shadow-blue bg-blue border-blue"
+                        }
+                      >
+                        <button
+                          className={
+                            "py-1 px-6 text-white text-xl uppercase border-2 border-black rounded-full relative w-full"
+                          }
+                        >
+                          <div className="flex flex-row items-center justify-center">
+                            <div>
+                              <h1>MacOS</h1>
+                            </div>
+                            <div className="absolute top-0 right-0 opacity-10">
+                              <Image
+                                src="/icons/bitmon-icon-white.svg"
+                                height="40"
+                                width="40"
+                              />
+                            </div>
+                          </div>
+                        </button>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+          {/* DOWNLOAD */}
+          {/* USER */}
+          <>
+            <div className="pt-14 text-center flex flex-row justify-center items-center gap-x-10">
+              <div className="hidden md:inline-flex ml-10">
+                <Image
+                  src="/img/separator-right.svg"
+                  width="250"
+                  height="17"
+                  alt="Bitmon Separator"
+                />
+              </div>
+              <div>
+                <h1 className="text-4xl uppercase">Welcome</h1>
+              </div>
+              <div className="hidden md:inline-flex mr-10">
+                <Image
+                  src="/img/separator-left.svg"
+                  width="250"
+                  height="17"
+                  alt="Bitmon Separator"
+                />
+              </div>
+            </div>
+            <div className="bg-white rounded-lg w-[350px] mx-auto py-5 my-10">
+              <h2 className="text-center text-md">Welcome to Bitmon</h2>
+              {wallet.connected ? (
+                <div className="mt-5">
+                  <h2 className="text-center mt-3 mb-2">Convert $BIT</h2>
+                  <div className="flex flex-row my-2 justify-between">
+                    <input
+                      className="w-[150px] mx-auto border-2 rounded-lg text-center text-sm p-1"
+                      type="number"
+                      onChange={(e) => setAmount(parseFloat(e.target.value))}
+                    />
+                  </div>
+
+                  {!amount || amount === 0 ? (
+                    <ButtonBlueDisabled text="Convert" />
+                  ) : (
+                    <ButtonBlue
+                      text="Convert"
+                      onClick={() => submitPayment(user.id, amount)}
+                    />
+                  )}
+                  <p className="text-orange text-center my-2 italic">
+                    The process can take up to 10 minutes
+                  </p>
+                  <p className="text-blue text-center my-2 italic">
+                    Your in-wallet $BIT is worth 10x in-game.
+                  </p>
+                  <p className="text-blue text-center my-2 italic">
+                    (Ex. 2 in-wallet $BIT = 20 in-game $BIT)
+                  </p>
+                </div>
+              ) : (
+                <div className="mt-5">
+                  <p className="text-center mt-3 mb-2"></p>
+                </div>
+              )}
+              <div className="mt-5 w-[200px] mx-auto">
+                <ButtonGreenBig
+                  text="Buy $BIT"
+                  onClick={async () => window.open("https://raydium.io/swap/?inputCurrency=sol&outputCurrency=EGiWZhNk3vUNJr35MbL2tY5YD6D81VVZghR2LgEFyXZh&inputAmount=0&outputAmount=0&fixed=out", "_blank")}
+                />
+              </div>
+              <h2 className="text-center mt-3">Your user ID is</h2>
+              <h2 className="text-sm text-center my-2">
+                <span className="text-red-800 text-xs">{user.id}</span>
+              </h2>
+
+              <h2 className="text-center mt-3">Your linked address is</h2>
+              <h2 className="text-center mb-3">
+                {user.address ? (
+                  <span className="text-red-800 text-xs">
+                    {shortenString(user.address, 24)}
+                  </span>
+                ) : (
+                  <span className="text-red-800 text-xs">
+                    You don't have a linked address
+                  </span>
+                )}
+              </h2>
+              {wallet.connected ? (
+                <>
+                  <h2 className="text-center mt-3 mb-2 text-md">
+                    On-Chain $BIT Balance
+                  </h2>
+                  <h2 className="text-center mb-3">
+                    <span className="text-red-800 text-lg">{tokens}</span>
+                  </h2>
+                </>
+              ) : null}
+              <h2 className="text-center mt-3 mb-2 text-md">
+                In-Game $BIT Balance
+              </h2>
+              <h2 className="text-center mb-3">
+                <span className="text-red-800 text-lg">{user.bit}</span>
+              </h2>
+              <h2 className="text-center mt-3 mb-2">Link or update address</h2>
+              <div className="flex flex-row justify-center">{connect()}</div>
+              {wallet.connected ? (
+                <div className="mt-5">
+                  <ButtonBlue
+                    text="Update"
+                    onClick={async () => {
+                      const sig = await wallet.signMessage(Buffer.from(user.id));
+                      toast
+                        .promise(
+                          uploadSignature(
+                            user.id,
+                            Buffer.from(sig).toString("hex"),
+                            wallet.publicKey.toBuffer().toString("hex")
+                          ),
+                          {
+                            loading: <b>Updating address</b>,
+                            success: <b>Success</b>,
+                            error: <b>Try again</b>,
+                          }
+                        )
+                        .then(() =>
+                          setUser({
+                            id: user.id,
+                            address: wallet.publicKey.toString(),
+                            bit: user.bit,
+                            verified: user.verified,
+                          })
+                        );
+                    }}
+                  />
+                </div>
+              ) : null}
+              <div className="mt-5 w-[200px] mx-auto">
+                <ButtonOrange
+                  text="Sign Out"
+                  onClick={async () => {
+                    await getAuth(getApp("bitmon")).signOut();
+                    await router.push("/auth/login");
                   }}
                 />
               </div>
-            ) : null}
-            <div className="mt-5 w-[200px] mx-auto">
-              <ButtonOrange
-                text="Sign Out"
-                onClick={async () => {
-                  await getAuth(getApp("bitmon")).signOut();
-                  await router.push("/auth/login");
-                }}
-              />
+
             </div>
- 
-          </div>
+          </>
+          {/* USER */}
+
         </>
       )}
     </div>

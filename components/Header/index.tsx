@@ -26,7 +26,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
       <ButtonRed
         text="PLAY NOW"
         onClick= {() => {
-          window.location.href='/download';
+          window.location.href='/user';
           }}
       />
     )
