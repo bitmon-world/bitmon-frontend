@@ -190,7 +190,7 @@ export default function Creator(): JSX.Element {
           {/* btn 2 */}
           <div className="  mx-auto py-5 flex-row">
             <div className="my-4">
-              <a href="" target="_blank" data-inline="true">
+              <a href="https://github.com/vibingstudio/vibing-launcher/releases/download/v0.1.3/Vibing.Launcher-0.1.3.dmg" target="_blank" data-inline="true">
                 <div
                   className={
                     "w-40 mx-auto rounded-full border-2 shadow shadow-blue bg-blue border-blue"
