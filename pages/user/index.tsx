@@ -279,8 +279,8 @@ export default function User(): JSX.Element {
               <div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[73px] mx-auto my-4">
                 <div className="top-0 text-xl text-white text-center">
                   <p className="text-white text-md">
-                    Get the alpha version of the {" "}
-                    <span className="text-orange">Bitmon Adventures</span> game
+                    Get sssthe alpha version of the {" "}
+                    <span className="text-orange">Bitmon Adventures</span> game.
                   </p>
                 </div>
               </div>
@@ -288,7 +288,7 @@ export default function User(): JSX.Element {
                 {/* btn 1 */}
                 <div className=" mx-auto py-5 flex-item">
                   <div className="my-4">
-                    <a href="https://github.com/vibingstudio/vibing-launcher/releases/download/v0.1.1/Vibing.Launcher.Setup.0.1.1.exe" target="_blank" data-inline="true">
+                    <a href="https://github.com/vibingstudio/vibing-launcher/releases/download/v0.1.3/Vibing.Launcher.Setup.0.1.3.exe" target="_blank" data-inline="true">
                       <div
                         className={
                           "w-40 mx-auto rounded-full border-2 shadow shadow-blue bg-blue border-blue display:inline-block"
@@ -319,7 +319,7 @@ export default function User(): JSX.Element {
                 {/* btn 2 */}
                 <div className="  mx-auto py-5 flex-row">
                   <div className="my-4">
-                    <a href="https://github.com/vibingstudio/vibing-launcher/releases/download/v0.1.1/Vibing.Launcher-0.1.1.dmg" target="_blank" data-inline="true">
+                    <a href="https://github.com/vibingstudio/vibing-launcher/releases/download/v0.1.3/Vibing.Launcher-0.1.3.dmg" target="_blank" data-inline="true">
                       <div
                         className={
                           "w-40 mx-auto rounded-full border-2 shadow shadow-blue bg-blue border-blue"
