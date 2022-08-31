@@ -234,52 +234,21 @@ export default function User(): JSX.Element {
                   />
                 </div>
               ) : null}
-              <div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[88px] mx-auto my-4">
-                <div className="top-0 text-xl text-white text-center">
+              {/*<div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[88px] mx-auto my-4">
+                 <div className="top-0 text-xl text-white text-center">
                   <p>
 
                   </p>
                   <p className="text-white text-md">
-                    You will need a <a href="https://magiceden.io/marketplace/bitmon_creatures" className="text-orange">Bitmon Creature</a> to play the alpha version of the game.
+                    You can buy a <a href="https://magiceden.io/marketplace/bitmon_creatures" className="text-orange">Bitmon Creature</a> to play the alpha version of the game.
                   </p>
-                </div>
-              </div>
-              <div className="flexArea">
-                <div className=" mx-auto py-5 flex-item">
-                  <div className="my-4">
-                    <a href="https://magiceden.io/marketplace/bitmon_creatures" target="_blank" data-inline="true">
-                      <div
-                        className={
-                          "w-60 mx-auto rounded-full border-2 shadow shadow-green bg-green border-green display:inline-block"
-                        }
-                      >
-                        <button
-                          className={
-                            "py-1 px-6 text-white text-xl uppercase border-2 border-black rounded-full relative w-full"
-                          }
-                        >
-                          <div className="flex flex-row items-center justify-center">
-                            <div>
-                              <h1>Buy a Bitmon Creature</h1>
-                            </div>
-                            <div className="absolute top-0 right-0 opacity-10">
-                              <Image
-                                src="/icons/bitmon-icon-white.svg"
-                                height="40"
-                                width="40"
-                              />
-                            </div>
-                          </div>
-                        </button>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
+                </div> 
+              </div>*/}
+             
               <div className="flex flex-row items-center justify-center bg-contain bg-no-repeat bg-center bg-title-background h-[73px] mx-auto my-4">
                 <div className="top-0 text-xl text-white text-center">
                   <p className="text-white text-md">
-                    Get sssthe alpha version of the {" "}
+                    Get the alpha version of the {" "}
                     <span className="text-orange">Bitmon Adventures</span> game.
                   </p>
                 </div>
@@ -347,6 +316,38 @@ export default function User(): JSX.Element {
                     </a>
                   </div>
                 </div>
+                <div className="flexArea">
+                <div className=" mx-auto py-5 flex-item">
+                  <div className="my-4">
+                    <a href="https://magiceden.io/marketplace/bitmon_creatures" target="_blank" data-inline="true">
+                      <div
+                        className={
+                          "w-60 mx-auto rounded-full border-2 shadow shadow-green bg-green border-green display:inline-block"
+                        }
+                      >
+                        <button
+                          className={
+                            "py-1 px-6 text-white text-xl uppercase border-2 border-black rounded-full relative w-full"
+                          }
+                        >
+                          <div className="flex flex-row items-center justify-center">
+                            <div>
+                              <h1>Buy a Bitmon Creature</h1>
+                            </div>
+                            <div className="absolute top-0 right-0 opacity-10">
+                              <Image
+                                src="/icons/bitmon-icon-white.svg"
+                                height="40"
+                                width="40"
+                              />
+                            </div>
+                          </div>
+                        </button>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
               </div>
             </div>
           </>
