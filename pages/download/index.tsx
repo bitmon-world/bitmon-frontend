@@ -157,7 +157,7 @@ export default function Creator(): JSX.Element {
         </div>
         <div className="flexArea">
           {/* btn 1 */}
-          <div className=" mx-auto py-5 flex-item">
+          {/* <div className=" mx-auto py-5 flex-item">
             <div className="my-4">
               <a href="https://github.com/vibingstudio/vibing-launcher/releases/download/v0.1.3/Vibing.Launcher.Setup.0.1.3.exe" target="_blank" data-inline="true">
                 <div
@@ -186,9 +186,9 @@ export default function Creator(): JSX.Element {
                 </div>
               </a>
             </div>
-          </div>
+          </div> */}
           {/* btn 2 */}
-          <div className="  mx-auto py-5 flex-row">
+          {/* <div className="  mx-auto py-5 flex-row">
             <div className="my-4">
               <a href="https://github.com/vibingstudio/vibing-launcher/releases/download/v0.1.3/Vibing.Launcher-0.1.3.dmg" target="_blank" data-inline="true">
                 <div
@@ -217,7 +217,7 @@ export default function Creator(): JSX.Element {
                 </div>
               </a>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
