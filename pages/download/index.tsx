@@ -151,7 +151,7 @@ export default function Creator(): JSX.Element {
           <div className="top-0 text-xl text-white text-center">
             <p className="text-white text-md">
               Get the alpha version of the {" "}
-              <span className="text-orange">Bitmon Adventures</span> game
+              <span className="text-orange">Bitmon Adventures</span> game.
             </p>
           </div>
         </div>
@@ -203,7 +203,7 @@ export default function Creator(): JSX.Element {
                   >
                     <div className="flex flex-row items-center justify-center">
                       <div>
-                        <h1>MacOS</h1>
+                        <h1>Macos</h1>
                       </div>
                       <div className="absolute top-0 right-0 opacity-10">
                         <Image
