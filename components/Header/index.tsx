@@ -10,8 +10,8 @@ import { classNames } from "../../functions/classnames";
 import { ChevronDownIcon } from '@heroicons/react/solid'
 
 const navigation = [
-  { name: "litepaper", href: "/#litepaper" },
-  { name: "roadmap",   href: "/#roadmap" },
+  // { name: "litepaper", href: "/#litepaper" },
+  // { name: "roadmap",   href: "/#roadmap" },
   { name: "my user",   href: "/user" },
   // { name: "wiki",      href: "https://bitmon.fandom.com/wiki/Bitmon_Adventures_Wiki" },
   // { name: "market",    href: "https://magiceden.io/creators/bitmon_world", target: "_blank"},
@@ -69,7 +69,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
     return (
       <div className="flex flex-row justify-center md:mr-3 gap-x-2 mt-2">
         
-        <a href="https://discord.gg/bitmon" target="_blank" rel="noreferrer">
+        <a href="https://discord.gg/wtFBBAg5r5" target="_blank" rel="noreferrer">
           <Image
             src="/icons/discord.svg"
             width="35"
@@ -104,7 +104,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
   function trainers(): JSX.Element {
     return (
       <Menu as="div" className="relative ">
-        <div>
+        {/* <div>
         <Menu.Button className="text-sm mx-0.5 px-2 py-2 text-white inline-flex w-full justify-center rounded-md bg-black bg-opacity-5 hover:bg-opacity-30 uppercase">
               <p>Trainer</p>
               <ChevronDownIcon
@@ -112,7 +112,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
               aria-hidden="true"
               />
           </Menu.Button>
-        </div>
+        </div> */}
         <Transition
           as={Fragment}
           enter="transition ease-out duration-100"
@@ -155,7 +155,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
   function bitToken(): JSX.Element {
     return (
       <Menu as="div" className="relative ">
-        <div>
+        {/* <div>
         <Menu.Button className="text-sm mx-0.5 px-2 py-2 text-white inline-flex w-full justify-center rounded-md bg-black bg-opacity-5 hover:bg-opacity-30">
               $BIT TOKEN
               <ChevronDownIcon
@@ -163,7 +163,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
               aria-hidden="true"
               />
           </Menu.Button>
-        </div>
+        </div> */}
         <Transition
           as={Fragment}
           enter="transition ease-out duration-100"
@@ -173,7 +173,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="origin-top-right md:absolute left-0 md:right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+          {/* <Menu.Items className="origin-top-right md:absolute left-0 md:right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
             <Menu.Item>
               <div className="block px-4 py-2 text-sm uppercase">
                 <Link href="https://bitmon-adventures.gitbook.io/welcome-to-gitbook/" passHref>
@@ -225,7 +225,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                 </a>
               </Link>
             </div>
-          </Menu.Items>
+          </Menu.Items> */}
         </Transition>
       </Menu>
     );
@@ -234,17 +234,17 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
   function community(): JSX.Element {
     return (
       <Menu as="div" className="relative ">
-        <div>
-        <Menu.Button className="text-sm mx-0.5 px-2 py-2 text-white inline-flex w-full justify-center rounded-md bg-black bg-opacity-5 hover:bg-opacity-30 uppercase">
+        {/* <div> */}
+        {/* <Menu.Button className="text-sm mx-0.5 px-2 py-2 text-white inline-flex w-full justify-center rounded-md bg-black bg-opacity-5 hover:bg-opacity-30 uppercase"> */}
             {/* <div className="text-sm mx-0.5 px-1.5 py-1 text-white cursor-pointer hover:text-grey uppercase"> */}
-              Community
+              {/* Community
               <ChevronDownIcon
               className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100"
               aria-hidden="true"
-              />
+              /> */}
             {/* </div> */}
-          </Menu.Button>
-        </div>
+          {/* </Menu.Button> */}
+        {/* </div> */}
         <Transition
           as={Fragment}
           enter="transition ease-out duration-100"
@@ -373,8 +373,8 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
               </div>
               <div className="flex flex-row items-center">
                 <div className="flex justify-center">
-                  <Link href="/" passHref>
-                    <a>
+                  {/* <Link> */}
+                    <a href="https://www.bitmon.io/">
                       <Image
                         src="/img/bitmon.png"
                         width="150"
@@ -382,7 +382,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
                         alt="Bitmon Logo"
                       />
                     </a>
-                  </Link>
+                  {/* </Link> */}
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex flex-row justify-end uppercase text-lg items-center">
