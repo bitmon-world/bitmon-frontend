@@ -373,7 +373,7 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
               </div>
               <div className="flex flex-row items-center">
                 <div className="flex justify-center">
-                    <a href="https://www.bitmon.io">
+                    <a href="https://bitmon-website-p9wi.vercel.app/">
                   {/* <Link href="/" passHref> */}
                       <Image
                         src="/img/bitmon.png"
