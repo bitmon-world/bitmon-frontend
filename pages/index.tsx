@@ -1,6 +1,8 @@
-import { Landing } from "../components/Landing/landing";
+// import { Landing } from "../components/Landing/landing";
+import { Login } from "./auth/login";
 
 export default function Home(): JSX.Element {
-  return;
+  // return;
   // return <Landing />;
+  return <Login />;
 }

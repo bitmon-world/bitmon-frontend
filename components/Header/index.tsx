@@ -373,17 +373,16 @@ export const Header: FC<{ background: boolean }> = ({ background }) => {
               </div>
               <div className="flex flex-row items-center">
                 <div className="flex justify-center">
-                  {/* <Link> */}
-                  
-                    <a href="https://www.bitmon.io/">
+                    <a href="https://www.bitmon.io">
+                  {/* <Link href="/" passHref> */}
                       <Image
                         src="/img/bitmon.png"
                         width="150"
                         height="66"
                         alt="Bitmon Logo"
                       />
-                    </a>
                   {/* </Link> */}
+                    </a>
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex flex-row justify-end uppercase text-lg items-center">
